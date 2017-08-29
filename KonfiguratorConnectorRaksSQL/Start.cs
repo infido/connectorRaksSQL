@@ -158,7 +158,7 @@ namespace KonfiguratorConnectorRaksSQL
 
             foreach (order item in orders3)
             {
-                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
+                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + "; Wartość:" + item.total_paid + Environment.NewLine;
             }
 
             Dictionary<string, string>  dtn10 = new Dictionary<string, string>();
@@ -168,7 +168,7 @@ namespace KonfiguratorConnectorRaksSQL
 
             foreach (order item in orders10)
             {
-                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
+                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + "; Wartość:" + item.total_paid + Environment.NewLine;
             }
 
             Dictionary<string, string> dtn2 = new Dictionary<string, string>();
@@ -178,7 +178,7 @@ namespace KonfiguratorConnectorRaksSQL
 
             foreach (order item in orders2)
             {
-                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
+                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + "; Wartość:" + item.total_paid + Environment.NewLine;
             }
 
         }

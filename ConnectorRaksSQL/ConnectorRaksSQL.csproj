@@ -164,6 +164,7 @@
     <ProjectReference Include="..\KonfiguratorConnectorRaksSQL\KonfiguratorConnectorRaksSQL.csproj">
       <Project>{820C69B5-8D1A-4A16-B445-22189AA8CEC0}</Project>
       <Name>KonfiguratorConnectorRaksSQL</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
