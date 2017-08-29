@@ -22,9 +22,9 @@ namespace ConnectorRaksSQL
             //1 minuta Timer(60000)
             //_timer = new Timer(60000) { AutoReset = true };
             //5 minuta Timer(60000)
-            _timer = new Timer(5 * 60000) { AutoReset = true };
+            //_timer = new Timer(5 * 60000) { AutoReset = true };
             //10 minut Timer(600000)
-            //_timer = new Timer(600000) { AutoReset = true };
+            _timer = new Timer(600000) { AutoReset = true };
             _timer.Elapsed += (sender, eventArgs) => Console.WriteLine("Uruchomiono usługę wymiany danych ze sklepem {0} i wszystko wyglada OK", DateTime.Now);
             _timer.Elapsed += new ElapsedEventHandler(this.cronAction);
         }
