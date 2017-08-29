@@ -76,6 +76,15 @@
             this.bPrestaProdukty = new System.Windows.Forms.Button();
             this.bPrestaDostepne = new System.Windows.Forms.Button();
             this.tabRaporty = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bZapiszFTP = new System.Windows.Forms.Button();
+            this.bOdcztyFTP = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tPassFTP = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tUserFTP = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tAdresFTP = new System.Windows.Forms.TextBox();
             this.tbMagazynyLista = new System.Windows.Forms.TextBox();
             this.bMagazyny = new System.Windows.Forms.Button();
             this.bTestLINQ = new System.Windows.Forms.Button();
@@ -84,15 +93,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dateDo = new System.Windows.Forms.DateTimePicker();
             this.dateOd = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tAdresFTP = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tUserFTP = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tPassFTP = new System.Windows.Forms.TextBox();
-            this.bOdcztyFTP = new System.Windows.Forms.Button();
-            this.bZapiszFTP = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabFirebird.SuspendLayout();
             this.tabPresta.SuspendLayout();
@@ -243,7 +243,7 @@
             this.bTestConnectionMarvest123.Name = "bTestConnectionMarvest123";
             this.bTestConnectionMarvest123.Size = new System.Drawing.Size(167, 23);
             this.bTestConnectionMarvest123.TabIndex = 16;
-            this.bTestConnectionMarvest123.Text = "Test 192.168.0.123 Mar";
+            this.bTestConnectionMarvest123.Text = "Ustaw 192.168.0.123 Mar";
             this.bTestConnectionMarvest123.UseVisualStyleBackColor = true;
             this.bTestConnectionMarvest123.Click += new System.EventHandler(this.bTestConnectionMarvest123_Click);
             // 
@@ -253,7 +253,7 @@
             this.b123.Name = "b123";
             this.b123.Size = new System.Drawing.Size(167, 23);
             this.b123.TabIndex = 15;
-            this.b123.Text = "Test 192.168.0.123 MM";
+            this.b123.Text = "Ustaw 192.168.0.123 MM";
             this.b123.UseVisualStyleBackColor = true;
             this.b123.Click += new System.EventHandler(this.b123_Click);
             // 
@@ -594,6 +594,91 @@
             this.tabRaporty.Text = "Raporty";
             this.tabRaporty.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bZapiszFTP);
+            this.groupBox1.Controls.Add(this.bOdcztyFTP);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.tPassFTP);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.tUserFTP);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.tAdresFTP);
+            this.groupBox1.Location = new System.Drawing.Point(241, 95);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(172, 194);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Konfiguracja dla FTP";
+            // 
+            // bZapiszFTP
+            // 
+            this.bZapiszFTP.Location = new System.Drawing.Point(87, 158);
+            this.bZapiszFTP.Name = "bZapiszFTP";
+            this.bZapiszFTP.Size = new System.Drawing.Size(75, 23);
+            this.bZapiszFTP.TabIndex = 7;
+            this.bZapiszFTP.Text = "Zapis";
+            this.bZapiszFTP.UseVisualStyleBackColor = true;
+            this.bZapiszFTP.Click += new System.EventHandler(this.bZapiszFTP_Click);
+            // 
+            // bOdcztyFTP
+            // 
+            this.bOdcztyFTP.Location = new System.Drawing.Point(6, 158);
+            this.bOdcztyFTP.Name = "bOdcztyFTP";
+            this.bOdcztyFTP.Size = new System.Drawing.Size(75, 23);
+            this.bOdcztyFTP.TabIndex = 6;
+            this.bOdcztyFTP.Text = "Odczyt";
+            this.bOdcztyFTP.UseVisualStyleBackColor = true;
+            this.bOdcztyFTP.Click += new System.EventHandler(this.bOdcztyFTP_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 97);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Hasło";
+            // 
+            // tPassFTP
+            // 
+            this.tPassFTP.Location = new System.Drawing.Point(6, 116);
+            this.tPassFTP.Name = "tPassFTP";
+            this.tPassFTP.Size = new System.Drawing.Size(160, 20);
+            this.tPassFTP.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 55);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Użytkownik";
+            // 
+            // tUserFTP
+            // 
+            this.tUserFTP.Location = new System.Drawing.Point(6, 74);
+            this.tUserFTP.Name = "tUserFTP";
+            this.tUserFTP.Size = new System.Drawing.Size(160, 20);
+            this.tUserFTP.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Adres FTP";
+            // 
+            // tAdresFTP
+            // 
+            this.tAdresFTP.Location = new System.Drawing.Point(6, 32);
+            this.tAdresFTP.Name = "tAdresFTP";
+            this.tAdresFTP.Size = new System.Drawing.Size(160, 20);
+            this.tAdresFTP.TabIndex = 0;
+            // 
             // tbMagazynyLista
             // 
             this.tbMagazynyLista.Location = new System.Drawing.Point(6, 166);
@@ -664,91 +749,6 @@
             this.dateOd.Name = "dateOd";
             this.dateOd.Size = new System.Drawing.Size(101, 20);
             this.dateOd.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.bZapiszFTP);
-            this.groupBox1.Controls.Add(this.bOdcztyFTP);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.tPassFTP);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.tUserFTP);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.tAdresFTP);
-            this.groupBox1.Location = new System.Drawing.Point(241, 95);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 194);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Konfiguracja dla FTP";
-            // 
-            // tAdresFTP
-            // 
-            this.tAdresFTP.Location = new System.Drawing.Point(6, 32);
-            this.tAdresFTP.Name = "tAdresFTP";
-            this.tAdresFTP.Size = new System.Drawing.Size(160, 20);
-            this.tAdresFTP.TabIndex = 0;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(57, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Adres FTP";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 55);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Użytkownik";
-            // 
-            // tUserFTP
-            // 
-            this.tUserFTP.Location = new System.Drawing.Point(6, 74);
-            this.tUserFTP.Name = "tUserFTP";
-            this.tUserFTP.Size = new System.Drawing.Size(160, 20);
-            this.tUserFTP.TabIndex = 2;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 97);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 13);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Hasło";
-            // 
-            // tPassFTP
-            // 
-            this.tPassFTP.Location = new System.Drawing.Point(6, 116);
-            this.tPassFTP.Name = "tPassFTP";
-            this.tPassFTP.Size = new System.Drawing.Size(160, 20);
-            this.tPassFTP.TabIndex = 4;
-            // 
-            // bOdcztyFTP
-            // 
-            this.bOdcztyFTP.Location = new System.Drawing.Point(6, 158);
-            this.bOdcztyFTP.Name = "bOdcztyFTP";
-            this.bOdcztyFTP.Size = new System.Drawing.Size(75, 23);
-            this.bOdcztyFTP.TabIndex = 6;
-            this.bOdcztyFTP.Text = "Odczyt";
-            this.bOdcztyFTP.UseVisualStyleBackColor = true;
-            this.bOdcztyFTP.Click += new System.EventHandler(this.bOdcztyFTP_Click);
-            // 
-            // bZapiszFTP
-            // 
-            this.bZapiszFTP.Location = new System.Drawing.Point(87, 158);
-            this.bZapiszFTP.Name = "bZapiszFTP";
-            this.bZapiszFTP.Size = new System.Drawing.Size(75, 23);
-            this.bZapiszFTP.TabIndex = 7;
-            this.bZapiszFTP.Text = "Zapis";
-            this.bZapiszFTP.UseVisualStyleBackColor = true;
-            this.bZapiszFTP.Click += new System.EventHandler(this.bZapiszFTP_Click);
             // 
             // Start
             // 
