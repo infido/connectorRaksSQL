@@ -151,16 +151,36 @@ namespace KonfiguratorConnectorRaksSQL
             OrderFactory orderFactory = new OrderFactory(BaseUrl, Account, Password);
             //List<order> orders = orderFactory.GetAll();
             
-            //pobranie tylko ze statusem = 3 Przygotowanie w toku
-            Dictionary<string, string> dtn = new Dictionary<string, string>();
-            dtn.Add("current_state", "3");
-            List<order> orders = orderFactory.GetByFilter(dtn, null, null);
-            List<Bukimedia.PrestaSharp.Entities.AuxEntities.language> valueLang = new List<Bukimedia.PrestaSharp.Entities.AuxEntities.language>();
+            Dictionary<string, string> dtn3 = new Dictionary<string, string>();
+            dtn3.Add("current_state", "3"); // Przygotowanie w toku
+            List<order> orders3 = orderFactory.GetByFilter(dtn3, null, null);
+            //List<Bukimedia.PrestaSharp.Entities.AuxEntities.language> valueLang3 = new List<Bukimedia.PrestaSharp.Entities.AuxEntities.language>();
 
-            foreach (order item in orders)
+            foreach (order item in orders3)
             {
                 tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
             }
+
+            Dictionary<string, string>  dtn10 = new Dictionary<string, string>();
+            dtn10.Add("current_state", "10"); //Oczekiwanie na płatnosc przelewem bankowym
+            List<order> orders10 = orderFactory.GetByFilter(dtn10, null, null);
+            //List<Bukimedia.PrestaSharp.Entities.AuxEntities.language> valueLang10 = new List<Bukimedia.PrestaSharp.Entities.AuxEntities.language>();
+
+            foreach (order item in orders10)
+            {
+                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
+            }
+
+            Dictionary<string, string> dtn2 = new Dictionary<string, string>();
+            dtn2.Add("current_state", "2"); //Płatnośc zaakceptowana
+            List<order> orders2 = orderFactory.GetByFilter(dtn2, null, null);
+            //List<Bukimedia.PrestaSharp.Entities.AuxEntities.language> valueLang2 = new List<Bukimedia.PrestaSharp.Entities.AuxEntities.language>();
+
+            foreach (order item in orders2)
+            {
+                tResponce.Text += item.id + ";" + item.payment + ";" + item.reference + ";" + item.shipping_number + "; Status:" + item.current_state + Environment.NewLine;
+            }
+
         }
 
         private void bSavePresta_Click(object sender, EventArgs e)

@@ -66,25 +66,31 @@ namespace KonfiguratorConnectorRaksSQL
 
         public void getZamFromPresta()
         {
+            getZamFromPrestaByStatus("3"); // Przygotowanie w toku
+            getZamFromPrestaByStatus("10"); //Oczekiwanie na płatnosc przelewem bankowym
+            getZamFromPrestaByStatus("2"); //Płatnośc zaakceptowana
+        }
+
+        public void getZamFromPrestaByStatus(string status)
+        {
             OrderFactory orderFactory = new OrderFactory(BaseUrl, Account, Password);
-            
+
             //List<order> orders = orderFactory.GetAll();
-            //Pobranie zamówienń tylko przygotowanie w toku
             Dictionary<string, string> dtn = new Dictionary<string, string>();
-            dtn.Add("current_state", "3");
+            dtn.Add("current_state", status);
             List<order> orders = orderFactory.GetByFilter(dtn, null, null);
 
             List<Bukimedia.PrestaSharp.Entities.AuxEntities.language> valueLang = new List<Bukimedia.PrestaSharp.Entities.AuxEntities.language>();
             int idzk_tmp;
 
-            logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Odnaleziono " + orders.Count + " zamówień o statusie do przeniesienia do Raks", true);
+            logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Odnaleziono " + orders.Count + " zamówień o statusie: " + status +  ", do przeniesienia do Raks", true);
 
             foreach (order item in orders)
             {
                 //if (item.id < 7745)
-                if (1==1)
+                if (1 == 1)
                 {
-                //    //wykonuj tylko testowe
+                    //    //wykonuj tylko testowe
 
                     //sprawdzenie i odczytanie klienta
                     CustomerFactory customerFactory = new CustomerFactory(BaseUrl, Account, Password);
@@ -98,27 +104,27 @@ namespace KonfiguratorConnectorRaksSQL
                     country krajDost;
                     country krajPlat;
                     carrier sposobDostawy;
-                    try 
-	                {	        
-		                klient = customerFactory.Get((long)item.id_customer);
+                    try
+                    {
+                        klient = customerFactory.Get((long)item.id_customer);
                         adrDost = adressFactory.Get((long)item.id_address_delivery);
                         krajDost = countryFactory.Get((long)adrDost.id_country);
                         adrPlatn = adressFactory.Get((long)item.id_address_invoice);
                         krajPlat = countryFactory.Get((long)adrPlatn.id_country);
                         sposobDostawy = carrierFactory.Get((long)item.id_carrier);
-	                }
-	                catch (Exception ex1)
-	                {
-		                logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "Błąd przy pobieraniu klienta " + item.id_customer + ": " + ex1.Message, true);
-		                throw;
-	                }
+                    }
+                    catch (Exception ex1)
+                    {
+                        logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "Błąd przy pobieraniu klienta " + item.id_customer + ": " + ex1.Message, true);
+                        throw;
+                    }
                     string plKrajDostawy = "";
                     valueLang = krajDost.name;
                     foreach (Bukimedia.PrestaSharp.Entities.AuxEntities.language lang in valueLang)
                     {
                         plKrajDostawy += lang.Value + " ";
                     }
-                    if (plKrajDostawy == null || plKrajDostawy=="") plKrajDostawy = "Polska";
+                    if (plKrajDostawy == null || plKrajDostawy == "") plKrajDostawy = "Polska";
 
 
                     string plKrajPlatnik = "";
@@ -130,13 +136,13 @@ namespace KonfiguratorConnectorRaksSQL
                     if (plKrajPlatnik == null || plKrajPlatnik == "") plKrajPlatnik = "Polska";
 
                     Adres adresDostawy = new Adres((long)adrDost.id, adrDost.address1 + " " + adrDost.address2, "", "", adrDost.city, adrDost.city, adrDost.postcode, plKrajDostawy, adrDost.company + " " + adrDost.firstname + " " + adrDost.lastname + " (" + sposobDostawy.name + ")", adrDost.vat_number);
-                    Adres adresPlatnika = new Adres((long)adrPlatn.id, adrPlatn.address1 + " " + adrPlatn.address2, "", "", adrPlatn.city, adrPlatn.city, adrPlatn.postcode, plKrajPlatnik, adrPlatn.company + " " + adrPlatn.firstname + " " + adrPlatn.lastname, adrPlatn.vat_number); ; 
+                    Adres adresPlatnika = new Adres((long)adrPlatn.id, adrPlatn.address1 + " " + adrPlatn.address2, "", "", adrPlatn.city, adrPlatn.city, adrPlatn.postcode, plKrajPlatnik, adrPlatn.company + " " + adrPlatn.firstname + " " + adrPlatn.lastname, adrPlatn.vat_number); ;
                     Klient kh = new Klient((long)klient.id, klient.lastname, klient.firstname, klient.email);
 
                     //powiązanie z kontrahentaem z Raks
                     // zmiana kodu na email
                     //kh.idRaks = setKontrahentInToRaks(Convert.ToString(kh.idPresta),kh.nazwaPelna(),adresPlatnika.nip,"PL","PLN",adresPlatnika.ulicaForRaks(), adresPlatnika.miejscowosc,adresPlatnika.panstwo,adresPlatnika.kod,adresPlatnika.poczta,kh.email);
-                    kh.idRaks = setKontrahentInToRaks(kh.skrot(), kh.nazwaPelna(), adresPlatnika.nip, "PL", "PLN", adresPlatnika.ulica, adresPlatnika.nrBudynkuNrLokalu() , adresPlatnika.miejscowosc, adresPlatnika.panstwo, adresPlatnika.kod, adresPlatnika.poczta, kh.email);
+                    kh.idRaks = setKontrahentInToRaks(kh.skrot(), kh.nazwaPelna(), adresPlatnika.nip, "PL", "PLN", adresPlatnika.ulica, adresPlatnika.nrBudynkuNrLokalu(), adresPlatnika.miejscowosc, adresPlatnika.panstwo, adresPlatnika.kod, adresPlatnika.poczta, kh.email);
 
                     SposobPlatnosci sp = getSposobPlatnosci(item.payment);
 
@@ -145,7 +151,7 @@ namespace KonfiguratorConnectorRaksSQL
                     {
                         getTowarByKodWithOutTrans(pozzam.product_reference, pozzam.product_name);
                     }
-                    
+
                     //zapis zamówinia
                     idzk_tmp = setNewZK(Convert.ToInt32(this.Magazyn), (int)item.id, "ZI/" + DateTime.Now.Year + "/" + item.id, sp, kh.idRaks, kh.skrot(), adresDostawy, adresPlatnika, item.reference, "", item.total_paid_tax_excl, item.total_paid_tax_incl);
 
@@ -174,8 +180,9 @@ namespace KonfiguratorConnectorRaksSQL
                         logg.setUstawienieLoga(Logg.RodzajLogowania.Warning, Logg.MediumLoga.File, "Wycofanie z zapisu pozycji zamówienia " + "ZI/" + DateTime.Now.Year + "/" + item.id + " otrzymało ID: " + idzk_tmp, true);
                     }
                 }
-                
+
             }
+
         }
 
         public int setNewZK(int MAGNUM, int NR, string SYMBOL, SposobPlatnosci sposobPlatnosci, long idPlatnikaRaks, string NAZWA_SKROCONA_PLATNIKA, Adres adresDostawy, Adres adresPlatnika, string NR_ZAMOWIENIA_NABYWCY, string SYGNATURA, decimal NETTO, decimal BRUTTO)
