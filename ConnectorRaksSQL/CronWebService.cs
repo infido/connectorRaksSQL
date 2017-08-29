@@ -53,11 +53,26 @@ namespace ConnectorRaksSQL
                 ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Aktualizacja stanów magazynowych o na poczatku każdej godziny od 8 do 21", "INFO");
 
                 FBConn fbc = new FBConn();
-                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
-                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (START) Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (START) Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
                 RaksRepo rr = new RaksRepo(fbc, true, false);
-                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
-                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (STOP) Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (STOP) Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
+                fbc.setConnectionOFF();
+            }
+            else if (
+                (DateTime.Now.Hour >= 7 && DateTime.Now.Hour < 22) && (DateTime.Now.Minute >= 10)
+                )
+            {
+                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction Import zamówień przy każdym odpaleniu za wyjątkiem poczatku godziny w godzinach od 7 do 22", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Import zamówień przy każdym odpaleniu za wyjątkiem poczatku godziny w godzinach od 7 do 22", "INFO");
+
+                FBConn fbc = new FBConn();
+                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (START) Po deklaracji połaczenia, import zamówień", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (START) Po deklaracji połaczenia, import zamówień", "INFO");
+                RaksRepo rr = new RaksRepo(fbc, false, false);
+                ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (STOP) Po wykonaniu importu zamówień", "INFO");
+                ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (STOP) Po wykonaniu importu zamówień", "INFO");
                 fbc.setConnectionOFF();
             }
             else if (DateTime.Now.Hour >= 23 && DateTime.Now.Hour < 24)
