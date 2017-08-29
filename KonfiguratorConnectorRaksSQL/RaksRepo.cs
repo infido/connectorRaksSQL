@@ -699,7 +699,7 @@ namespace KonfiguratorConnectorRaksSQL
                         {
                             if (item.quantity != (int)currStock)
                             {
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Ustawinie dla indeksu: " + currIndex + "; starta ilość: " + item.quantity.ToString() + "; nowa ilość:" + currStock);
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Ustawinie dla indeksu;" + currIndex + "; starta ilość;" + item.quantity.ToString() + "; nowa ilość;" + currStock);
                                 Console.Write("Stan przed: " + item.quantity);
                                 item.quantity = (int)currStock;
                                 Console.WriteLine("  Stan po: " + item.quantity);
@@ -708,7 +708,7 @@ namespace KonfiguratorConnectorRaksSQL
                             }
                             else
                             {
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Stan dla indeksu: " + currIndex + "; bez zmian ilość: " + currStock);
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Stan dla indeksu;" + currIndex + "; bez zmian ilość;" + currStock);
                             }
 
                             //Usuwanie z listy
@@ -725,11 +725,11 @@ namespace KonfiguratorConnectorRaksSQL
                             {
                                 ustawBrakWPresta.ExecuteScalar();
                                 stanyInRaks.Remove(currIndex);
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Brak w sklepie Presta indeksu: " + currIndex + "; Ustwiono znaczniku w polus PKWIU");
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Brak w sklepie Presta indeksu;" + currIndex + "; Ustwiono znaczniku w polus PKWIU");
                             }
                             catch (Exception fuex)
                             {
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "Błąd przy ustawianiu w Raks dla indeksu: " + currIndex + " znacznika w polus PKWIU: " + fuex.Message);
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "Błąd przy ustawianiu w Raks dla indeksu;" + currIndex + " znacznika w polus PKWIU;" + fuex.Message);
                                 throw;
                             }
                         }
