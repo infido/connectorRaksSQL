@@ -66,11 +66,11 @@ namespace KonfiguratorConnectorRaksSQL
                 {
                     if (_trybTest)
                     {
-                        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9002: Nawiązano połaczenie. " + conn.Database + " Status=" + conn.State, true);
+                        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9002: Nawiązano połaczenie. " + conn.DataSource + "  " + conn.Database + " Status=" + conn.State, true);
                     }
                     else
                     {
-                        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9003: Nawiązano połaczenie! " + conn.Database + " Status=" + conn.State, true);
+                        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9003: Nawiązano połaczenie! " + conn.DataSource + "  " + conn.Database + " Status=" + conn.State, true);
                     }
                 }
                 else
