@@ -42,7 +42,7 @@
             this.bClose = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFirebird = new System.Windows.Forms.TabPage();
-            this.bTestConnectionMarvest123 = new System.Windows.Forms.Button();
+            this.bTestConnectionM123 = new System.Windows.Forms.Button();
             this.b123 = new System.Windows.Forms.Button();
             this.lPathInfo = new System.Windows.Forms.Label();
             this.tabPresta = new System.Windows.Forms.TabPage();
@@ -93,6 +93,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dateDo = new System.Windows.Forms.DateTimePicker();
             this.dateOd = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabFirebird.SuspendLayout();
             this.tabPresta.SuspendLayout();
@@ -215,7 +216,8 @@
             // 
             // tabFirebird
             // 
-            this.tabFirebird.Controls.Add(this.bTestConnectionMarvest123);
+            this.tabFirebird.Controls.Add(this.button1);
+            this.tabFirebird.Controls.Add(this.bTestConnectionM123);
             this.tabFirebird.Controls.Add(this.b123);
             this.tabFirebird.Controls.Add(this.lPathInfo);
             this.tabFirebird.Controls.Add(this.tIP);
@@ -237,15 +239,15 @@
             this.tabFirebird.Text = "Firebird";
             this.tabFirebird.UseVisualStyleBackColor = true;
             // 
-            // bTestConnectionMarvest123
+            // bTestConnectionM123
             // 
-            this.bTestConnectionMarvest123.Location = new System.Drawing.Point(13, 311);
-            this.bTestConnectionMarvest123.Name = "bTestConnectionMarvest123";
-            this.bTestConnectionMarvest123.Size = new System.Drawing.Size(167, 23);
-            this.bTestConnectionMarvest123.TabIndex = 16;
-            this.bTestConnectionMarvest123.Text = "Ustaw 192.168.0.123 Mar";
-            this.bTestConnectionMarvest123.UseVisualStyleBackColor = true;
-            this.bTestConnectionMarvest123.Click += new System.EventHandler(this.bTestConnectionMarvest123_Click);
+            this.bTestConnectionM123.Location = new System.Drawing.Point(13, 311);
+            this.bTestConnectionM123.Name = "bTestConnectionM123";
+            this.bTestConnectionM123.Size = new System.Drawing.Size(167, 23);
+            this.bTestConnectionM123.TabIndex = 16;
+            this.bTestConnectionM123.Text = "Ustaw 192.168.0.123 Mar";
+            this.bTestConnectionM123.UseVisualStyleBackColor = true;
+            this.bTestConnectionM123.Click += new System.EventHandler(this.bTestConnectionMarvest123_Click);
             // 
             // b123
             // 
@@ -262,9 +264,9 @@
             this.lPathInfo.AutoSize = true;
             this.lPathInfo.Location = new System.Drawing.Point(13, 110);
             this.lPathInfo.Name = "lPathInfo";
-            this.lPathInfo.Size = new System.Drawing.Size(41, 13);
+            this.lPathInfo.Size = new System.Drawing.Size(16, 13);
             this.lPathInfo.TabIndex = 14;
-            this.lPathInfo.Text = "label10";
+            this.lPathInfo.Text = "...";
             // 
             // tabPresta
             // 
@@ -750,6 +752,16 @@
             this.dateOd.Size = new System.Drawing.Size(101, 20);
             this.dateOd.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(272, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(132, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Wczytaj z ustawień";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Start
             // 
             this.AcceptButton = this.bClose;
@@ -829,7 +841,7 @@
         private System.Windows.Forms.Button bReadMagList;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tListaMagDoStanow;
-        private System.Windows.Forms.Button bTestConnectionMarvest123;
+        private System.Windows.Forms.Button bTestConnectionM123;
         private System.Windows.Forms.Button bSetStan;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button bCheckStan;
@@ -844,6 +856,7 @@
         private System.Windows.Forms.TextBox tUserFTP;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tAdresFTP;
+        private System.Windows.Forms.Button button1;
     }
 }
 

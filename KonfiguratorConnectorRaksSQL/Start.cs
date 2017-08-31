@@ -39,6 +39,17 @@ namespace KonfiguratorConnectorRaksSQL
             this.BaseUrl = FBConn.GetKeyFromRegistry("http");
             this.Account = FBConn.GetKeyFromRegistry("userHttp");
             this.Password = FBConn.GetKeyFromRegistry("key");
+
+            if (System.Environment.MachineName.Equals("WINVBOX"))
+            {
+                b123.Visible = true;
+                bTestConnectionM123.Visible = true;
+            }
+            else
+            {
+                b123.Visible = false;
+                bTestConnectionM123.Visible = false;
+            }
         }
 
         private void bSave_Click(object sender, EventArgs e)
@@ -381,6 +392,25 @@ namespace KonfiguratorConnectorRaksSQL
                 tAdresFTP.Text = (String)rejestr.GetValue("adresFTP");
                 tUserFTP.Text = (String)rejestr.GetValue("userFTP");
                 tPassFTP.Text = (String)rejestr.GetValue("passFTP");
+            }
+            catch (Exception ex)
+            {
+                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: : " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: " + ex.Message);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lPathInfo.Text = "Nazwa maszyny lokalnej: " + System.Environment.MachineName;
+            RegistryKey rejestr;
+            try
+            {
+                rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey);
+                tIP.Text = (String)rejestr.GetValue("IP");
+                tPath.Text = (String)rejestr.GetValue("Path");
+                tLogin.Text = (String)rejestr.GetValue("User");
+                tPass.Text = (String)rejestr.GetValue("Pass");
             }
             catch (Exception ex)
             {
