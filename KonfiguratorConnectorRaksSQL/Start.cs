@@ -227,7 +227,7 @@ namespace KonfiguratorConnectorRaksSQL
 
         private void bTestLINQ_Click(object sender, EventArgs e)
         {
-            RaksRepo rr = new RaksRepo(fbconn,false, false);
+            RaksRepo rr = new RaksRepo(fbconn,false, true);
         }
 
         private void b123_Click(object sender, EventArgs e)
@@ -414,8 +414,92 @@ namespace KonfiguratorConnectorRaksSQL
             }
             catch (Exception ex)
             {
-                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: : " + ex.Message);
-                System.Windows.Forms.MessageBox.Show("1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: " + ex.Message);
+                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1104: Błąd odczytu konfiguracji połączenia do bazy danych z rejestru Windows: : " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("1104: Błąd odczytu konfiguracji połączenia do bazy danych z rejestru Windows: " + ex.Message);
+            }
+        }
+
+        private void bReadPrestaSetings_Click(object sender, EventArgs e)
+        {
+            RegistryKey rejestr;
+            try
+            {
+                rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey);
+                tKey.Text = (String)rejestr.GetValue("key");
+                thttp.Text = (String)rejestr.GetValue("http");
+                tUserHttp.Text = (String)rejestr.GetValue("userHttp");
+            }
+            catch (Exception ex)
+            {
+                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1105: Błąd odczytu konfiguracji połączenia do API Presta z rejestru Windows: : " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("1105: Błąd odczytu konfiguracji połączenia do API Presta z rejestru Windows: " + ex.Message);
+            }
+        }
+
+        private void bReadMagForOrder_Click(object sender, EventArgs e)
+        {
+            RegistryKey rejestr;
+            try
+            {
+                rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey);
+                numerMagForOrder.Value = Convert.ToInt16(rejestr.GetValue("magazyn"));
+                numerMagForOrder.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1106: Błąd odczytu konfiguracji magazynu do zapisu zamówień z Presty z rejestru Windows: : " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("1106: Błąd odczytu konfiguracji magazynu do zapisu zamówień z Presty z rejestru Windows: " + ex.Message);
+            }
+
+        }
+
+        private void bMagazyny_Click_1(object sender, EventArgs e)
+        {
+            FbCommand fbcmag;
+            try
+            {
+                fbcmag = new FbCommand("SELECT ID, NUMER,NAZWA from GM_MAGAZYNY;", fbconn.getCurentConnection());
+            }
+            catch (FbException fbe)
+            {
+                MessageBox.Show("Bład połaczenia z bazą danych, sprawdź czy połaczona na pierwszej zakładce: " + fbe.Message);
+                throw;
+            }
+            try
+            {
+                FbDataReader fdk = fbcmag.ExecuteReader();
+                if (fdk.Read())
+                {
+                    do
+                    {
+                        tbMagazynyLista.Text += (int)fdk["ID"] + "; " + (string)fdk["NUMER"] + "; " + (string)fdk["NAZWA"] + Environment.NewLine;
+
+                    } while (fdk.Read());
+                }
+            }
+            catch (FbException exgen)
+            {
+                MessageBox.Show("Bład pobrania listy magazynów z Raks:: " + exgen.Message); 
+                throw;
+            }
+        }
+
+        private void bSaveMagForOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistryKey rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey, true);
+                if (rejestr == null)
+                {
+                    RegistryKey rejestrNew = Registry.CurrentUser.CreateSubKey(RegistryKey);
+                    rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey, true);
+                }
+                rejestr.SetValue("magazyn", numerMagForOrder.Text);
+            }
+            catch (Exception ex)
+            {
+                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1108: Błąd ustawienia wartości w rejestrze Windows dla numeru magazynu do zapisu zamówień: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("1108: Błąd ustawienia wartości w rejestrze Windows dla numeru magazynu do zapisu zamówień: " + ex.Message);
             }
         }
 

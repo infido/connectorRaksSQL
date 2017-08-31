@@ -85,15 +85,19 @@
             this.tUserFTP = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tAdresFTP = new System.Windows.Forms.TextBox();
-            this.tbMagazynyLista = new System.Windows.Forms.TextBox();
-            this.bMagazyny = new System.Windows.Forms.Button();
-            this.bTestLINQ = new System.Windows.Forms.Button();
             this.chMagazyny = new System.Windows.Forms.CheckedListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.dateDo = new System.Windows.Forms.DateTimePicker();
             this.dateOd = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.bReadPrestaSetings = new System.Windows.Forms.Button();
+            this.tbMagazynyLista = new System.Windows.Forms.TextBox();
+            this.bMagazyny = new System.Windows.Forms.Button();
+            this.bTestLINQ = new System.Windows.Forms.Button();
+            this.numerMagForOrder = new System.Windows.Forms.NumericUpDown();
+            this.bSaveMagForOrder = new System.Windows.Forms.Button();
+            this.bReadMagForOrder = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabFirebird.SuspendLayout();
             this.tabPresta.SuspendLayout();
@@ -104,6 +108,7 @@
             this.panel1.SuspendLayout();
             this.tabRaporty.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numerMagForOrder)).BeginInit();
             this.SuspendLayout();
             // 
             // tIP
@@ -270,6 +275,13 @@
             // 
             // tabPresta
             // 
+            this.tabPresta.Controls.Add(this.bReadMagForOrder);
+            this.tabPresta.Controls.Add(this.bSaveMagForOrder);
+            this.tabPresta.Controls.Add(this.numerMagForOrder);
+            this.tabPresta.Controls.Add(this.bTestLINQ);
+            this.tabPresta.Controls.Add(this.bMagazyny);
+            this.tabPresta.Controls.Add(this.tbMagazynyLista);
+            this.tabPresta.Controls.Add(this.bReadPrestaSetings);
             this.tabPresta.Controls.Add(this.nStanInput);
             this.tabPresta.Controls.Add(this.tKodInPresta);
             this.tabPresta.Controls.Add(this.label11);
@@ -298,14 +310,14 @@
             // 
             // nStanInput
             // 
-            this.nStanInput.Location = new System.Drawing.Point(270, 225);
+            this.nStanInput.Location = new System.Drawing.Point(268, 259);
             this.nStanInput.Name = "nStanInput";
             this.nStanInput.Size = new System.Drawing.Size(62, 20);
             this.nStanInput.TabIndex = 33;
             // 
             // tKodInPresta
             // 
-            this.tKodInPresta.Location = new System.Drawing.Point(107, 224);
+            this.tKodInPresta.Location = new System.Drawing.Point(105, 258);
             this.tKodInPresta.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -318,7 +330,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 227);
+            this.label11.Location = new System.Drawing.Point(3, 261);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(89, 13);
             this.label11.TabIndex = 30;
@@ -326,7 +338,7 @@
             // 
             // bCheckStan
             // 
-            this.bCheckStan.Location = new System.Drawing.Point(180, 222);
+            this.bCheckStan.Location = new System.Drawing.Point(178, 256);
             this.bCheckStan.Name = "bCheckStan";
             this.bCheckStan.Size = new System.Drawing.Size(81, 23);
             this.bCheckStan.TabIndex = 29;
@@ -336,7 +348,7 @@
             // 
             // bSetStan
             // 
-            this.bSetStan.Location = new System.Drawing.Point(339, 222);
+            this.bSetStan.Location = new System.Drawing.Point(337, 256);
             this.bSetStan.Name = "bSetStan";
             this.bSetStan.Size = new System.Drawing.Size(75, 23);
             this.bSetStan.TabIndex = 26;
@@ -346,7 +358,7 @@
             // 
             // bSaveMagList
             // 
-            this.bSaveMagList.Location = new System.Drawing.Point(327, 166);
+            this.bSaveMagList.Location = new System.Drawing.Point(328, 131);
             this.bSaveMagList.Name = "bSaveMagList";
             this.bSaveMagList.Size = new System.Drawing.Size(75, 23);
             this.bSaveMagList.TabIndex = 25;
@@ -356,7 +368,7 @@
             // 
             // bReadMagList
             // 
-            this.bReadMagList.Location = new System.Drawing.Point(245, 165);
+            this.bReadMagList.Location = new System.Drawing.Point(246, 130);
             this.bReadMagList.Name = "bReadMagList";
             this.bReadMagList.Size = new System.Drawing.Size(75, 23);
             this.bReadMagList.TabIndex = 24;
@@ -367,7 +379,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 149);
+            this.label10.Location = new System.Drawing.Point(9, 114);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(326, 13);
             this.label10.TabIndex = 23;
@@ -375,24 +387,24 @@
             // 
             // tListaMagDoStanow
             // 
-            this.tListaMagDoStanow.Location = new System.Drawing.Point(8, 165);
+            this.tListaMagDoStanow.Location = new System.Drawing.Point(9, 130);
             this.tListaMagDoStanow.Name = "tListaMagDoStanow";
             this.tListaMagDoStanow.Size = new System.Drawing.Size(230, 20);
             this.tListaMagDoStanow.TabIndex = 22;
             // 
             // bStanyRun
             // 
-            this.bStanyRun.Location = new System.Drawing.Point(7, 97);
+            this.bStanyRun.Location = new System.Drawing.Point(6, 284);
             this.bStanyRun.Name = "bStanyRun";
-            this.bStanyRun.Size = new System.Drawing.Size(125, 23);
+            this.bStanyRun.Size = new System.Drawing.Size(403, 23);
             this.bStanyRun.TabIndex = 21;
-            this.bStanyRun.Text = "Wysłanie stanów teraz";
+            this.bStanyRun.Text = "Wysłanie wszystkich stanów teraz";
             this.bStanyRun.UseVisualStyleBackColor = true;
             this.bStanyRun.Click += new System.EventHandler(this.bStanyRun_Click);
             // 
             // bSaveDafult
             // 
-            this.bSaveDafult.Location = new System.Drawing.Point(172, 97);
+            this.bSaveDafult.Location = new System.Drawing.Point(172, 84);
             this.bSaveDafult.Name = "bSaveDafult";
             this.bSaveDafult.Size = new System.Drawing.Size(116, 23);
             this.bSaveDafult.TabIndex = 20;
@@ -402,7 +414,7 @@
             // 
             // bSavePresta
             // 
-            this.bSavePresta.Location = new System.Drawing.Point(294, 97);
+            this.bSavePresta.Location = new System.Drawing.Point(294, 84);
             this.bSavePresta.Name = "bSavePresta";
             this.bSavePresta.Size = new System.Drawing.Size(116, 23);
             this.bSavePresta.TabIndex = 19;
@@ -423,8 +435,7 @@
             // 
             this.tUserHttp.Location = new System.Drawing.Point(82, 58);
             this.tUserHttp.Name = "tUserHttp";
-            this.tUserHttp.PasswordChar = '*';
-            this.tUserHttp.Size = new System.Drawing.Size(100, 20);
+            this.tUserHttp.Size = new System.Drawing.Size(328, 20);
             this.tUserHttp.TabIndex = 17;
             // 
             // label6
@@ -440,7 +451,6 @@
             // 
             this.thttp.Location = new System.Drawing.Point(82, 32);
             this.thttp.Name = "thttp";
-            this.thttp.PasswordChar = '*';
             this.thttp.Size = new System.Drawing.Size(328, 20);
             this.thttp.TabIndex = 15;
             // 
@@ -580,9 +590,6 @@
             // tabRaporty
             // 
             this.tabRaporty.Controls.Add(this.groupBox1);
-            this.tabRaporty.Controls.Add(this.tbMagazynyLista);
-            this.tabRaporty.Controls.Add(this.bMagazyny);
-            this.tabRaporty.Controls.Add(this.bTestLINQ);
             this.tabRaporty.Controls.Add(this.chMagazyny);
             this.tabRaporty.Controls.Add(this.label9);
             this.tabRaporty.Controls.Add(this.label8);
@@ -606,7 +613,7 @@
             this.groupBox1.Controls.Add(this.tUserFTP);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.tAdresFTP);
-            this.groupBox1.Location = new System.Drawing.Point(241, 95);
+            this.groupBox1.Location = new System.Drawing.Point(9, 140);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(172, 194);
             this.groupBox1.TabIndex = 8;
@@ -681,46 +688,18 @@
             this.tAdresFTP.Size = new System.Drawing.Size(160, 20);
             this.tAdresFTP.TabIndex = 0;
             // 
-            // tbMagazynyLista
-            // 
-            this.tbMagazynyLista.Location = new System.Drawing.Point(6, 166);
-            this.tbMagazynyLista.Multiline = true;
-            this.tbMagazynyLista.Name = "tbMagazynyLista";
-            this.tbMagazynyLista.Size = new System.Drawing.Size(229, 123);
-            this.tbMagazynyLista.TabIndex = 7;
-            // 
-            // bMagazyny
-            // 
-            this.bMagazyny.Location = new System.Drawing.Point(11, 295);
-            this.bMagazyny.Name = "bMagazyny";
-            this.bMagazyny.Size = new System.Drawing.Size(122, 23);
-            this.bMagazyny.TabIndex = 6;
-            this.bMagazyny.Text = "Lista magazynów";
-            this.bMagazyny.UseVisualStyleBackColor = true;
-            this.bMagazyny.Click += new System.EventHandler(this.bMagazyny_Click);
-            // 
-            // bTestLINQ
-            // 
-            this.bTestLINQ.Location = new System.Drawing.Point(240, 66);
-            this.bTestLINQ.Name = "bTestLINQ";
-            this.bTestLINQ.Size = new System.Drawing.Size(175, 23);
-            this.bTestLINQ.TabIndex = 5;
-            this.bTestLINQ.Text = "Test zamówieńia";
-            this.bTestLINQ.UseVisualStyleBackColor = true;
-            this.bTestLINQ.Click += new System.EventHandler(this.bTestLINQ_Click);
-            // 
             // chMagazyny
             // 
             this.chMagazyny.FormattingEnabled = true;
-            this.chMagazyny.Location = new System.Drawing.Point(6, 66);
+            this.chMagazyny.Location = new System.Drawing.Point(6, 36);
             this.chMagazyny.Name = "chMagazyny";
-            this.chMagazyny.Size = new System.Drawing.Size(229, 94);
+            this.chMagazyny.Size = new System.Drawing.Size(404, 94);
             this.chMagazyny.TabIndex = 4;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 44);
+            this.label9.Location = new System.Drawing.Point(175, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 3;
@@ -739,7 +718,7 @@
             // dateDo
             // 
             this.dateDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDo.Location = new System.Drawing.Point(59, 40);
+            this.dateDo.Location = new System.Drawing.Point(228, 9);
             this.dateDo.Name = "dateDo";
             this.dateDo.Size = new System.Drawing.Size(101, 20);
             this.dateDo.TabIndex = 1;
@@ -761,6 +740,76 @@
             this.button1.Text = "Wczytaj z ustawień";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bReadPrestaSetings
+            // 
+            this.bReadPrestaSetings.Location = new System.Drawing.Point(0, 84);
+            this.bReadPrestaSetings.Name = "bReadPrestaSetings";
+            this.bReadPrestaSetings.Size = new System.Drawing.Size(166, 23);
+            this.bReadPrestaSetings.TabIndex = 34;
+            this.bReadPrestaSetings.Text = "Wczytaj ustawienia Presty";
+            this.bReadPrestaSetings.UseVisualStyleBackColor = true;
+            this.bReadPrestaSetings.Click += new System.EventHandler(this.bReadPrestaSetings_Click);
+            // 
+            // tbMagazynyLista
+            // 
+            this.tbMagazynyLista.Location = new System.Drawing.Point(8, 156);
+            this.tbMagazynyLista.Multiline = true;
+            this.tbMagazynyLista.Name = "tbMagazynyLista";
+            this.tbMagazynyLista.Size = new System.Drawing.Size(231, 81);
+            this.tbMagazynyLista.TabIndex = 35;
+            // 
+            // bMagazyny
+            // 
+            this.bMagazyny.Location = new System.Drawing.Point(245, 156);
+            this.bMagazyny.Name = "bMagazyny";
+            this.bMagazyny.Size = new System.Drawing.Size(158, 23);
+            this.bMagazyny.TabIndex = 36;
+            this.bMagazyny.Text = "Odczytaj listę magazynów";
+            this.bMagazyny.UseVisualStyleBackColor = true;
+            this.bMagazyny.Click += new System.EventHandler(this.bMagazyny_Click_1);
+            // 
+            // bTestLINQ
+            // 
+            this.bTestLINQ.Location = new System.Drawing.Point(6, 311);
+            this.bTestLINQ.Name = "bTestLINQ";
+            this.bTestLINQ.Size = new System.Drawing.Size(403, 23);
+            this.bTestLINQ.TabIndex = 37;
+            this.bTestLINQ.Text = "Import zamówień teraz";
+            this.bTestLINQ.UseVisualStyleBackColor = true;
+            // 
+            // numerMagForOrder
+            // 
+            this.numerMagForOrder.Location = new System.Drawing.Point(246, 214);
+            this.numerMagForOrder.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numerMagForOrder.Name = "numerMagForOrder";
+            this.numerMagForOrder.Size = new System.Drawing.Size(42, 20);
+            this.numerMagForOrder.TabIndex = 38;
+            this.numerMagForOrder.Visible = false;
+            // 
+            // bSaveMagForOrder
+            // 
+            this.bSaveMagForOrder.Location = new System.Drawing.Point(294, 214);
+            this.bSaveMagForOrder.Name = "bSaveMagForOrder";
+            this.bSaveMagForOrder.Size = new System.Drawing.Size(108, 23);
+            this.bSaveMagForOrder.TabIndex = 39;
+            this.bSaveMagForOrder.Text = "Zapis magazynu";
+            this.bSaveMagForOrder.UseVisualStyleBackColor = true;
+            this.bSaveMagForOrder.Click += new System.EventHandler(this.bSaveMagForOrder_Click);
+            // 
+            // bReadMagForOrder
+            // 
+            this.bReadMagForOrder.Location = new System.Drawing.Point(246, 185);
+            this.bReadMagForOrder.Name = "bReadMagForOrder";
+            this.bReadMagForOrder.Size = new System.Drawing.Size(156, 23);
+            this.bReadMagForOrder.TabIndex = 40;
+            this.bReadMagForOrder.Text = "Odczyt magazynu dla zam";
+            this.bReadMagForOrder.UseVisualStyleBackColor = true;
+            this.bReadMagForOrder.Click += new System.EventHandler(this.bReadMagForOrder_Click);
             // 
             // Start
             // 
@@ -786,6 +835,7 @@
             this.tabRaporty.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numerMagForOrder)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -828,12 +878,9 @@
         private System.Windows.Forms.DateTimePicker dateOd;
         private System.Windows.Forms.CheckedListBox chMagazyny;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button bTestLINQ;
         private System.Windows.Forms.Label lPathInfo;
         private System.Windows.Forms.Button b123;
         private System.Windows.Forms.Button bStanyZamowien;
-        private System.Windows.Forms.TextBox tbMagazynyLista;
-        private System.Windows.Forms.Button bMagazyny;
         private System.Windows.Forms.Button bStanyRun;
         private System.Windows.Forms.Button bTestCeny;
         private System.Windows.Forms.Button bTestStany;
@@ -857,6 +904,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tAdresFTP;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bReadPrestaSetings;
+        private System.Windows.Forms.Button bMagazyny;
+        private System.Windows.Forms.TextBox tbMagazynyLista;
+        private System.Windows.Forms.Button bReadMagForOrder;
+        private System.Windows.Forms.Button bSaveMagForOrder;
+        private System.Windows.Forms.NumericUpDown numerMagForOrder;
+        private System.Windows.Forms.Button bTestLINQ;
     }
 }
 
