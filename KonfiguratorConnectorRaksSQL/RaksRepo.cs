@@ -647,7 +647,8 @@ namespace KonfiguratorConnectorRaksSQL
                         }
 
                         stanyInRaks.Add(indeks, new StanTowaruWRaks(product_id, indeks, stan));
-                        Console.WriteLine("lp:" + lp + " kod: " + indeks + " Stan: " + stan + " product_id: " + product_id.ToString()); 
+                        Console.WriteLine("lp:" + lp + " kod: " + indeks + " Stan: " + stan + " product_id: " + product_id.ToString());
+                        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, ">>>>;lp:;" + lp + ";kod:;" + indeks + ";Stan: " + stan + " product_id: " + product_id.ToString(), true);
                     }
                     lp++;
                 }
@@ -668,6 +669,7 @@ namespace KonfiguratorConnectorRaksSQL
                 string sql = getPrepareSQLStatmentForSock(listaIndeksow.ToString());
                 string currIndex;
                 decimal currStock;
+                int licznik = 0;
 
                 FbCommand stanymag = new FbCommand(sql, fbc.getCurentConnection());
                 try
@@ -677,7 +679,7 @@ namespace KonfiguratorConnectorRaksSQL
                     {
                         currIndex = (string)fdk["SKROT"];
                         currStock = (decimal)fdk["STAN"];
-
+                        licznik++;
 
                         //if (!currIndex.Contains("MTPV005"))
                         //{
@@ -686,6 +688,13 @@ namespace KonfiguratorConnectorRaksSQL
                         //    continue;
                         //}
 
+                        //logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Kontrola czy w Presta jest stan dla indeksu:;" + currIndex);
+                        
+                        if (!stanyInRaks.ContainsKey(currIndex))
+                        {
+                            logg.setUstawienieLoga(Logg.RodzajLogowania.Warning, Logg.MediumLoga.File, ">>>>>>>> DO POPRAWY W PRESTA >>>>>>;Nie odnaleziono w stanach odczytanych z Presty indeksu:;" + currIndex );
+                            break;
+                        }
 
                         StanTowaruWRaks stanTowaru = stanyInRaks[currIndex];
 
@@ -699,23 +708,40 @@ namespace KonfiguratorConnectorRaksSQL
                         {
                             if (item.quantity != (int)currStock)
                             {
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Ustawinie dla indeksu;" + currIndex + "; starta ilość;" + item.quantity.ToString() + "; nowa ilość;" + currStock);
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, ";" + licznik +";Ustawinie dla indeksu;" + currIndex + "; starta ilość;" + item.quantity.ToString() + "; nowa ilość;" + currStock);
                                 Console.Write("Stan przed: " + item.quantity);
                                 item.quantity = (int)currStock;
                                 Console.WriteLine("  Stan po: " + item.quantity);
                                 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                sotckAvailableFactorySet.Update(item);
+                                try
+                                {
+                                    sotckAvailableFactorySet.Update(item);
+                                }
+                                catch (Exception e1)
+                                {
+                                    logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "BŁĄD;" + licznik +";Ustawinie dla indeksu;" + currIndex + ";" + e1.Message);
+                                }
                             }
                             else
                             {
-                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Stan dla indeksu;" + currIndex + "; bez zmian ilość;" + currStock);
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "STAN;" + licznik + ";Stan dla indeksu;" + currIndex + "; bez zmian ilość;" + currStock);
                             }
 
                             //Usuwanie z listy
-                            stanyInRaks.Remove(currIndex);
+                            try
+                            {
+                                //logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Usuwanie z listy;" + currIndex); 
+                                stanyInRaks.Remove(currIndex);
+                            }
+                            catch (Exception e2)
+                            {
+                                logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "BŁĄD;Usuwanie z listy indeksu;" + currIndex + ";" + e2.Message);
+                            }
                             ustwionoWPresta = true;
                             break;
                         }
+
+                        //logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Zmiana trybu na towary, których nie ma w Presta");
 
                         //brak towaru w sklepie Presta
                         if (!ustwionoWPresta)
@@ -735,12 +761,15 @@ namespace KonfiguratorConnectorRaksSQL
                         }
                     }
 
+                    logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Czyszczenie indeksów, których nie ma na stanie w Raks >> jest do przetworzenia: " + stanyInRaks.Count, true);
                     //Czyszczenie indexów, których nie ma na stanie
                     int coount = 0;
+                    licznik = 0;
                     while (stanyInRaks.Count>0)
                     {
                         StanTowaruWRaks st = (StanTowaruWRaks)stanyInRaks.Values[0];
                         coount++;
+                        licznik++;
                         
                         StockAvailableFactory sotckAvailableFactorySet = new StockAvailableFactory(BaseUrl, Account, Password);
                         Dictionary<string, string> dtnSet = new Dictionary<string, string>();
@@ -749,7 +778,7 @@ namespace KonfiguratorConnectorRaksSQL
 
                         foreach (stock_available item in sotckAvailablesSet)
                         {
-                            logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "Zerowanie stanu dla indeksu: " + st.kodRaks + "; starta ilość: " + item.quantity.ToString() + " Lp. " + coount);
+                            logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, ";" + licznik + ";Zerowanie stanu dla indeksu: " + st.kodRaks + "; starta ilość: " + item.quantity.ToString() + " Lp. " + coount);
                             Console.WriteLine("Zerowanie kod: " + st.kodRaks + " stan przed: " + item.quantity + " counter: " + coount);
                             item.quantity = (int)0;
                             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -275,8 +275,10 @@ namespace KonfiguratorConnectorRaksSQL
         {
             FBConn fbc = new FBConn();
             Console.WriteLine("cronAction Po deklaracji połaczenia dla aktualizacji stanów magazynowych");
+            MessageBox.Show("START cronAction Po deklaracji połaczenia dla aktualizacji stanów magazynowych");
             RaksRepo rr = new RaksRepo(fbc, true, true);
             Console.WriteLine("cronAction Po wykonaniu dla aktualizacji stanów magazynowych");
+            MessageBox.Show("KONIEC cronAction Po wykonaniu dla aktualizacji stanów magazynowych");
         }
 
         private void bTestCeny_Click(object sender, EventArgs e)
