@@ -14,6 +14,7 @@ namespace ConnectorRaksSQL
     {
         private readonly Timer _timer;
         public HostControl hostControl;
+        bool trwaEksportStanow = false;
 
         public CronWebService()
         {
@@ -55,15 +56,23 @@ namespace ConnectorRaksSQL
                 FBConn fbc = new FBConn();
                 ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (START) Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
                 ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (START) Po deklaracji połaczenia dla aktualizacji stanów magazynowych", "INFO");
+                trwaEksportStanow = true;
                 RaksRepo rr = new RaksRepo(fbc, true, false);
                 ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction (STOP) Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
                 ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction (STOP) Po wykonaniu dla aktualizacji stanów magazynowych", "INFO");
                 fbc.setConnectionOFF();
+                trwaEksportStanow = false;
             }
             else if (
                 (DateTime.Now.Hour >= 7 && DateTime.Now.Hour < 22) && (DateTime.Now.Minute >= 10)
                 )
             {
+                if (trwaEksportStanow)
+                {
+                    ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction Wywołanie importu zamówień gdy trwa jeszcze synchronizacja stanów mafgazynowych!", "WARNING");
+                    ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Wywołanie importu zamówień gdy trwa jeszcze synchronizacja stanów mafgazynowych!", "WARNING");
+                }
+                
                 ConnectorRaksSQL.Program.logowanieDoPlikuConRaks("cronAction Import zamówień przy każdym odpaleniu za wyjątkiem poczatku godziny w godzinach od 7 do 22", "INFO");
                 ConnectorRaksSQL.Program.logowanieDoPlikuLocConRaks("cronAction Import zamówień przy każdym odpaleniu za wyjątkiem poczatku godziny w godzinach od 7 do 22", "INFO");
 
