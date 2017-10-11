@@ -621,7 +621,7 @@ namespace KonfiguratorConnectorRaksSQL
                     string indeks = oneProduct.reference;
                     counter++;
 
-                    //if (!indeks.Contains("MTPV005"))
+                    //if (!indeks.Contains("SNK050K1"))
                     //{
                     //    //ograniczenie dla testów
                     //    Console.WriteLine("Pominięto: " + indeks + " Lp.: " + counter);
@@ -671,6 +671,24 @@ namespace KonfiguratorConnectorRaksSQL
                 decimal currStock;
                 int licznik = 0;
 
+                //Blok tetowy do wykrycia błędu
+                //FbCommand stanymag_test = new FbCommand(sql, fbc.getCurentConnection());
+                //try
+                //{
+                //    FbDataReader fdk = stanymag_test.ExecuteReader();
+                //    while (fdk.Read())
+                //    {
+                //        licznik++;
+                //        logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "INFO;TEST;" + licznik + ";INFO o stanach z Raks;Indeks;" + (string)fdk["SKROT"] + ";Stan;" + (decimal)fdk["STAN"]);
+                //    }
+                //    fdk.Close();
+                //}
+                //catch (Exception test_ex)
+                //{
+                //    logg.setUstawienieLoga(Logg.RodzajLogowania.Error, Logg.MediumLoga.File, "BŁĄD;" + licznik +";Wykonanie testowego zapytania do Raks;" + test_ex.Message);
+                //}
+                //licznik = 0;
+
                 FbCommand stanymag = new FbCommand(sql, fbc.getCurentConnection());
                 try
                 {
@@ -681,7 +699,7 @@ namespace KonfiguratorConnectorRaksSQL
                         currStock = (decimal)fdk["STAN"];
                         licznik++;
 
-                        //if (!currIndex.Contains("MTPV005"))
+                        //if (!currIndex.Contains("SNK050K1"))
                         //{
                         //    //ograniczenie dla testów
                         //    Console.WriteLine("Pominięto oblicznie stanów w Raks: " + currIndex);
@@ -693,7 +711,7 @@ namespace KonfiguratorConnectorRaksSQL
                         if (!stanyInRaks.ContainsKey(currIndex))
                         {
                             logg.setUstawienieLoga(Logg.RodzajLogowania.Warning, Logg.MediumLoga.File, ">>>>>>>> DO POPRAWY W PRESTA >>>>>>;Nie odnaleziono w stanach odczytanych z Presty indeksu:;" + currIndex );
-                            break;
+                            continue;
                         }
 
                         StanTowaruWRaks stanTowaru = stanyInRaks[currIndex];
@@ -709,9 +727,9 @@ namespace KonfiguratorConnectorRaksSQL
                             if (item.quantity != (int)currStock)
                             {
                                 logg.setUstawienieLoga(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, ";" + licznik +";Ustawinie dla indeksu;" + currIndex + "; starta ilość;" + item.quantity.ToString() + "; nowa ilość;" + currStock);
-                                Console.Write("Stan przed: " + item.quantity);
+                                Console.Write(currIndex + " Stan przed: " + item.quantity);
                                 item.quantity = (int)currStock;
-                                Console.WriteLine("  Stan po: " + item.quantity);
+                                Console.WriteLine(currIndex + "  Stan po: " + item.quantity);
                                 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                                 try
                                 {
