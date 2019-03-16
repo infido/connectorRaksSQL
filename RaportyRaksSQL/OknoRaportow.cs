@@ -23,6 +23,7 @@ namespace RaportyRaksSQL
         string dostawcy = "";
         string producenci = "";
         DateTime mark;
+        DataView fDataView;
 
         public OknoRaportow()
         {
@@ -120,6 +121,7 @@ namespace RaportyRaksSQL
 
         private void bWykonajRaport1_Click(object sender, EventArgs e)
         {
+            toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
 
@@ -414,6 +416,7 @@ namespace RaportyRaksSQL
 
         private void bRaport2_Click(object sender, EventArgs e)
         {
+            toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
 
@@ -529,6 +532,7 @@ namespace RaportyRaksSQL
         private void bRaport3_Click(object sender, EventArgs e)
         {
             //Analiza stanow minimalnych dla wszystkich
+            toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
 
@@ -665,9 +669,11 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("RESULT");
                 adapter.Fill(dt);
-                dataGridView1.DataSource = dt;
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
             }
             catch (FbException ex)
             {
@@ -680,6 +686,7 @@ namespace RaportyRaksSQL
 
         private void bRaport4DlaPB_Click(object sender, EventArgs e)
         {
+            toSearch.ReadOnly = true; 
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
 
@@ -843,7 +850,8 @@ namespace RaportyRaksSQL
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-                dataGridView1.DataSource = dt;
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
 
                 bSaveFTPPowerbike.Enabled = true;
             }
@@ -964,6 +972,47 @@ namespace RaportyRaksSQL
         {
             OknoFTP of = new OknoFTP();
             of.Show();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+            toSearch.ReadOnly = false;
+            toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+        }
+
+        private void toSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (toSearch.Text.Length > 0)
+            {
+                try
+                {
+                    if ((labelCol.Text.Contains("STAN")) ||
+                        labelCol.Text.Contains("DO_ZAM"))
+                    {
+                        fDataView.RowFilter = " " + labelCol.Text + " = " + toSearch.Text;
+                        dataGridView1.Refresh();
+                    }
+                    else
+                    {
+                        fDataView.RowFilter = " " + labelCol.Text + " Like '%" + toSearch.Text + "%'";
+                        dataGridView1.Refresh();
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Filtrowanie nie działa poprawnie na kolumnie " + labelCol.Text + " - proszę filtrować po innej kolumnie.");
+                }
+            }
+        }
+
+        private void toSearchClear_Click(object sender, EventArgs e)
+        {
+            fDataView.RowFilter = " " ;
+            dataGridView1.Refresh();
+            toSearch.Text = "";
+            toSearch.ReadOnly = true;
+            labelCol.Text = "kliknij w kolumnę";
         }
     }
 }

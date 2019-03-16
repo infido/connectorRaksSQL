@@ -69,6 +69,10 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
+            this.labelCol = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.toSearch = new System.Windows.Forms.TextBox();
+            this.toSearchClear = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -118,6 +122,10 @@
             // 
             // tabPageRaportTyp1
             // 
+            this.tabPageRaportTyp1.Controls.Add(this.toSearchClear);
+            this.tabPageRaportTyp1.Controls.Add(this.toSearch);
+            this.tabPageRaportTyp1.Controls.Add(this.label10);
+            this.tabPageRaportTyp1.Controls.Add(this.labelCol);
             this.tabPageRaportTyp1.Controls.Add(this.chPominArchiwalne);
             this.tabPageRaportTyp1.Controls.Add(this.chTylkoTowar);
             this.tabPageRaportTyp1.Controls.Add(this.bRaport4DlaPB);
@@ -414,6 +422,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(1354, 458);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // panelGdidStopka
             // 
@@ -478,6 +487,43 @@
             this.bCheckFtpPowerBike.Text = "Sprawdzenie Zawartości FTP Powerbike";
             this.bCheckFtpPowerBike.UseVisualStyleBackColor = true;
             this.bCheckFtpPowerBike.Click += new System.EventHandler(this.bCheckFtpPowerBike_Click);
+            // 
+            // labelCol
+            // 
+            this.labelCol.AutoSize = true;
+            this.labelCol.Location = new System.Drawing.Point(1067, 147);
+            this.labelCol.Name = "labelCol";
+            this.labelCol.Size = new System.Drawing.Size(88, 13);
+            this.labelCol.TabIndex = 20;
+            this.labelCol.Text = "kliknij w komórkę";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(951, 147);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(110, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Filtowanie w kolmnie: ";
+            // 
+            // toSearch
+            // 
+            this.toSearch.Location = new System.Drawing.Point(1187, 144);
+            this.toSearch.Name = "toSearch";
+            this.toSearch.ReadOnly = true;
+            this.toSearch.Size = new System.Drawing.Size(102, 20);
+            this.toSearch.TabIndex = 22;
+            this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
+            // 
+            // toSearchClear
+            // 
+            this.toSearchClear.Location = new System.Drawing.Point(1295, 142);
+            this.toSearchClear.Name = "toSearchClear";
+            this.toSearchClear.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear.TabIndex = 23;
+            this.toSearchClear.Text = "Usuń";
+            this.toSearchClear.UseVisualStyleBackColor = true;
+            this.toSearchClear.Click += new System.EventHandler(this.toSearchClear_Click);
             // 
             // OknoRaportow
             // 
@@ -551,6 +597,10 @@
         private System.Windows.Forms.CheckBox chPominArchiwalne;
         private System.Windows.Forms.CheckBox chTylkoTowar;
         private System.Windows.Forms.Button bCheckFtpPowerBike;
+        private System.Windows.Forms.Label labelCol;
+        private System.Windows.Forms.TextBox toSearch;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button toSearchClear;
     }
 }
 
