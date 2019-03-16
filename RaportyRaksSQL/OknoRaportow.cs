@@ -337,7 +337,7 @@ namespace RaportyRaksSQL
                     if (File.Exists(saveFileDialog1.FileName))
                         File.Delete(saveFileDialog1.FileName);
                     File.WriteAllText(saveFileDialog1.FileName, builder.ToString());
-                    MessageBox.Show("Zapisano plik z raportem: " + saveFileDialog1.FileName);
+                    MessageBox.Show("Poprawnie zapisano plik z raportem: " + saveFileDialog1.FileName);
                 }
                 catch (Exception ex)
                 {
