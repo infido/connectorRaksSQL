@@ -34,6 +34,18 @@ namespace RaportyRaksSQL
 
         private void OknoRaportow_Load(object sender, EventArgs e)
         {
+            if (fbconn.getConectedToFB())
+            {
+                onLoadWindow();
+            }
+            else
+            {
+                MessageBox.Show("Brak połączenia do bazy danych RaksSQL");
+            }
+        }
+
+        private void onLoadWindow()
+        {
             FbCommand cdk = new FbCommand("SELECT NUMER from GM_MAGAZYNY order by NUMER;", fbconn.getCurentConnection());
             try
             {
@@ -337,7 +349,7 @@ namespace RaportyRaksSQL
 
         private void bSetYear2009_Click(object sender, EventArgs e)
         {
-            dateOD1.Text = dateOd2.Text = "2016-10-01";
+            dateOD1.Text = dateOd2.Text = "2018-10-01";
         }
 
         private void SetWartosciParametrowDlaWhere()
@@ -887,20 +899,24 @@ namespace RaportyRaksSQL
                 string file ="";
                 try
                 {
-                    if (wybrany_magazyn == "'KR'")
+                    if (magazyny == "'KRAK'")
                         file = "N00780.csv"; //Kraków
-                    else if (wybrany_magazyn == "'WA'")
-                        file = "N04964.csv"; //Warszawa
-                    else if (wybrany_magazyn == "'M7'")
+                    else if (magazyny == "'WARS'")
+                        file = "N04964.csv"; //Warszawa (Puławska)
+                    else if (magazyny == "'PRZE'")
                         file = "N03885.csv"; //Przemyśl
-                    else if (wybrany_magazyn == "'NS'")
+                    else if (magazyny == "'NOWY'")
                         file = "N00779.csv"; //Nowy Sącz
+                    else if (magazyny == "'WESO'")
+                        file = "N05484.csv"; //N05484 Warszawa (Trakt Brzeski)
+                    else if (magazyny == "'CENTR'")
+                        file = "N05533.csv"; //N05533 Nowy Sącz (magazyn centrala)
                     else
                     {
                         file = "N00000.csv";
                         MessageBox.Show("Brak nazwy pliku dla tego magazynu, na serwer ftp zostanie zapisany plik " + file);
                     }
-
+      //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                     RegistryKey rejestr = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Infido\\KonektorSQL");
                     string tAdresFTP = (String)rejestr.GetValue("adresFTP");
                     string tUserFTP = (String)rejestr.GetValue("userFTP");
@@ -939,6 +955,12 @@ namespace RaportyRaksSQL
             {
                 MessageBox.Show("Wybrano za dużo magazynów, zapis raportu na serwer ftp przerwano!");
             }
+        }
+
+        private void bCheckFtpPowerBike_Click(object sender, EventArgs e)
+        {
+            OknoFTP of = new OknoFTP();
+            of.Show();
         }
     }
 }

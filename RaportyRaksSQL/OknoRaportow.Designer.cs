@@ -34,6 +34,8 @@
             this.panelParametry = new System.Windows.Forms.Panel();
             this.tabControlParametry = new System.Windows.Forms.TabControl();
             this.tabPageRaportTyp1 = new System.Windows.Forms.TabPage();
+            this.chPominArchiwalne = new System.Windows.Forms.CheckBox();
+            this.chTylkoTowar = new System.Windows.Forms.CheckBox();
             this.bRaport4DlaPB = new System.Windows.Forms.Button();
             this.bRaport3 = new System.Windows.Forms.Button();
             this.bRaport2 = new System.Windows.Forms.Button();
@@ -66,8 +68,7 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.chTylkoTowar = new System.Windows.Forms.CheckBox();
-            this.chPominArchiwalne = new System.Windows.Forms.CheckBox();
+            this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -144,6 +145,26 @@
             this.tabPageRaportTyp1.TabIndex = 0;
             this.tabPageRaportTyp1.Text = "Typ 1";
             this.tabPageRaportTyp1.UseVisualStyleBackColor = true;
+            // 
+            // chPominArchiwalne
+            // 
+            this.chPominArchiwalne.AutoSize = true;
+            this.chPominArchiwalne.Location = new System.Drawing.Point(14, 112);
+            this.chPominArchiwalne.Name = "chPominArchiwalne";
+            this.chPominArchiwalne.Size = new System.Drawing.Size(149, 17);
+            this.chPominArchiwalne.TabIndex = 19;
+            this.chPominArchiwalne.Text = "Czy pominąć archiwalne? ";
+            this.chPominArchiwalne.UseVisualStyleBackColor = true;
+            // 
+            // chTylkoTowar
+            // 
+            this.chTylkoTowar.AutoSize = true;
+            this.chTylkoTowar.Location = new System.Drawing.Point(14, 89);
+            this.chTylkoTowar.Name = "chTylkoTowar";
+            this.chTylkoTowar.Size = new System.Drawing.Size(108, 17);
+            this.chTylkoTowar.TabIndex = 18;
+            this.chTylkoTowar.Text = "Czy tylko towary?";
+            this.chTylkoTowar.UseVisualStyleBackColor = true;
             // 
             // bRaport4DlaPB
             // 
@@ -396,6 +417,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.bCheckFtpPowerBike);
             this.panelGdidStopka.Controls.Add(this.bSaveFTPPowerbike);
             this.panelGdidStopka.Controls.Add(this.bSetYear2009);
             this.panelGdidStopka.Controls.Add(this.CzyDodacNaglowek);
@@ -447,25 +469,15 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // chTylkoTowar
+            // bCheckFtpPowerBike
             // 
-            this.chTylkoTowar.AutoSize = true;
-            this.chTylkoTowar.Location = new System.Drawing.Point(14, 89);
-            this.chTylkoTowar.Name = "chTylkoTowar";
-            this.chTylkoTowar.Size = new System.Drawing.Size(108, 17);
-            this.chTylkoTowar.TabIndex = 18;
-            this.chTylkoTowar.Text = "Czy tylko towary?";
-            this.chTylkoTowar.UseVisualStyleBackColor = true;
-            // 
-            // chPominArchiwalne
-            // 
-            this.chPominArchiwalne.AutoSize = true;
-            this.chPominArchiwalne.Location = new System.Drawing.Point(14, 112);
-            this.chPominArchiwalne.Name = "chPominArchiwalne";
-            this.chPominArchiwalne.Size = new System.Drawing.Size(149, 17);
-            this.chPominArchiwalne.TabIndex = 19;
-            this.chPominArchiwalne.Text = "Czy pominąć archiwalne? ";
-            this.chPominArchiwalne.UseVisualStyleBackColor = true;
+            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(24, 7);
+            this.bCheckFtpPowerBike.Name = "bCheckFtpPowerBike";
+            this.bCheckFtpPowerBike.Size = new System.Drawing.Size(167, 22);
+            this.bCheckFtpPowerBike.TabIndex = 11;
+            this.bCheckFtpPowerBike.Text = "Sprawdzenie Zawartości FTP Powerbike";
+            this.bCheckFtpPowerBike.UseVisualStyleBackColor = true;
+            this.bCheckFtpPowerBike.Click += new System.EventHandler(this.bCheckFtpPowerBike_Click);
             // 
             // OknoRaportow
             // 
@@ -538,6 +550,7 @@
         private System.Windows.Forms.Button bSaveFTPPowerbike;
         private System.Windows.Forms.CheckBox chPominArchiwalne;
         private System.Windows.Forms.CheckBox chTylkoTowar;
+        private System.Windows.Forms.Button bCheckFtpPowerBike;
     }
 }
 

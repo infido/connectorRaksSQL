@@ -817,16 +817,72 @@ namespace KonfiguratorConnectorRaksSQL
         private string getPrepareSQLStatmentForSock(string listaIndeksow)
         {
             string magazyny = FBConn.GetKeyFromRegistry("stanymagazynow");
+            string sql = "";
+            //if (listaIndeksow.Count() < 1500)
+            //{
+            //    sql = "SELECT GM_TOWARY.SKROT, (sum(GM_MAGAZYN.ILOSC) - sum(GM_MAGAZYN.ILOSC_ZAREZERWOWANA)) as STAN ";
+            //    sql += " FROM GM_MAGAZYN";
+            //    sql += " join GM_TOWARY on GM_MAGAZYN.ID_TOWAR=GM_TOWARY.ID_TOWARU";
+            //    sql += " join GM_MAGAZYNY on GM_MAGAZYN.MAGNUM=GM_MAGAZYNY.ID";
+            //    sql += " where GM_TOWARY.SKROT in (" + listaIndeksow + ")";
+            //    sql += " and GM_MAGAZYNY.NUMER in (" + magazyny + ")";
+            //    sql += " group by GM_TOWARY.SKROT;";
+            //}
+            //else if (listaIndeksow.Count() >= 1500 && listaIndeksow.Count() < 3000)
+            //{
 
-            string sql = "SELECT GM_TOWARY.SKROT, (sum(GM_MAGAZYN.ILOSC) - sum(GM_MAGAZYN.ILOSC_ZAREZERWOWANA)) as STAN ";
-            sql += " FROM GM_MAGAZYN";
-            sql += " join GM_TOWARY on GM_MAGAZYN.ID_TOWAR=GM_TOWARY.ID_TOWARU";
-            sql += " join GM_MAGAZYNY on GM_MAGAZYN.MAGNUM=GM_MAGAZYNY.ID";
-            sql += " where GM_TOWARY.SKROT in (" + listaIndeksow + ")";
-            sql += " and GM_MAGAZYNY.NUMER in (" + magazyny + ")";
-            sql += " group by GM_TOWARY.SKROT;";
+                sql = "SELECT GM_TOWARY.SKROT, (sum(GM_MAGAZYN.ILOSC) - sum(GM_MAGAZYN.ILOSC_ZAREZERWOWANA)) as STAN ";
+                sql += " FROM GM_MAGAZYN";
+                sql += " join GM_TOWARY on GM_MAGAZYN.ID_TOWAR=GM_TOWARY.ID_TOWARU";
+                sql += " join GM_MAGAZYNY on GM_MAGAZYN.MAGNUM=GM_MAGAZYNY.ID";
+                sql += " where GM_TOWARY.SKROT in (" + set1499elements(listaIndeksow,0,1499) + ")";
+                sql += " and GM_MAGAZYNY.NUMER in (" + magazyny + ")";
+                sql += " group by GM_TOWARY.SKROT";
 
+                sql += " union all ";
+
+                sql += "SELECT GM_TOWARY.SKROT, (sum(GM_MAGAZYN.ILOSC) - sum(GM_MAGAZYN.ILOSC_ZAREZERWOWANA)) as STAN ";
+                sql += " FROM GM_MAGAZYN";
+                sql += " join GM_TOWARY on GM_MAGAZYN.ID_TOWAR=GM_TOWARY.ID_TOWARU";
+                sql += " join GM_MAGAZYNY on GM_MAGAZYN.MAGNUM=GM_MAGAZYNY.ID";
+                sql += " where GM_TOWARY.SKROT in (" + set1499elements(listaIndeksow, 1500, 2999) + ")";
+                sql += " and GM_MAGAZYNY.NUMER in (" + magazyny + ")";
+                sql += " group by GM_TOWARY.SKROT;";
+            //}
             return sql;
+        }
+
+        private StringBuilder set1499elements(string lista, int odElementu, int doElementu)
+        {
+            StringBuilder listaWynik = new StringBuilder();
+            int licznik = 0;
+            int size = lista.Length;
+
+            for (int i = 0; licznik < doElementu; i++)
+            {
+                if (i == size)
+                {
+                    licznik = doElementu;
+                }
+                else if (lista.ElementAt(i) == Convert.ToChar(","))
+                {
+                    licznik++;
+                }
+                
+                if (licznik >= odElementu && licznik < doElementu)
+                {
+                    if (listaWynik.Length == 0 && lista.ElementAt(i) == Convert.ToChar(","))
+                    {
+                        //nie rób nic bo to poczatek drugiej listy
+                    }else
+                    {
+                        listaWynik.Append(lista.ElementAt(i));
+                    }
+                }
+                
+            }
+
+            return listaWynik;
         }
 
         public void getCalculateStocInRaks(string listaIndeksow)

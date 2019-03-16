@@ -225,5 +225,10 @@ namespace KonfiguratorConnectorRaksSQL
         {
             return pathInfo;
         }
+
+        public bool getConectedToFB()
+        {
+            return (conn.State > 0 ? true : false);
+        }
     }
 }
