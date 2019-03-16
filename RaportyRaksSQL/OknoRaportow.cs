@@ -238,9 +238,11 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("RESULT");
                 adapter.Fill(dt);
-                dataGridView1.DataSource = dt;
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
             }
             catch (FbException ex)
             {
@@ -287,9 +289,11 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("RESULT");
                 adapter.Fill(dt);
-                dataGridView1.DataSource = dt;
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
             }
             catch (FbException ex)
             {
@@ -516,9 +520,11 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("RESULT");
                 adapter.Fill(dt);
-                dataGridView1.DataSource = dt;
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
             }
             catch (FbException ex)
             {
@@ -848,8 +854,9 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataAdapter adapter = new FbDataAdapter(cdk);
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable("RESULT");
                 adapter.Fill(dt);
+                fDataView = new DataView();
                 fDataView.Table = dt;
                 dataGridView1.DataSource = fDataView;
 
@@ -978,7 +985,17 @@ namespace RaportyRaksSQL
         {
             labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
             toSearch.ReadOnly = false;
-            toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+            if ((labelCol.Text.Contains("STAN")) ||
+                        labelCol.Text.Contains("DO_ZAM") ||
+                        labelCol.Text.Contains("ILOSC"))
+            {
+                toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+            }
+            else
+            {
+                toSearch.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+            }
+
         }
 
         private void toSearch_TextChanged(object sender, EventArgs e)
@@ -988,14 +1005,15 @@ namespace RaportyRaksSQL
                 try
                 {
                     if ((labelCol.Text.Contains("STAN")) ||
-                        labelCol.Text.Contains("DO_ZAM"))
+                        labelCol.Text.Contains("DO_ZAM") ||
+                        labelCol.Text.Contains("ILOSC"))
                     {
                         fDataView.RowFilter = " " + labelCol.Text + " = " + toSearch.Text;
                         dataGridView1.Refresh();
                     }
                     else
                     {
-                        fDataView.RowFilter = " " + labelCol.Text + " Like '%" + toSearch.Text + "%'";
+                        fDataView.RowFilter = " " + labelCol.Text + " Like '" + toSearch.Text + "'";
                         dataGridView1.Refresh();
                     }
                 }
