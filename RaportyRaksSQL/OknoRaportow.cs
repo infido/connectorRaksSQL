@@ -528,18 +528,20 @@ namespace RaportyRaksSQL
 
         private void bRaport3_Click(object sender, EventArgs e)
         {
+            //Analiza stanow minimalnych dla wszystkich
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
 
             string sql = " ";
             sql += " select SKROT, NAZWA, sum(STAN_MAG) STAN_MAG, sum(STANMIN) STAN_MIN, sum(STANMAX) STAN_MAX,  ";
             sql += " IIF((sum(STANMIN)-sum(STAN_MAG))<0, ";
-            sql += " IIF((sum(STANMAX)-sum(STAN_MAG))<0,(sum(STANMAX)-sum(STAN_MAG)),0),(sum(STANMIN)-sum(STAN_MAG)) ) DO_ZAMOWIENIA,DOST DOSTAWCA, PRODU PRODUCENT ";
+            sql += " IIF((sum(STANMAX)-sum(STAN_MAG))<0,(sum(STANMAX)-sum(STAN_MAG)),0),(sum(STANMIN)-sum(STAN_MAG)) ) DO_ZAMOWIENIA,DOST DOSTAWCA, PRODU PRODUCENT, LOKALIZACJA ";
             sql += " FROM ( ";
-            sql += " SELECT GM_TOWARY.SKROT, GM_TOWARY.NAZWA, 0 STAN_MAG, GM_TOWARY.STANMIN, GM_TOWARY.STANMAX, R3DOST.SHORT_NAME DOST, R3PRODU.SHORT_NAME PRODU ";
+            sql += " SELECT GM_TOWARY.SKROT, GM_TOWARY.NAZWA, 0 STAN_MAG, GM_TOWARY.STANMIN, GM_TOWARY.STANMAX, R3DOST.SHORT_NAME DOST, R3PRODU.SHORT_NAME PRODU, GM_LOKALIZACJE.NAZWA LOKALIZACJA ";
             sql += " FROM GM_TOWARY   ";
             sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
+            sql += " left join GM_LOKALIZACJE on GM_LOKALIZACJE.ID=GM_TOWARY.LOKALIZACJA ";
             if (podstawoweGT.Length != 0)
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA ";
             if (dowolneGT.Length != 0)
@@ -602,12 +604,13 @@ namespace RaportyRaksSQL
                 sql += " where " + tmpsql;
 
             sql += " union ";
-            sql += " SELECT GM_TOWARY.SKROT , GM_TOWARY.NAZWA, sum(GM_MAGAZYN.ILOSC) STAN_MAG, 0 STANMIN, 0 STANMAX, R3DOST.SHORT_NAME DOST, R3PRODU.SHORT_NAME PRODU ";
+            sql += " SELECT GM_TOWARY.SKROT , GM_TOWARY.NAZWA, sum(GM_MAGAZYN.ILOSC) STAN_MAG, 0 STANMIN, 0 STANMAX, R3DOST.SHORT_NAME DOST, R3PRODU.SHORT_NAME PRODU, GM_LOKALIZACJE.NAZWA LOKALIZACJA  ";
             sql += " FROM GM_MAGAZYN ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_MAGAZYN.ID_TOWAR ";
             sql += " join GM_MAGAZYNY on GM_MAGAZYNY.ID=GM_MAGAZYN.MAGNUM ";
             sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
+            sql += " left join GM_LOKALIZACJE on GM_LOKALIZACJE.ID=GM_TOWARY.LOKALIZACJA ";
             if (podstawoweGT.Length != 0)
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA ";
             if (dowolneGT.Length != 0)
@@ -654,8 +657,8 @@ namespace RaportyRaksSQL
             if (tmpsql.Length>0)
                 sql += " where " + tmpsql;
 
-            sql += " group by  GM_MAGAZYN.MAGNUM, GM_TOWARY.SKROT,GM_TOWARY.NAZWA,R3DOST.SHORT_NAME, R3PRODU.SHORT_NAME) a ";
-            sql += " group by SKROT, NAZWA, DOSTAWCA, PRODUCENT ";
+            sql += " group by  GM_MAGAZYN.MAGNUM, GM_TOWARY.SKROT,GM_TOWARY.NAZWA,R3DOST.SHORT_NAME, R3PRODU.SHORT_NAME, GM_LOKALIZACJE.NAZWA) a ";
+            sql += " group by SKROT, NAZWA, DOSTAWCA, PRODUCENT, LOKALIZACJA ";
             sql += " order by SKROT ";
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
