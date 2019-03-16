@@ -387,19 +387,7 @@ namespace KonfiguratorConnectorRaksSQL
 
         private void bOdcztyFTP_Click(object sender, EventArgs e)
         {
-            RegistryKey rejestr;
-            try
-            {
-                rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey);
-                tAdresFTP.Text = (String)rejestr.GetValue("adresFTP");
-                tUserFTP.Text = (String)rejestr.GetValue("userFTP");
-                tPassFTP.Text = (String)rejestr.GetValue("passFTP");
-            }
-            catch (Exception ex)
-            {
-                Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: : " + ex.Message);
-                System.Windows.Forms.MessageBox.Show("1103: Błąd odczytu klucza konfiguracji połączenia FTP z rejestru Windows: " + ex.Message);
-            }
+            MessageBox.Show("Funkcjonalność jest już nie używana... teraz obowiązauje plik konfiguracyjny");
         }
 
         private void button1_Click(object sender, EventArgs e)
