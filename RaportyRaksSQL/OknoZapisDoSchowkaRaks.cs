@@ -32,6 +32,8 @@ namespace RaportyRaksSQL
 
         private void bSave_Click(object sender, EventArgs e)
         {
+            string tmpLab = label3.Text;
+            label3.Text += " WYKONUJE...";
             int count = 0; 
             if (tnameClipboard.Text.Length > 0 && tnameUser.Text.Length > 0)
             {
@@ -94,7 +96,8 @@ namespace RaportyRaksSQL
             {
                 MessageBox.Show("Nie uzupełniono obowiązkowych pól: Nazwa schowka i/lub Użytkownik! Proszę uzupełnić i ponownie zapisać do RaksSQL.");
             }
-            label3.Text += " wykonano " + count;
+            label3.Text = "Status OK:" + tmpLab + " wykonano " + count;
+            label3.ForeColor = Color.Green;
             bSave.Enabled = false;
 
         }
