@@ -124,6 +124,7 @@ namespace RaportyRaksSQL
             toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
+            bSaveToRaksSQLClipboard.Enabled = false;
 
             string sql = "select * from (";
             sql += " select ";
@@ -423,6 +424,7 @@ namespace RaportyRaksSQL
             toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
+            bSaveToRaksSQLClipboard.Enabled = false;
 
             string sql = " select MAGAZYN, INDEKS, NAZWA, sum(ILOSC) as ILOSC, sum(STANMIN) as STANMIN, sum(STANMAX) as STANMAX, DOSTAWCA, PRODUCENT from ( ";
 
@@ -541,6 +543,7 @@ namespace RaportyRaksSQL
             toSearch.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
+            bSaveToRaksSQLClipboard.Enabled = true;
 
             string sql = " ";
             sql += " select SKROT, NAZWA, sum(STAN_MAG) STAN_MAG, sum(STANMIN) STAN_MIN, sum(STANMAX) STAN_MAX,  ";
@@ -695,6 +698,7 @@ namespace RaportyRaksSQL
             toSearch.ReadOnly = true; 
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
+            bSaveToRaksSQLClipboard.Enabled = false;
 
             string sql = " ";
             sql += " select SKROT, sum(AKTUALNY_STAN) STAN_MAGAZYNU, sum(ILOSC_SPRZEDANA) SPRZEDANE_DNIA ";
@@ -939,6 +943,7 @@ namespace RaportyRaksSQL
                     string tAdresFTP = (String)rejestr.GetValue("adresFTP");
                     string tUserFTP = (String)rejestr.GetValue("userFTP");
                     string tPassFTP = (String)rejestr.GetValue("passFTP");
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
                     string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\" + file ;
                     File.WriteAllText(mydocpath, builder.ToString());
@@ -1031,6 +1036,12 @@ namespace RaportyRaksSQL
             toSearch.Text = "";
             toSearch.ReadOnly = true;
             labelCol.Text = "kliknij w kolumnę";
+        }
+
+        private void bSaveToRaksSQLClipboard_Click(object sender, EventArgs e)
+        {
+            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn,ref dataGridView1);
+            okno.Show();
         }
     }
 }

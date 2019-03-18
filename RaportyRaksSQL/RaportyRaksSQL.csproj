@@ -24,8 +24,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.9.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -90,6 +90,12 @@
     <Compile Include="OknoRaportow.Designer.cs">
       <DependentUpon>OknoRaportow.cs</DependentUpon>
     </Compile>
+    <Compile Include="OknoZapisDoSchowkaRaks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OknoZapisDoSchowkaRaks.Designer.cs">
+      <DependentUpon>OknoZapisDoSchowkaRaks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingFile.cs" />
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OknoRaportow.resx">
       <DependentUpon>OknoRaportow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OknoZapisDoSchowkaRaks.resx">
+      <DependentUpon>OknoZapisDoSchowkaRaks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

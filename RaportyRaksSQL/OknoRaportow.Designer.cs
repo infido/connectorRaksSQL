@@ -34,6 +34,10 @@
             this.panelParametry = new System.Windows.Forms.Panel();
             this.tabControlParametry = new System.Windows.Forms.TabControl();
             this.tabPageRaportTyp1 = new System.Windows.Forms.TabPage();
+            this.toSearchClear = new System.Windows.Forms.Button();
+            this.toSearch = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelCol = new System.Windows.Forms.Label();
             this.chPominArchiwalne = new System.Windows.Forms.CheckBox();
             this.chTylkoTowar = new System.Windows.Forms.CheckBox();
             this.bRaport4DlaPB = new System.Windows.Forms.Button();
@@ -64,15 +68,12 @@
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelGdidStopka = new System.Windows.Forms.Panel();
+            this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
             this.bSaveFTPPowerbike = new System.Windows.Forms.Button();
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
-            this.labelCol = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.toSearch = new System.Windows.Forms.TextBox();
-            this.toSearchClear = new System.Windows.Forms.Button();
+            this.bSaveToRaksSQLClipboard = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -153,6 +154,43 @@
             this.tabPageRaportTyp1.TabIndex = 0;
             this.tabPageRaportTyp1.Text = "Typ 1";
             this.tabPageRaportTyp1.UseVisualStyleBackColor = true;
+            // 
+            // toSearchClear
+            // 
+            this.toSearchClear.Location = new System.Drawing.Point(1295, 142);
+            this.toSearchClear.Name = "toSearchClear";
+            this.toSearchClear.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear.TabIndex = 23;
+            this.toSearchClear.Text = "Usuń";
+            this.toSearchClear.UseVisualStyleBackColor = true;
+            this.toSearchClear.Click += new System.EventHandler(this.toSearchClear_Click);
+            // 
+            // toSearch
+            // 
+            this.toSearch.Location = new System.Drawing.Point(1187, 144);
+            this.toSearch.Name = "toSearch";
+            this.toSearch.ReadOnly = true;
+            this.toSearch.Size = new System.Drawing.Size(102, 20);
+            this.toSearch.TabIndex = 22;
+            this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(951, 147);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(110, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Filtowanie w kolmnie: ";
+            // 
+            // labelCol
+            // 
+            this.labelCol.AutoSize = true;
+            this.labelCol.Location = new System.Drawing.Point(1067, 147);
+            this.labelCol.Name = "labelCol";
+            this.labelCol.Size = new System.Drawing.Size(88, 13);
+            this.labelCol.TabIndex = 20;
+            this.labelCol.Text = "kliknij w komórkę";
             // 
             // chPominArchiwalne
             // 
@@ -426,6 +464,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.bSaveToRaksSQLClipboard);
             this.panelGdidStopka.Controls.Add(this.bCheckFtpPowerBike);
             this.panelGdidStopka.Controls.Add(this.bSaveFTPPowerbike);
             this.panelGdidStopka.Controls.Add(this.bSetYear2009);
@@ -436,6 +475,16 @@
             this.panelGdidStopka.Name = "panelGdidStopka";
             this.panelGdidStopka.Size = new System.Drawing.Size(1354, 35);
             this.panelGdidStopka.TabIndex = 1;
+            // 
+            // bCheckFtpPowerBike
+            // 
+            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(24, 7);
+            this.bCheckFtpPowerBike.Name = "bCheckFtpPowerBike";
+            this.bCheckFtpPowerBike.Size = new System.Drawing.Size(167, 22);
+            this.bCheckFtpPowerBike.TabIndex = 11;
+            this.bCheckFtpPowerBike.Text = "Sprawdzenie Zawartości FTP Powerbike";
+            this.bCheckFtpPowerBike.UseVisualStyleBackColor = true;
+            this.bCheckFtpPowerBike.Click += new System.EventHandler(this.bCheckFtpPowerBike_Click);
             // 
             // bSaveFTPPowerbike
             // 
@@ -478,52 +527,16 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // bCheckFtpPowerBike
+            // bSaveToRaksSQLClipboard
             // 
-            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(24, 7);
-            this.bCheckFtpPowerBike.Name = "bCheckFtpPowerBike";
-            this.bCheckFtpPowerBike.Size = new System.Drawing.Size(167, 22);
-            this.bCheckFtpPowerBike.TabIndex = 11;
-            this.bCheckFtpPowerBike.Text = "Sprawdzenie Zawartości FTP Powerbike";
-            this.bCheckFtpPowerBike.UseVisualStyleBackColor = true;
-            this.bCheckFtpPowerBike.Click += new System.EventHandler(this.bCheckFtpPowerBike_Click);
-            // 
-            // labelCol
-            // 
-            this.labelCol.AutoSize = true;
-            this.labelCol.Location = new System.Drawing.Point(1067, 147);
-            this.labelCol.Name = "labelCol";
-            this.labelCol.Size = new System.Drawing.Size(88, 13);
-            this.labelCol.TabIndex = 20;
-            this.labelCol.Text = "kliknij w komórkę";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(951, 147);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(110, 13);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Filtowanie w kolmnie: ";
-            // 
-            // toSearch
-            // 
-            this.toSearch.Location = new System.Drawing.Point(1187, 144);
-            this.toSearch.Name = "toSearch";
-            this.toSearch.ReadOnly = true;
-            this.toSearch.Size = new System.Drawing.Size(102, 20);
-            this.toSearch.TabIndex = 22;
-            this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
-            // 
-            // toSearchClear
-            // 
-            this.toSearchClear.Location = new System.Drawing.Point(1295, 142);
-            this.toSearchClear.Name = "toSearchClear";
-            this.toSearchClear.Size = new System.Drawing.Size(43, 23);
-            this.toSearchClear.TabIndex = 23;
-            this.toSearchClear.Text = "Usuń";
-            this.toSearchClear.UseVisualStyleBackColor = true;
-            this.toSearchClear.Click += new System.EventHandler(this.toSearchClear_Click);
+            this.bSaveToRaksSQLClipboard.Enabled = false;
+            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(746, 6);
+            this.bSaveToRaksSQLClipboard.Name = "bSaveToRaksSQLClipboard";
+            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(156, 23);
+            this.bSaveToRaksSQLClipboard.TabIndex = 12;
+            this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
+            this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
+            this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
             // 
             // OknoRaportow
             // 
@@ -601,6 +614,7 @@
         private System.Windows.Forms.TextBox toSearch;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button toSearchClear;
+        private System.Windows.Forms.Button bSaveToRaksSQLClipboard;
     }
 }
 
