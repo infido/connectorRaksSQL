@@ -1043,5 +1043,10 @@ namespace RaportyRaksSQL
             OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn,ref dataGridView1);
             okno.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Lokalizacja pliku konf.ini to: " + Directory.GetCurrentDirectory());
+        }
     }
 }

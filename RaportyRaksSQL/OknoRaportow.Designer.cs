@@ -74,6 +74,7 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.bSaveToRaksSQLClipboard = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -464,6 +465,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.button1);
             this.panelGdidStopka.Controls.Add(this.bSaveToRaksSQLClipboard);
             this.panelGdidStopka.Controls.Add(this.bCheckFtpPowerBike);
             this.panelGdidStopka.Controls.Add(this.bSaveFTPPowerbike);
@@ -478,7 +480,7 @@
             // 
             // bCheckFtpPowerBike
             // 
-            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(24, 7);
+            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(66, 7);
             this.bCheckFtpPowerBike.Name = "bCheckFtpPowerBike";
             this.bCheckFtpPowerBike.Size = new System.Drawing.Size(167, 22);
             this.bCheckFtpPowerBike.TabIndex = 11;
@@ -537,6 +539,16 @@
             this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
             this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
             this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(24, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "ini";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // OknoRaportow
             // 
@@ -615,6 +627,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button toSearchClear;
         private System.Windows.Forms.Button bSaveToRaksSQLClipboard;
+        private System.Windows.Forms.Button button1;
     }
 }
 
