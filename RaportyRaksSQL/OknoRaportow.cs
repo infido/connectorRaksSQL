@@ -938,12 +938,12 @@ namespace RaportyRaksSQL
                         file = "N00000.csv";
                         MessageBox.Show("Brak nazwy pliku dla tego magazynu, na serwer ftp zostanie zapisany plik " + file);
                     }
-      //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                    RegistryKey rejestr = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Infido\\KonektorSQL");
-                    string tAdresFTP = (String)rejestr.GetValue("adresFTP");
-                    string tUserFTP = (String)rejestr.GetValue("userFTP");
-                    string tPassFTP = (String)rejestr.GetValue("passFTP");
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    #region pobranie ustawienien do połączenia z serwerem FTP
+                    RaksForPoverbike.SettingFile sf = new RaksForPoverbike.SettingFile();
+                    string tAdresFTP = sf.AdresFTP;
+                    string tUserFTP = sf.UserFTP;
+                    string tPassFTP = sf.PassFTP;
+                    #endregion
 
                     string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\" + file ;
                     File.WriteAllText(mydocpath, builder.ToString());
