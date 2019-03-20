@@ -137,13 +137,25 @@ namespace KonfiguratorConnectorRaksSQL
             string connectionString = "";
             try
             {
+
+//=========================================================================
+//Wymaga zmiany namespace odczyt z pliku
+
+
                 rejestr = Registry.CurrentUser.OpenSubKey(RegistryKey);
                 if (rejestr == null)
                 {
                     setConnectionStringToRegistry("", "", "", "", "");
                 }
+//=========================================================================
 
                 connectionString =
+
+                    //"User=" + (String)rejestr.GetValue("User") + ";" +
+                    //"Password=" + (String)rejestr.GetValue("Pass") + ";" +
+                    //"Database=" + (String)rejestr.GetValue("Path") + ";" +
+                    //"Datasource=" + (String)rejestr.GetValue("IP") + ";" +
+
                     "User=" +(String)rejestr.GetValue("User") + ";" +
                     "Password=" + (String)rejestr.GetValue("Pass") + ";" +
                     "Database=" + (String)rejestr.GetValue("Path") + ";" +
