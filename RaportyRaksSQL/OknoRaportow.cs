@@ -130,6 +130,8 @@ namespace RaportyRaksSQL
             sql += " select ";
             sql += " GM_FSPOZ.SKROT_ORYGINALNY INDEKS,";
             sql += " GM_FSPOZ.NAZWA_ORYGINALNA NAZWA,";
+            sql += " GM_RABATY.NAZWA RODZAJ_RABATU, ";
+            sql += " GM_FSPOZ.RABAT, ";
             sql += " GM_FSPOZ.ILOSC,";
             sql += " GM_WZPOZ.CENA_ZAKUPU_PO CENA_ZAKUPU_NETTO," ;
             sql += " GM_FSPOZ.CENA_SP_PLN_NETTO CENA_SPRZEDAZY_NETTO,";
@@ -139,6 +141,7 @@ namespace RaportyRaksSQL
             sql += " GM_MAGAZYNY.NUMER MAGAZYN ";
             sql += " from GM_FSPOZ";
             sql += " left join GM_WZPOZ on GM_FSPOZ.ID = GM_WZPOZ.ID_FSPOZ";
+            sql += " left join GM_RABATY on GM_FSPOZ.RODZAJ_RABATU = GM_RABATY.ID";
             sql += " join gm_fs on gm_fspoz.id_glowki=gm_fs.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
             if (podstawoweGT.Length != 0)
@@ -180,6 +183,8 @@ namespace RaportyRaksSQL
             sql += " select ";
             sql += " GM_KSPOZ.SKROT_ORYGINALNY INDEKS,";
             sql += " GM_KSPOZ.NAZWA_ORYGINALNA NAZWA,";
+            sql += " '' RODZAJ_RABATU,";
+            sql += " 0 as RABAT,";
             sql += " GM_KSPOZ.ILOSC_PO - GM_KSPOZ.ILOSC_PRZED as ILOSC,";
             //sql += " GM_WZPOZ.CENA_ZAKUPU_PO CENA_ZAKUPU_NETTO,";
             sql += " 0 CENA_ZAKUPU_NETTO,";
