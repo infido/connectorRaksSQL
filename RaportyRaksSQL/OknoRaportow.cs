@@ -889,6 +889,14 @@ namespace RaportyRaksSQL
             {
                 if (wybrany_magazyn.Length == 0)
                     wybrany_magazyn = "'" + item.ToString() + "'";
+                else if (item.ToString().Equals("CENTR") && wybrany_magazyn.Contains("NOWY"))
+                {
+                    //jest ok
+                }
+                else if (item.ToString().Equals("NOWY") && wybrany_magazyn.Contains("CENTR"))
+                {
+                    //jest ok
+                }
                 else
                 {
                     zaDuzoMagazynow = true;
@@ -932,6 +940,8 @@ namespace RaportyRaksSQL
                         file = "N04964.csv"; //Warszawa (Puławska)
                     else if (magazyny == "'PRZE'")
                         file = "N03885.csv"; //Przemyśl
+                    else if (magazyny.Contains( "'NOWY'") && magazyny.Contains( "'CENTR'"))
+                        file = "N00779.csv"; //Nowy Sącz magazyn główny i pomocniczy
                     else if (magazyny == "'NOWY'")
                         file = "N00779.csv"; //Nowy Sącz
                     else if (magazyny == "'WESO'")
