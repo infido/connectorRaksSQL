@@ -68,13 +68,19 @@
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelGdidStopka = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.bSaveToRaksSQLClipboard = new System.Windows.Forms.Button();
             this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
             this.bSaveFTPPowerbike = new System.Windows.Forms.Button();
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.bSaveToRaksSQLClipboard = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toSearchClear2 = new System.Windows.Forms.Button();
+            this.toSearch2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelCol2 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -124,6 +130,12 @@
             // 
             // tabPageRaportTyp1
             // 
+            this.tabPageRaportTyp1.Controls.Add(this.radioButton2);
+            this.tabPageRaportTyp1.Controls.Add(this.radioButton1);
+            this.tabPageRaportTyp1.Controls.Add(this.toSearchClear2);
+            this.tabPageRaportTyp1.Controls.Add(this.toSearch2);
+            this.tabPageRaportTyp1.Controls.Add(this.label11);
+            this.tabPageRaportTyp1.Controls.Add(this.labelCol2);
             this.tabPageRaportTyp1.Controls.Add(this.toSearchClear);
             this.tabPageRaportTyp1.Controls.Add(this.toSearch);
             this.tabPageRaportTyp1.Controls.Add(this.label10);
@@ -158,7 +170,7 @@
             // 
             // toSearchClear
             // 
-            this.toSearchClear.Location = new System.Drawing.Point(1295, 142);
+            this.toSearchClear.Location = new System.Drawing.Point(1295, 121);
             this.toSearchClear.Name = "toSearchClear";
             this.toSearchClear.Size = new System.Drawing.Size(43, 23);
             this.toSearchClear.TabIndex = 23;
@@ -168,7 +180,7 @@
             // 
             // toSearch
             // 
-            this.toSearch.Location = new System.Drawing.Point(1187, 144);
+            this.toSearch.Location = new System.Drawing.Point(1187, 123);
             this.toSearch.Name = "toSearch";
             this.toSearch.ReadOnly = true;
             this.toSearch.Size = new System.Drawing.Size(102, 20);
@@ -178,7 +190,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(951, 147);
+            this.label10.Location = new System.Drawing.Point(959, 126);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(110, 13);
             this.label10.TabIndex = 21;
@@ -187,7 +199,7 @@
             // labelCol
             // 
             this.labelCol.AutoSize = true;
-            this.labelCol.Location = new System.Drawing.Point(1067, 147);
+            this.labelCol.Location = new System.Drawing.Point(1067, 126);
             this.labelCol.Name = "labelCol";
             this.labelCol.Size = new System.Drawing.Size(88, 13);
             this.labelCol.TabIndex = 20;
@@ -215,7 +227,7 @@
             // 
             // bRaport4DlaPB
             // 
-            this.bRaport4DlaPB.Location = new System.Drawing.Point(954, 118);
+            this.bRaport4DlaPB.Location = new System.Drawing.Point(954, 97);
             this.bRaport4DlaPB.Name = "bRaport4DlaPB";
             this.bRaport4DlaPB.Size = new System.Drawing.Size(384, 23);
             this.bRaport4DlaPB.TabIndex = 17;
@@ -225,7 +237,7 @@
             // 
             // bRaport3
             // 
-            this.bRaport3.Location = new System.Drawing.Point(954, 89);
+            this.bRaport3.Location = new System.Drawing.Point(954, 68);
             this.bRaport3.Name = "bRaport3";
             this.bRaport3.Size = new System.Drawing.Size(384, 23);
             this.bRaport3.TabIndex = 16;
@@ -235,7 +247,7 @@
             // 
             // bRaport2
             // 
-            this.bRaport2.Location = new System.Drawing.Point(954, 60);
+            this.bRaport2.Location = new System.Drawing.Point(954, 39);
             this.bRaport2.Name = "bRaport2";
             this.bRaport2.Size = new System.Drawing.Size(384, 23);
             this.bRaport2.TabIndex = 15;
@@ -279,7 +291,7 @@
             // 
             // bWykonajRaport1
             // 
-            this.bWykonajRaport1.Location = new System.Drawing.Point(954, 31);
+            this.bWykonajRaport1.Location = new System.Drawing.Point(954, 10);
             this.bWykonajRaport1.Name = "bWykonajRaport1";
             this.bWykonajRaport1.Size = new System.Drawing.Size(384, 23);
             this.bWykonajRaport1.TabIndex = 10;
@@ -478,6 +490,27 @@
             this.panelGdidStopka.Size = new System.Drawing.Size(1354, 35);
             this.panelGdidStopka.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(24, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "ini";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bSaveToRaksSQLClipboard
+            // 
+            this.bSaveToRaksSQLClipboard.Enabled = false;
+            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(746, 6);
+            this.bSaveToRaksSQLClipboard.Name = "bSaveToRaksSQLClipboard";
+            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(156, 23);
+            this.bSaveToRaksSQLClipboard.TabIndex = 12;
+            this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
+            this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
+            this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
+            // 
             // bCheckFtpPowerBike
             // 
             this.bCheckFtpPowerBike.Location = new System.Drawing.Point(66, 7);
@@ -529,26 +562,63 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // bSaveToRaksSQLClipboard
+            // toSearchClear2
             // 
-            this.bSaveToRaksSQLClipboard.Enabled = false;
-            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(746, 6);
-            this.bSaveToRaksSQLClipboard.Name = "bSaveToRaksSQLClipboard";
-            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(156, 23);
-            this.bSaveToRaksSQLClipboard.TabIndex = 12;
-            this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
-            this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
-            this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
+            this.toSearchClear2.Location = new System.Drawing.Point(1295, 147);
+            this.toSearchClear2.Name = "toSearchClear2";
+            this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear2.TabIndex = 27;
+            this.toSearchClear2.Text = "Usuń";
+            this.toSearchClear2.UseVisualStyleBackColor = true;
+            this.toSearchClear2.Click += new System.EventHandler(this.toSearchClear2_Click);
             // 
-            // button1
+            // toSearch2
             // 
-            this.button1.Location = new System.Drawing.Point(24, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "ini";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toSearch2.Location = new System.Drawing.Point(1187, 149);
+            this.toSearch2.Name = "toSearch2";
+            this.toSearch2.ReadOnly = true;
+            this.toSearch2.Size = new System.Drawing.Size(102, 20);
+            this.toSearch2.TabIndex = 26;
+            this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(959, 152);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(110, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Filtowanie w kolmnie: ";
+            // 
+            // labelCol2
+            // 
+            this.labelCol2.AutoSize = true;
+            this.labelCol2.Location = new System.Drawing.Point(1067, 152);
+            this.labelCol2.Name = "labelCol2";
+            this.labelCol2.Size = new System.Drawing.Size(88, 13);
+            this.labelCol2.TabIndex = 24;
+            this.labelCol2.Text = "kliknij w komórkę";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(943, 126);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 28;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(943, 152);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(14, 13);
+            this.radioButton2.TabIndex = 29;
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // OknoRaportow
             // 
@@ -628,6 +698,12 @@
         private System.Windows.Forms.Button toSearchClear;
         private System.Windows.Forms.Button bSaveToRaksSQLClipboard;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button toSearchClear2;
+        private System.Windows.Forms.TextBox toSearch2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelCol2;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

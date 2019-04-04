@@ -22,6 +22,8 @@ namespace RaportyRaksSQL
         string dowolneGT = "";
         string dostawcy = "";
         string producenci = "";
+        string search1 = "";
+        string search2 = "";
         DateTime mark;
         DataView fDataView;
 
@@ -122,6 +124,7 @@ namespace RaportyRaksSQL
         private void bWykonajRaport1_Click(object sender, EventArgs e)
         {
             toSearch.ReadOnly = true;
+            toSearch2.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
@@ -427,6 +430,7 @@ namespace RaportyRaksSQL
         private void bRaport2_Click(object sender, EventArgs e)
         {
             toSearch.ReadOnly = true;
+            toSearch2.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
@@ -546,6 +550,7 @@ namespace RaportyRaksSQL
         {
             //Analiza stanow minimalnych dla wszystkich
             toSearch.ReadOnly = true;
+            toSearch2.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = true;
@@ -700,7 +705,8 @@ namespace RaportyRaksSQL
 
         private void bRaport4DlaPB_Click(object sender, EventArgs e)
         {
-            toSearch.ReadOnly = true; 
+            toSearch.ReadOnly = true;
+            toSearch2.ReadOnly = true;
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
@@ -1003,17 +1009,35 @@ namespace RaportyRaksSQL
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
-            toSearch.ReadOnly = false;
-            if ((labelCol.Text.Contains("STAN")) ||
-                        labelCol.Text.Contains("DO_ZAM") ||
-                        labelCol.Text.Contains("ILOSC"))
+            if (radioButton1.Checked)
             {
-                toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+                labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+                toSearch.ReadOnly = false;
+                if ((labelCol.Text.Contains("STAN")) ||
+                            labelCol.Text.Contains("DO_ZAM") ||
+                            labelCol.Text.Contains("ILOSC"))
+                {
+                    toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+                }
+                else
+                {
+                    toSearch.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                }
             }
             else
             {
-                toSearch.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                labelCol2.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+                toSearch2.ReadOnly = false;
+                if ((labelCol2.Text.Contains("STAN")) ||
+                            labelCol2.Text.Contains("DO_ZAM") ||
+                            labelCol2.Text.Contains("ILOSC"))
+                {
+                    toSearch2.Text = dataGridView1.CurrentCell.Value.ToString();
+                }
+                else
+                {
+                    toSearch2.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                }
             }
 
         }
@@ -1028,25 +1052,34 @@ namespace RaportyRaksSQL
                         labelCol.Text.Contains("DO_ZAM") ||
                         labelCol.Text.Contains("ILOSC"))
                     {
-                        fDataView.RowFilter = " " + labelCol.Text + " = " + toSearch.Text;
+                        search1 = " " + labelCol.Text + " = " + toSearch.Text;
+                        if (search2.Length > 0)
+                            fDataView.RowFilter = search1 + " AND " + search2;
+                        else
+                            fDataView.RowFilter = search1;
                         dataGridView1.Refresh();
                     }
                     else
                     {
-                        fDataView.RowFilter = " " + labelCol.Text + " Like '" + toSearch.Text + "'";
+                        search1 = " " + labelCol.Text + " Like '" + toSearch.Text + "'";
+                        if (search2.Length > 0)
+                            fDataView.RowFilter = search1 + " AND " + search2;
+                        else
+                            fDataView.RowFilter = search1;
                         dataGridView1.Refresh();
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Filtrowanie nie działa poprawnie na kolumnie " + labelCol.Text + " - proszę filtrować po innej kolumnie.");
+                    MessageBox.Show("Pierwsze filtrowanie nie działa poprawnie na kolumnie " + labelCol.Text + " - proszę filtrować po innej kolumnie.");
                 }
             }
         }
 
         private void toSearchClear_Click(object sender, EventArgs e)
         {
-            fDataView.RowFilter = " " ;
+            fDataView.RowFilter = search2;
+            search1 = "";
             dataGridView1.Refresh();
             toSearch.Text = "";
             toSearch.ReadOnly = true;
@@ -1062,6 +1095,56 @@ namespace RaportyRaksSQL
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Lokalizacja pliku konf.ini to: " + Directory.GetCurrentDirectory());
+        }
+
+        private void toSearchClear2_Click(object sender, EventArgs e)
+        {
+            fDataView.RowFilter = search1;
+            search2 = "";
+            dataGridView1.Refresh();
+            toSearch2.Text = "";
+            toSearch2.ReadOnly = true;
+            labelCol2.Text = "kliknij w kolumnę";
+        }
+
+        private void toSearch2_TextChanged(object sender, EventArgs e)
+        {
+            if (toSearch2.Text.Length > 0)
+            {
+                try
+                {
+                    if ((labelCol2.Text.Contains("STAN")) ||
+                        labelCol2.Text.Contains("DO_ZAM") ||
+                        labelCol2.Text.Contains("ILOSC"))
+                    {
+                        search2 = " " + labelCol2.Text + " = " + toSearch2.Text;
+                        if (search1.Length > 0)
+                            fDataView.RowFilter = search1 + " AND " + search2;
+                        else
+                            fDataView.RowFilter = search2;
+                        dataGridView1.Refresh();
+                    }
+                    else
+                    {
+                        search2 = " " + labelCol2.Text + " Like '" + toSearch2.Text + "'";
+                        if (search1.Length > 0)
+                            fDataView.RowFilter = search1 + " AND " + search2;
+                        else
+                            fDataView.RowFilter = search2;
+                        dataGridView1.Refresh();
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Drugie filtrowanie nie działa poprawnie na kolumnie " + labelCol.Text + " - proszę filtrować po innej kolumnie.");
+                }
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (radioButton1.Checked)
+            //    MessageBox.Show("Zaznaczony");
         }
     }
 }
