@@ -15,12 +15,14 @@ namespace RaportyRaksSQL
     {
         FBConn fbconn;
         DataGridView view;
+        bool wszystkoJako1 = false;
 
-        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv)
+        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv, bool czyWartoscJeden)
         {
             InitializeComponent();
             fbconn = new FBConn();
             fbconn = fbc;
+            wszystkoJako1 = czyWartoscJeden;
             view = new DataGridView();
             view = dgv;
         }
@@ -73,7 +75,8 @@ namespace RaportyRaksSQL
                         }
 
                         #endregion
-                        double dozam = Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
+                        
+                        double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
                         if (dozam > 0)
                         {
                             string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"));

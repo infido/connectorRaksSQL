@@ -128,6 +128,7 @@ namespace RaportyRaksSQL
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
+            checkBoxIlosc1.Enabled = false;
 
             string sql = "select * from (";
             sql += " select ";
@@ -434,6 +435,7 @@ namespace RaportyRaksSQL
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
+            checkBoxIlosc1.Enabled = false;
 
             string sql = " select MAGAZYN, INDEKS, NAZWA, sum(ILOSC) as ILOSC, sum(STANMIN) as STANMIN, sum(STANMAX) as STANMAX, DOSTAWCA, PRODUCENT from ( ";
 
@@ -554,6 +556,8 @@ namespace RaportyRaksSQL
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = true;
+            checkBoxIlosc1.Enabled = true;
+            checkBoxIlosc1.Checked = false;
 
             string sql = " ";
             sql += " select SKROT, KOD_KRESKOWY, NAZWA, sum(STAN_MAG) STAN_MAG, sum(STANMIN) STAN_MIN, sum(STANMAX) STAN_MAX,  ";
@@ -710,6 +714,7 @@ namespace RaportyRaksSQL
             SetStatusStartuRaportu(DateTime.Now);
             SetWartosciParametrowDlaWhere();
             bSaveToRaksSQLClipboard.Enabled = false;
+            checkBoxIlosc1.Enabled = false;
 
             string sql = " ";
             sql += " select SKROT, sum(AKTUALNY_STAN) STAN_MAGAZYNU, sum(ILOSC_SPRZEDANA) SPRZEDANE_DNIA ";
@@ -1088,7 +1093,7 @@ namespace RaportyRaksSQL
 
         private void bSaveToRaksSQLClipboard_Click(object sender, EventArgs e)
         {
-            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn,ref dataGridView1);
+            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn,ref dataGridView1, checkBoxIlosc1.Checked);
             okno.Show();
         }
 

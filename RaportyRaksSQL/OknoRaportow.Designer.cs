@@ -81,6 +81,7 @@
             this.labelCol2 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.checkBoxIlosc1 = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -477,6 +478,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.checkBoxIlosc1);
             this.panelGdidStopka.Controls.Add(this.button1);
             this.panelGdidStopka.Controls.Add(this.bSaveToRaksSQLClipboard);
             this.panelGdidStopka.Controls.Add(this.bCheckFtpPowerBike);
@@ -503,11 +505,12 @@
             // bSaveToRaksSQLClipboard
             // 
             this.bSaveToRaksSQLClipboard.Enabled = false;
-            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(746, 6);
+            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(637, 6);
             this.bSaveToRaksSQLClipboard.Name = "bSaveToRaksSQLClipboard";
-            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(156, 23);
+            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(265, 23);
             this.bSaveToRaksSQLClipboard.TabIndex = 12;
             this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
+            this.bSaveToRaksSQLClipboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
             this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
             // 
@@ -620,6 +623,17 @@
             this.radioButton2.TabIndex = 29;
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
+            // checkBoxIlosc1
+            // 
+            this.checkBoxIlosc1.AutoSize = true;
+            this.checkBoxIlosc1.Enabled = false;
+            this.checkBoxIlosc1.Location = new System.Drawing.Point(790, 10);
+            this.checkBoxIlosc1.Name = "checkBoxIlosc1";
+            this.checkBoxIlosc1.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxIlosc1.TabIndex = 14;
+            this.checkBoxIlosc1.Text = "wszystko jako 1";
+            this.checkBoxIlosc1.UseVisualStyleBackColor = true;
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -704,6 +718,7 @@
         private System.Windows.Forms.Label labelCol2;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.CheckBox checkBoxIlosc1;
     }
 }
 
