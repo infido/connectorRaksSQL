@@ -134,6 +134,8 @@ namespace RaportyRaksSQL
             sql += " select ";
             sql += " GM_FSPOZ.SKROT_ORYGINALNY INDEKS,";
             sql += " GM_FSPOZ.NAZWA_ORYGINALNA NAZWA,";
+            sql += " DOSTAWCY.SHORT_NAME as DOSTAWCA,";
+            sql += " PRODUCENCI.SHORT_NAME as PRODUCENT,";
             sql += " GM_RABATY.NAZWA RODZAJ_RABATU, ";
             sql += " GM_FSPOZ.RABAT, ";
             sql += " GM_FSPOZ.ILOSC,";
@@ -148,6 +150,8 @@ namespace RaportyRaksSQL
             sql += " left join GM_RABATY on GM_FSPOZ.RODZAJ_RABATU = GM_RABATY.ID";
             sql += " join gm_fs on gm_fspoz.id_glowki=gm_fs.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
+            sql += " join R3_CONTACTS as DOSTAWCY on GM_TOWARY.DOSTAWCA=DOSTAWCY.ID ";
+            sql += " join R3_CONTACTS as PRODUCENCI on GM_TOWARY.PRODUCENT=PRODUCENCI.ID ";
             if (podstawoweGT.Length != 0)
             {
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA";
@@ -187,6 +191,8 @@ namespace RaportyRaksSQL
             sql += " select ";
             sql += " GM_KSPOZ.SKROT_ORYGINALNY INDEKS,";
             sql += " GM_KSPOZ.NAZWA_ORYGINALNA NAZWA,";
+            sql += " DOSTAWCY.SHORT_NAME as DOSTAWCA,";
+            sql += " PRODUCENCI.SHORT_NAME as PRODUCENT,";
             sql += " '' RODZAJ_RABATU,";
             sql += " 0 as RABAT,";
             sql += " GM_KSPOZ.ILOSC_PO - GM_KSPOZ.ILOSC_PRZED as ILOSC,";
@@ -208,6 +214,8 @@ namespace RaportyRaksSQL
             //sql += " left join GM_WZPOZ on GM_KSPOZ.ID = GM_WZPOZ.ID_KSPOZ";
             sql += " join gm_ks on gm_kspoz.id_glowki=gm_ks.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_KSPOZ.ID_TOWARU ";
+            sql += " join R3_CONTACTS as DOSTAWCY on GM_TOWARY.DOSTAWCA=DOSTAWCY.ID ";
+            sql += " join R3_CONTACTS as PRODUCENCI on GM_TOWARY.PRODUCENT=PRODUCENCI.ID ";
             if (podstawoweGT.Length != 0)
             {
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA";
