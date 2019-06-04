@@ -71,7 +71,6 @@ namespace KonfiguratorConnectorRaksSQL
             catch (Exception ex)
             {
                 Logg logg = new Logg(Logg.RodzajLogowania.ErrorMSG, Logg.MediumLoga.File, "1007: Bład zamykania połaczenia do bazy: " + ex.Message);
-                throw;
             }
         }
 
