@@ -26,6 +26,7 @@ namespace RaportyRaksSQL
         string search2 = "";
         DateTime mark;
         DataView fDataView;
+        bool stanSaveClip = false;
 
         public OknoRaportow()
         {
@@ -1146,7 +1147,7 @@ namespace RaportyRaksSQL
 
         private void bSaveToRaksSQLClipboard_Click(object sender, EventArgs e)
         {
-            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn,ref dataGridView1, checkBoxIlosc1.Checked);
+            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn, ref dataGridView1, checkBoxIlosc1.Checked, tabControlParametry.SelectedTab.Name.ToString());
             okno.Show();
         }
 
@@ -1203,6 +1204,57 @@ namespace RaportyRaksSQL
         {
             //if (radioButton1.Checked)
             //    MessageBox.Show("Zaznaczony");
+        }
+
+        private void tabControlParametry_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabControlParametry.SelectedTab.Name.ToString() == "tabPageImportCSV")
+            {
+                stanSaveClip = bSaveToRaksSQLClipboard.Enabled;
+                bSaveToRaksSQLClipboard.Enabled = true;
+            }
+            else
+            {
+                bSaveToRaksSQLClipboard.Enabled = stanSaveClip;
+            }
+        }
+
+        private void bReadFileCSV_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dial = new OpenFileDialog();
+            dial.Filter = "CSV files (*.csv)|*.csv";
+            if (dial.ShowDialog()==DialogResult.OK || dial.ShowDialog()==DialogResult.Yes)
+            {
+                try
+                {
+                    DataTable dt = new DataTable("RESULT");
+                    dt.Columns.Add(new DataColumn("SKROT",typeof(String)));
+                    dt.Columns.Add(new DataColumn("CENA",typeof(Double)));
+
+                    
+                    string[] lines = System.IO.File.ReadAllLines(dial.FileName.ToString(), Encoding.Default);
+                    foreach (string line in lines)
+                    {
+                        string[] tablica = line.Split(';');
+                        // Use a tab to indent each line of the file.
+                        Console.WriteLine("\t" + tablica[0].ToString() + ";;" + tablica[1].ToString());
+                        DataRow workRow = dt.NewRow();
+                        workRow["SKROT"] = tablica[0].ToString();
+                        workRow["CENA"] = Convert.ToDouble(tablica[1].ToString());
+                        dt.Rows.Add(workRow); 
+                    }
+
+                    fDataView = new DataView();
+                    fDataView.Table = dt;
+                    dataGridView1.DataSource = fDataView;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd importu pliku: " + ex.Message);
+                    throw;
+                }
+            }
+
         }
     }
 }

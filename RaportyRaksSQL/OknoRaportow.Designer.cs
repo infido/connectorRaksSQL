@@ -83,6 +83,8 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.checkBoxPBindex = new System.Windows.Forms.CheckBox();
+            this.tabPageImportCSV = new System.Windows.Forms.TabPage();
+            this.bReadFileCSV = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -92,6 +94,7 @@
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
+            this.tabPageImportCSV.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -123,12 +126,14 @@
             // 
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp1);
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp2);
+            this.tabControlParametry.Controls.Add(this.tabPageImportCSV);
             this.tabControlParametry.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlParametry.Location = new System.Drawing.Point(0, 0);
             this.tabControlParametry.Name = "tabControlParametry";
             this.tabControlParametry.SelectedIndex = 0;
             this.tabControlParametry.Size = new System.Drawing.Size(1354, 202);
             this.tabControlParametry.TabIndex = 0;
+            this.tabControlParametry.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlParametry_Selected);
             // 
             // tabPageRaportTyp1
             // 
@@ -647,6 +652,27 @@
             this.checkBoxPBindex.Text = "Skrót zamiast FK";
             this.checkBoxPBindex.UseVisualStyleBackColor = true;
             // 
+            // tabPageImportCSV
+            // 
+            this.tabPageImportCSV.Controls.Add(this.bReadFileCSV);
+            this.tabPageImportCSV.Location = new System.Drawing.Point(4, 22);
+            this.tabPageImportCSV.Name = "tabPageImportCSV";
+            this.tabPageImportCSV.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageImportCSV.Size = new System.Drawing.Size(1346, 176);
+            this.tabPageImportCSV.TabIndex = 2;
+            this.tabPageImportCSV.Text = "Konwersja plików csv";
+            this.tabPageImportCSV.UseVisualStyleBackColor = true;
+            // 
+            // bReadFileCSV
+            // 
+            this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
+            this.bReadFileCSV.Name = "bReadFileCSV";
+            this.bReadFileCSV.Size = new System.Drawing.Size(190, 23);
+            this.bReadFileCSV.TabIndex = 0;
+            this.bReadFileCSV.Text = "Wczytaj plik CSV";
+            this.bReadFileCSV.UseVisualStyleBackColor = true;
+            this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,6 +698,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
+            this.tabPageImportCSV.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,6 +760,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.CheckBox checkBoxIlosc1;
         private System.Windows.Forms.CheckBox checkBoxPBindex;
+        private System.Windows.Forms.TabPage tabPageImportCSV;
+        private System.Windows.Forms.Button bReadFileCSV;
     }
 }
 

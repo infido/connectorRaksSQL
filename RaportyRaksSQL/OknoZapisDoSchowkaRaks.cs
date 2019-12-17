@@ -16,13 +16,15 @@ namespace RaportyRaksSQL
         FBConn fbconn;
         DataGridView view;
         bool wszystkoJako1 = false;
+        string currentTabName = "";
 
-        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv, bool czyWartoscJeden)
+        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv, bool czyWartoscJeden, string tabName)
         {
             InitializeComponent();
             fbconn = new FBConn();
             fbconn = fbc;
             wszystkoJako1 = czyWartoscJeden;
+            currentTabName = tabName;
             view = new DataGridView();
             view = dgv;
         }
@@ -76,21 +78,48 @@ namespace RaportyRaksSQL
 
                         #endregion
                         
-                        double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
-                        if (dozam > 0)
+                        //Tutaj dopiero ilości z innej kolumny ILOSC
+                        if (currentTabName.Contains("tabPageImportCSV"))
                         {
-                            string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"));
+                            #region zapisywanie schowka w wariancie do importu cenników
+                                double cena = Convert.ToDouble(row.Cells["CENA"].Value);
+                                if (cena > 0)
+                                {
+                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString());
 
-                            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
-                            try
-                            {
-                                cdk.ExecuteScalar();
-                                count++;
-                            }
-                            catch (FbException ex)
-                            {
-                                MessageBox.Show("Błąd zapisu danych do schowka z okna z Raportu 1: " + ex.Message);
-                            }
+                                    FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+                                    try
+                                    {
+                                        cdk.ExecuteScalar();
+                                        count++;
+                                    }
+                                    catch (FbException ex)
+                                    {
+                                        MessageBox.Show("Błąd zapisu danych do schowka z okna z import z pliku CSV: " + ex.Message);
+                                    }
+                            
+                                }
+                            #endregion
+                        }else{
+                            #region zapisywanie schowka w wariancie do importu zamówień
+                                double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
+                                if (dozam > 0)
+                                {
+                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"), "0.0");
+
+                                    FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+                                    try
+                                    {
+                                        cdk.ExecuteScalar();
+                                        count++;
+                                    }
+                                    catch (FbException ex)
+                                    {
+                                        MessageBox.Show("Błąd zapisu danych do schowka z okna z Raportu 1: " + ex.Message);
+                                    }
+                            
+                                }
+                            #endregion
                         }
                     }
                 }
@@ -105,7 +134,7 @@ namespace RaportyRaksSQL
 
         }
 
-        private string setSQLInsertSchowek(int id, string indeks, string schoNaz, string user, string ilosc)
+        private string setSQLInsertSchowek(int id, string indeks, string schoNaz, string user, string ilosc, string cena)
         {
             StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_SCHOWEK_POZYCJI (");
             myStringBuilder.Append("ID, ");  
@@ -113,7 +142,9 @@ namespace RaportyRaksSQL
             myStringBuilder.Append("IDENTYFIKATOR, ");  
             myStringBuilder.Append("PUBLICZNA, ");  
             myStringBuilder.Append("ID_TOWARU, ");  
-            myStringBuilder.Append("ILOSC, ");  
+            myStringBuilder.Append("ILOSC, ");
+            myStringBuilder.Append("CENA_SP_PLN_BRUTTO_PRZED_RAB, ");
+            myStringBuilder.Append("CENA_KATALOGOWA_BRUTTO, ");
             myStringBuilder.Append("ZNACZNIKI, ");  
             myStringBuilder.Append("UWAGI");  
 
@@ -127,6 +158,8 @@ namespace RaportyRaksSQL
             myStringBuilder.Append(indeks + ", ");  //ID_TOWARU
             
             myStringBuilder.Append(ilosc.ToString().Replace(",", ".") + ", ");  //ILOSC
+            myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_BRUTTO_PRZED_RAB
+            myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CENA_KATALOGOWA_BRUTTO
             myStringBuilder.Append("NULL, ");  //ZNACZNIKI
             myStringBuilder.Append("NULL");  //UWAGI
             myStringBuilder.Append(");");  
@@ -138,10 +171,18 @@ namespace RaportyRaksSQL
             int size = view.RowCount-1;
             int lp = 0;
             string name = "";
-            while (name.Length == 0 && size > lp)
+            if (!currentTabName.Contains("tabPageImportCSV"))
             {
-                name = view.Rows[lp].Cells["DOSTAWCA"].Value.ToString();
-                lp++;
+                name = "";
+                while (name.Length == 0 && size > lp)
+                {
+                    name = view.Rows[lp].Cells["DOSTAWCA"].Value.ToString();
+                    lp++;
+                }
+            }
+            else
+            {
+                name = "CSV";
             }
             
             tnameUser.Text = Environment.UserName;
