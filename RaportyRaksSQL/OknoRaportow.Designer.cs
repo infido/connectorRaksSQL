@@ -34,6 +34,12 @@
             this.panelParametry = new System.Windows.Forms.Panel();
             this.tabControlParametry = new System.Windows.Forms.TabControl();
             this.tabPageRaportTyp1 = new System.Windows.Forms.TabPage();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.toSearchClear2 = new System.Windows.Forms.Button();
+            this.toSearch2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelCol2 = new System.Windows.Forms.Label();
             this.toSearchClear = new System.Windows.Forms.Button();
             this.toSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -68,6 +74,7 @@
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelGdidStopka = new System.Windows.Forms.Panel();
+            this.checkBoxIlosc1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.bSaveToRaksSQLClipboard = new System.Windows.Forms.Button();
             this.bCheckFtpPowerBike = new System.Windows.Forms.Button();
@@ -75,13 +82,7 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.toSearchClear2 = new System.Windows.Forms.Button();
-            this.toSearch2 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.labelCol2 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.checkBoxIlosc1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPBindex = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // tabPageRaportTyp1
             // 
+            this.tabPageRaportTyp1.Controls.Add(this.checkBoxPBindex);
             this.tabPageRaportTyp1.Controls.Add(this.radioButton2);
             this.tabPageRaportTyp1.Controls.Add(this.radioButton1);
             this.tabPageRaportTyp1.Controls.Add(this.toSearchClear2);
@@ -168,6 +170,64 @@
             this.tabPageRaportTyp1.TabIndex = 0;
             this.tabPageRaportTyp1.Text = "Typ 1";
             this.tabPageRaportTyp1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(943, 152);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(14, 13);
+            this.radioButton2.TabIndex = 29;
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(943, 126);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 28;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // toSearchClear2
+            // 
+            this.toSearchClear2.Location = new System.Drawing.Point(1295, 147);
+            this.toSearchClear2.Name = "toSearchClear2";
+            this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear2.TabIndex = 27;
+            this.toSearchClear2.Text = "Usuń";
+            this.toSearchClear2.UseVisualStyleBackColor = true;
+            this.toSearchClear2.Click += new System.EventHandler(this.toSearchClear2_Click);
+            // 
+            // toSearch2
+            // 
+            this.toSearch2.Location = new System.Drawing.Point(1187, 149);
+            this.toSearch2.Name = "toSearch2";
+            this.toSearch2.ReadOnly = true;
+            this.toSearch2.Size = new System.Drawing.Size(102, 20);
+            this.toSearch2.TabIndex = 26;
+            this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(959, 152);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(110, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Filtowanie w kolmnie: ";
+            // 
+            // labelCol2
+            // 
+            this.labelCol2.AutoSize = true;
+            this.labelCol2.Location = new System.Drawing.Point(1067, 152);
+            this.labelCol2.Name = "labelCol2";
+            this.labelCol2.Size = new System.Drawing.Size(88, 13);
+            this.labelCol2.TabIndex = 24;
+            this.labelCol2.Text = "kliknij w komórkę";
             // 
             // toSearchClear
             // 
@@ -230,9 +290,10 @@
             // 
             this.bRaport4DlaPB.Location = new System.Drawing.Point(954, 97);
             this.bRaport4DlaPB.Name = "bRaport4DlaPB";
-            this.bRaport4DlaPB.Size = new System.Drawing.Size(384, 23);
+            this.bRaport4DlaPB.Size = new System.Drawing.Size(384, 26);
             this.bRaport4DlaPB.TabIndex = 17;
             this.bRaport4DlaPB.Text = "Wykonaj - Dane do eksportu dla PowerBike";
+            this.bRaport4DlaPB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bRaport4DlaPB.UseVisualStyleBackColor = true;
             this.bRaport4DlaPB.Click += new System.EventHandler(this.bRaport4DlaPB_Click);
             // 
@@ -492,6 +553,17 @@
             this.panelGdidStopka.Size = new System.Drawing.Size(1354, 35);
             this.panelGdidStopka.TabIndex = 1;
             // 
+            // checkBoxIlosc1
+            // 
+            this.checkBoxIlosc1.AutoSize = true;
+            this.checkBoxIlosc1.Enabled = false;
+            this.checkBoxIlosc1.Location = new System.Drawing.Point(790, 10);
+            this.checkBoxIlosc1.Name = "checkBoxIlosc1";
+            this.checkBoxIlosc1.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxIlosc1.TabIndex = 14;
+            this.checkBoxIlosc1.Text = "wszystko jako 1";
+            this.checkBoxIlosc1.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(24, 6);
@@ -565,74 +637,15 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // toSearchClear2
+            // checkBoxPBindex
             // 
-            this.toSearchClear2.Location = new System.Drawing.Point(1295, 147);
-            this.toSearchClear2.Name = "toSearchClear2";
-            this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
-            this.toSearchClear2.TabIndex = 27;
-            this.toSearchClear2.Text = "Usuń";
-            this.toSearchClear2.UseVisualStyleBackColor = true;
-            this.toSearchClear2.Click += new System.EventHandler(this.toSearchClear2_Click);
-            // 
-            // toSearch2
-            // 
-            this.toSearch2.Location = new System.Drawing.Point(1187, 149);
-            this.toSearch2.Name = "toSearch2";
-            this.toSearch2.ReadOnly = true;
-            this.toSearch2.Size = new System.Drawing.Size(102, 20);
-            this.toSearch2.TabIndex = 26;
-            this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(959, 152);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Filtowanie w kolmnie: ";
-            // 
-            // labelCol2
-            // 
-            this.labelCol2.AutoSize = true;
-            this.labelCol2.Location = new System.Drawing.Point(1067, 152);
-            this.labelCol2.Name = "labelCol2";
-            this.labelCol2.Size = new System.Drawing.Size(88, 13);
-            this.labelCol2.TabIndex = 24;
-            this.labelCol2.Text = "kliknij w komórkę";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(943, 126);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(14, 13);
-            this.radioButton1.TabIndex = 28;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(943, 152);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(14, 13);
-            this.radioButton2.TabIndex = 29;
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxIlosc1
-            // 
-            this.checkBoxIlosc1.AutoSize = true;
-            this.checkBoxIlosc1.Enabled = false;
-            this.checkBoxIlosc1.Location = new System.Drawing.Point(790, 10);
-            this.checkBoxIlosc1.Name = "checkBoxIlosc1";
-            this.checkBoxIlosc1.Size = new System.Drawing.Size(101, 17);
-            this.checkBoxIlosc1.TabIndex = 14;
-            this.checkBoxIlosc1.Text = "wszystko jako 1";
-            this.checkBoxIlosc1.UseVisualStyleBackColor = true;
+            this.checkBoxPBindex.AutoSize = true;
+            this.checkBoxPBindex.Location = new System.Drawing.Point(962, 102);
+            this.checkBoxPBindex.Name = "checkBoxPBindex";
+            this.checkBoxPBindex.Size = new System.Drawing.Size(105, 17);
+            this.checkBoxPBindex.TabIndex = 30;
+            this.checkBoxPBindex.Text = "Skrót zamiast FK";
+            this.checkBoxPBindex.UseVisualStyleBackColor = true;
             // 
             // OknoRaportow
             // 
@@ -719,6 +732,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.CheckBox checkBoxIlosc1;
+        private System.Windows.Forms.CheckBox checkBoxPBindex;
     }
 }
 

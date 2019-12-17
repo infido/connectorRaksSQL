@@ -725,10 +725,19 @@ namespace RaportyRaksSQL
             checkBoxIlosc1.Enabled = false;
 
             string sql = " ";
-            sql += " select SKROT, sum(AKTUALNY_STAN) STAN_MAGAZYNU, sum(ILOSC_SPRZEDANA) SPRZEDANE_DNIA ";
-            sql += " from ( ";
+            if (checkBoxPBindex.Checked) 
+            {
+                sql += " select SKROT, sum(AKTUALNY_STAN) STAN_MAGAZYNU, sum(ILOSC_SPRZEDANA) SPRZEDANE_DNIA ";
+                sql += " from ( ";
+                sql += " select GM_TOWARY.SKROT,";
+            }else
+            {
+                sql += " select KONTOFK, sum(AKTUALNY_STAN) STAN_MAGAZYNU, sum(ILOSC_SPRZEDANA) SPRZEDANE_DNIA ";
+                sql += " from ( ";
+                sql += " select GM_TOWARY.KONTOFK,";
+            }
 
-            sql += " select GM_TOWARY.SKROT, 0 AKTUALNY_STAN, 0 ILOSC_SPRZEDANA ";
+            sql += " 0 AKTUALNY_STAN, 0 ILOSC_SPRZEDANA ";
             sql += " FROM GM_TOWARY ";
             sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
@@ -785,13 +794,26 @@ namespace RaportyRaksSQL
             if (tmpsql.Length > 0)
                 sql += " where " + tmpsql;
 
-            sql += " group by  GM_TOWARY.SKROT ";
+            if (checkBoxPBindex.Checked)
+            {
+                sql += " group by  GM_TOWARY.SKROT ";
+            }
+            else
+            {
+                sql += " group by  GM_TOWARY.KONTOFK ";
+            }
 
 
             sql += " union ";
 
-
-            sql += " select GM_TOWARY.SKROT, sum(GM_MAGAZYN.ILOSC) AKTUALNY_STAN, 0 ILOSC_SPRZEDANA ";
+            if (checkBoxPBindex.Checked)
+            {
+                sql += " select GM_TOWARY.SKROT, sum(GM_MAGAZYN.ILOSC) AKTUALNY_STAN, 0 ILOSC_SPRZEDANA ";
+            }
+            else
+            {
+                sql += " select GM_TOWARY.KONTOFK, sum(GM_MAGAZYN.ILOSC) AKTUALNY_STAN, 0 ILOSC_SPRZEDANA ";
+            }
             sql += " FROM GM_TOWARY ";
             sql += " left join GM_MAGAZYN on GM_TOWARY.ID_TOWARU=GM_MAGAZYN.ID_TOWAR ";
             sql += " left join GM_MAGAZYNY on GM_MAGAZYNY.ID=GM_MAGAZYN.MAGNUM ";
@@ -844,11 +866,25 @@ namespace RaportyRaksSQL
             if (tmpsql.Length > 0)
                 sql += " where " + tmpsql;
 
-            sql += " group by  GM_TOWARY.SKROT ";
+            if (checkBoxPBindex.Checked)
+            {
+                sql += " group by  GM_TOWARY.SKROT ";
+            }
+            else
+            {
+                sql += " group by  GM_TOWARY.KONTOFK ";
+            }
 
             sql += " union ";
 
-            sql += " select GM_TOWARY.SKROT, 0 AKTUALNY_STAN, sum(GM_FSPOZ.ILOSC) ILOSC_SPRZEDANA ";
+            if (checkBoxPBindex.Checked)
+            {
+                sql += " select GM_TOWARY.SKROT, 0 AKTUALNY_STAN, sum(GM_FSPOZ.ILOSC) ILOSC_SPRZEDANA ";
+            }
+            else
+            {
+                sql += " select GM_TOWARY.KONTOFK, 0 AKTUALNY_STAN, sum(GM_FSPOZ.ILOSC) ILOSC_SPRZEDANA ";
+            }
             sql += " from GM_FSPOZ ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
             sql += " join gm_fs on gm_fspoz.id_glowki=gm_fs.id ";
@@ -873,10 +909,19 @@ namespace RaportyRaksSQL
                 sql += " and R3DOST.SHORT_NAME in (" + dostawcy + ")";
             if (producenci.Length != 0)
                 sql += " and R3PRODU.SHORT_NAME in (" + producenci + ")";
-            sql += " group by  GM_TOWARY.SKROT ";
-            
-            sql += " ) a ";
-            sql += " group by SKROT ";
+
+            if (checkBoxPBindex.Checked)
+            {
+                sql += " group by  GM_TOWARY.SKROT ";
+                sql += " ) a ";
+                sql += " group by  SKROT ";
+            }
+            else
+            {
+                sql += " group by  GM_TOWARY.KONTOFK ";
+                sql += " ) a "; 
+                sql += " group by  KONTOFK ";
+            }
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
             try
