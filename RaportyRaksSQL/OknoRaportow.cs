@@ -459,6 +459,7 @@ namespace RaportyRaksSQL
             //sql += " 0 DO_ZAMOWIENIA, ";
             sql += " R3DOST.SHORT_NAME DOSTAWCA, ";
             sql += " R3PRODU.SHORT_NAME PRODUCENT";
+            sql += " GM_CENY.NAZWA RODZAJ";
             sql += " from GM_TOWARY";
             sql += " left join GM_FSPOZ on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
             sql += " left join GM_WZPOZ on GM_FSPOZ.ID = GM_WZPOZ.ID_FSPOZ";
@@ -466,6 +467,7 @@ namespace RaportyRaksSQL
             sql += " left join GM_MAGAZYNY on GM_FS.MAGNUM=GM_MAGAZYNY.ID ";
             sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
+            sql += " left join GM_CENY on GM_CENY.ID = GM_TOWARY.RABAT ";
 
             if (podstawoweGT.Length != 0)
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA";
@@ -504,6 +506,7 @@ namespace RaportyRaksSQL
             //sql += " 0 DO_ZAMOWIENIA, ";
             sql += " R3DOST.SHORT_NAME DOSTAWCA, ";
             sql += " R3PRODU.SHORT_NAME PRODUCENT";
+            sql += " GM_CENY.NAZWA RODZAJ";
             sql += " from GM_TOWARY";
             sql += " left join GM_KSPOZ on GM_TOWARY.ID_TOWARU=GM_KSPOZ.ID_TOWARU ";
             //sql += " left join GM_WZPOZ on GM_KSPOZ.ID = GM_WZPOZ.ID_KSPOZ";
@@ -511,6 +514,7 @@ namespace RaportyRaksSQL
             sql += " left join GM_MAGAZYNY on GM_KS.MAGNUM=GM_MAGAZYNY.ID ";
             sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
+            sql += " left join GM_CENY on GM_CENY.ID = GM_TOWARY.RABAT ";
 
             if (podstawoweGT.Length != 0)
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA";
