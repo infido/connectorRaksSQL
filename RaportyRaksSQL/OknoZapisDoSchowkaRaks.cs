@@ -85,7 +85,8 @@ namespace RaportyRaksSQL
                                 double cena = Convert.ToDouble(row.Cells["CENA"].Value);
                                 if (cena > 0)
                                 {
-                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString());
+                                    double cenaNet = (cena > 0 ? cena / 1.23 : 0);
+                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString(), (cena/1.23).ToString());
 
                                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                                     try
@@ -105,7 +106,7 @@ namespace RaportyRaksSQL
                                 double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
                                 if (dozam > 0)
                                 {
-                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"), "0.0");
+                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"), "0.0", "0.0");
 
                                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                                     try
@@ -134,7 +135,7 @@ namespace RaportyRaksSQL
 
         }
 
-        private string setSQLInsertSchowek(int id, string indeks, string schoNaz, string user, string ilosc, string cena)
+        private string setSQLInsertSchowek(int id, string indeks, string schoNaz, string user, string ilosc, string cena, string cenaNet)
         {
             StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_SCHOWEK_POZYCJI (");
             myStringBuilder.Append("ID, ");  
@@ -143,7 +144,15 @@ namespace RaportyRaksSQL
             myStringBuilder.Append("PUBLICZNA, ");  
             myStringBuilder.Append("ID_TOWARU, ");  
             myStringBuilder.Append("ILOSC, ");
+            myStringBuilder.Append("CENA_SP_PLN_NETTO_PO_RAB, ");
+            myStringBuilder.Append("CENA_SP_PLN_BRUTTO_PO_RAB, ");
+            myStringBuilder.Append("CENA_SP_PLN_NETTO_PRZED_RAB, ");
             myStringBuilder.Append("CENA_SP_PLN_BRUTTO_PRZED_RAB, ");
+            myStringBuilder.Append("CENA_SP_WAL_NETTO_PRZED_RAB, ");
+            myStringBuilder.Append("CENA_SP_WAL_BRUTTO_PRZED_RAB, ");
+            myStringBuilder.Append("CENA_SP_WAL_NETTO_PO_RAB, ");
+            myStringBuilder.Append("CENA_SP_WAL_BRUTTO_PO_RAB, ");
+            myStringBuilder.Append("CENA_KATALOGOWA_NETTO, ");
             myStringBuilder.Append("CENA_KATALOGOWA_BRUTTO, ");
             myStringBuilder.Append("ZNACZNIKI, ");  
             myStringBuilder.Append("UWAGI");  
@@ -158,7 +167,16 @@ namespace RaportyRaksSQL
             myStringBuilder.Append(indeks + ", ");  //ID_TOWARU
             
             myStringBuilder.Append(ilosc.ToString().Replace(",", ".") + ", ");  //ILOSC
+            myStringBuilder.Append(cenaNet.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_NETTO_PO_RAB
+            myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_BRUTTO_PO_RAB
+            myStringBuilder.Append(cenaNet.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_NETTO_PRZED_RAB
             myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_BRUTTO_PRZED_RAB
+            myStringBuilder.Append(cenaNet.ToString().Replace(",", ".") + ", ");  //CENA_SP_WAL_NETTO_PRZED_RAB
+            myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CCENA_SP_WAL_BRUTTO_PRZED_RAB
+            myStringBuilder.Append(cenaNet.ToString().Replace(",", ".") + ", ");  //CENA_SP_WAL_NETTO_PO_RAB
+            myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CCENA_SP_WAL_BRUTTO_PO_RAB
+
+            myStringBuilder.Append(cenaNet.ToString().Replace(",", ".") + ", ");  //CENA_KATALOGOWA_NETTO
             myStringBuilder.Append(cena.ToString().Replace(",", ".") + ", ");  //CENA_KATALOGOWA_BRUTTO
             myStringBuilder.Append("NULL, ");  //ZNACZNIKI
             myStringBuilder.Append("NULL");  //UWAGI
