@@ -145,14 +145,16 @@ namespace RaportyRaksSQL
             sql += " IIF (GM_FSPOZ.CENA_SP_PLN_NETTO = 0, -1,((GM_FSPOZ.CENA_SP_PLN_NETTO-GM_WZPOZ.CENA_ZAKUPU_PO)/GM_FSPOZ.CENA_SP_PLN_NETTO)) MARZA,";
             sql += " ((GM_FSPOZ.ILOSC*GM_FSPOZ.CENA_SP_PLN_NETTO)-(GM_FSPOZ.ILOSC*GM_WZPOZ.CENA_ZAKUPU_PO)) ZYSK_NETTO,";
             sql += " gm_fs.OPERATOR,";
-            sql += " GM_MAGAZYNY.NUMER MAGAZYN ";
+            sql += " GM_MAGAZYNY.NUMER MAGAZYN, ";
+            sql += " GM_RABATY2.NAZWA RODZAJ ";
             sql += " from GM_FSPOZ";
             sql += " left join GM_WZPOZ on GM_FSPOZ.ID = GM_WZPOZ.ID_FSPOZ";
             sql += " left join GM_RABATY on GM_FSPOZ.RODZAJ_RABATU = GM_RABATY.ID";
             sql += " join gm_fs on gm_fspoz.id_glowki=gm_fs.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
-            sql += " join R3_CONTACTS as DOSTAWCY on GM_TOWARY.DOSTAWCA=DOSTAWCY.ID ";
-            sql += " join R3_CONTACTS as PRODUCENCI on GM_TOWARY.PRODUCENT=PRODUCENCI.ID ";
+            sql += " left join GM_RABATY GM_RABATY2 on GM_RABATY2.ID = GM_TOWARY.RABAT ";
+            sql += " left join R3_CONTACTS as DOSTAWCY on GM_TOWARY.DOSTAWCA=DOSTAWCY.ID ";
+            sql += " left join R3_CONTACTS as PRODUCENCI on GM_TOWARY.PRODUCENT=PRODUCENCI.ID ";
             if (podstawoweGT.Length != 0)
             {
                 sql += " left join GM_GRUPYT on GM_GRUPYT.ID=GM_TOWARY.GRUPA";
@@ -165,11 +167,11 @@ namespace RaportyRaksSQL
             sql += " left join GM_MAGAZYNY on GM_FS.MAGNUM=GM_MAGAZYNY.ID ";
             if (dostawcy.Length != 0)
             {
-                sql += " join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
+                sql += " left join R3_CONTACTS R3DOST on R3DOST.ID=GM_TOWARY.DOSTAWCA ";
             }
             if (producenci.Length != 0)
             {
-                sql += " join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
+                sql += " left join R3_CONTACTS R3PRODU on R3PRODU.ID=GM_TOWARY.PRODUCENT ";
             }
             sql += " where gm_fs.data_wystawienia>='" + dateOD1.Text.ToString() + "' and gm_fs.data_wystawienia<='" + dateDO1.Text.ToString() + "'";
             if (chPominArchiwalne.Checked)
@@ -210,11 +212,13 @@ namespace RaportyRaksSQL
             sql += " 0 ZYSK_NETTO,";
 
             sql += " gm_ks.OPERATOR,";
-            sql += " GM_MAGAZYNY.NUMER MAGAZYN ";
+            sql += " GM_MAGAZYNY.NUMER MAGAZYN, ";
+            sql += " GM_RABATY2.NAZWA RODZAJ ";
             sql += " from GM_KSPOZ";
             //sql += " left join GM_WZPOZ on GM_KSPOZ.ID = GM_WZPOZ.ID_KSPOZ";
             sql += " join gm_ks on gm_kspoz.id_glowki=gm_ks.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_KSPOZ.ID_TOWARU ";
+            sql += " left join GM_RABATY GM_RABATY2 on GM_RABATY2.ID = GM_TOWARY.RABAT ";
             sql += " join R3_CONTACTS as DOSTAWCY on GM_TOWARY.DOSTAWCA=DOSTAWCY.ID ";
             sql += " join R3_CONTACTS as PRODUCENCI on GM_TOWARY.PRODUCENT=PRODUCENCI.ID ";
             if (podstawoweGT.Length != 0)
