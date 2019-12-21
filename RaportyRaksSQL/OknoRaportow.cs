@@ -446,7 +446,7 @@ namespace RaportyRaksSQL
             bSaveToRaksSQLClipboard.Enabled = false;
             checkBoxIlosc1.Enabled = false;
 
-            string sql = " select MAGAZYN, INDEKS, NAZWA, sum(ILOSC) as ILOSC, sum(STANMIN) as STANMIN, sum(STANMAX) as STANMAX, DOSTAWCA, PRODUCENT from ( ";
+            string sql = " select MAGAZYN, INDEKS, NAZWA, sum(ILOSC) as ILOSC, sum(STANMIN) as STANMIN, sum(STANMAX) as STANMAX, DOSTAWCA, PRODUCENT, RODZAJ from ( ";
 
             sql += "select ";
             sql += " GM_MAGAZYNY.NUMER MAGAZYN, ";
@@ -458,7 +458,7 @@ namespace RaportyRaksSQL
             sql += " GM_TOWARY.STANMAX, ";
             //sql += " 0 DO_ZAMOWIENIA, ";
             sql += " R3DOST.SHORT_NAME DOSTAWCA, ";
-            sql += " R3PRODU.SHORT_NAME PRODUCENT";
+            sql += " R3PRODU.SHORT_NAME PRODUCENT, ";
             sql += " GM_CENY.NAZWA RODZAJ";
             sql += " from GM_TOWARY";
             sql += " left join GM_FSPOZ on GM_TOWARY.ID_TOWARU=GM_FSPOZ.ID_TOWARU ";
@@ -505,7 +505,7 @@ namespace RaportyRaksSQL
             sql += " 0 as STANMAX, ";
             //sql += " 0 DO_ZAMOWIENIA, ";
             sql += " R3DOST.SHORT_NAME DOSTAWCA, ";
-            sql += " R3PRODU.SHORT_NAME PRODUCENT";
+            sql += " R3PRODU.SHORT_NAME PRODUCENT, ";
             sql += " GM_CENY.NAZWA RODZAJ";
             sql += " from GM_TOWARY";
             sql += " left join GM_KSPOZ on GM_TOWARY.ID_TOWARU=GM_KSPOZ.ID_TOWARU ";
@@ -540,7 +540,7 @@ namespace RaportyRaksSQL
             if (producenci.Length != 0)
                 sql += " and R3PRODU.SHORT_NAME in (" + producenci + ")";
 
-            sql += " ) group by MAGAZYN, INDEKS, NAZWA, DOSTAWCA, PRODUCENT; ";
+            sql += " ) group by MAGAZYN, INDEKS, NAZWA, DOSTAWCA, PRODUCENT, RODZAJ; ";
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
             try
