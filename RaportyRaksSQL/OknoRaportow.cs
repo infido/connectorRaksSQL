@@ -199,23 +199,32 @@ namespace RaportyRaksSQL
             sql += " '' RODZAJ_RABATU,";
             sql += " 0 as RABAT,";
             sql += " GM_KSPOZ.ILOSC_PO - GM_KSPOZ.ILOSC_PRZED as ILOSC,";
-            //sql += " GM_WZPOZ.CENA_ZAKUPU_PO CENA_ZAKUPU_NETTO,";
-            sql += " 0 CENA_ZAKUPU_NETTO,";
-            //sql += " GM_KSPOZ.CENA_SP_PLN_NETTO_PO - GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED CENA_SPRZEDAZY_NETTO,";
-            sql += " IIF ((GM_KSPOZ.CENA_SP_PLN_NETTO_PO - GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED)=0,GM_KSPOZ.CENA_SP_PLN_NETTO_PO,GM_KSPOZ.CENA_SP_PLN_NETTO_PO - GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED) as CENA_SPRZEDAZY_NETTO, ";
-
-            sql += " IIF (GM_KSPOZ.CENA_SP_PLN_NETTO_PO = 0, -1,((GM_KSPOZ.CENA_SP_PLN_NETTO_PO-";
-            //sql += "( select first 1 CENA_ZAKUPU_PO from GM_WZPOZ where ID_TOWARU=000  order by DATA_ZAKUPU asc )";
-            sql += "0";
-            sql += ")/GM_KSPOZ.CENA_SP_PLN_NETTO_PO)) MARZA,";
-            //sql += " ((GM_FSPOZ.ILOSC*GM_FSPOZ.CENA_SP_PLN_NETTO)-(GM_FSPOZ.ILOSC*GM_WZPOZ.CENA_ZAKUPU_PO)) ZYSK_NETTO,";
-            sql += " 0 ZYSK_NETTO,";
+            //
+            sql += " GM_WZPOZ.CENA_ZAKUPU_PO CENA_ZAKUPU_NETTO,";
+            
+            sql += " GM_KSPOZ.CENA_SP_PLN_NETTO_PO - GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED CENA_SPRZEDAZY_NETTO,";
+            
+            sql += " IIF (GM_KSPOZ.CENA_SP_PLN_NETTO_PO = 0, -1,(";
+            sql += "((GM_KSPOZ.CENA_SP_PLN_NETTO_PO-GM_WZPOZ.CENA_ZAKUPU_PO) /GM_KSPOZ.CENA_SP_PLN_NETTO_PO)";
+            sql += " - ";
+            sql += "((GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED-GM_WZPOZ.CENA_ZAKUPU_PO) /GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED)";
+            sql += ")) MARZA,";
+            
+            sql += " (";
+            //zysk po
+            sql += " ((GM_KSPOZ.ILOSC_PO*GM_KSPOZ.CENA_SP_PLN_NETTO_PO)-(GM_KSPOZ.ILOSC_PO*GM_WZPOZ.CENA_ZAKUPU_PO)) ";
+            sql += "-";
+            //zysk przed
+            sql += "((GM_KSPOZ.ILOSC_PRZED*GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED)-(GM_KSPOZ.ILOSC_PRZED*GM_WZPOZ.CENA_ZAKUPU_PO))";
+            sql += " ) ZYSK_NETTO,";
+            //sql += " 0 ZYSK_NETTO,";
 
             sql += " gm_ks.OPERATOR,";
             sql += " GM_MAGAZYNY.NUMER MAGAZYN, ";
             sql += " GM_RABATY2.NAZWA RODZAJ ";
             sql += " from GM_KSPOZ";
-            //sql += " left join GM_WZPOZ on GM_KSPOZ.ID = GM_WZPOZ.ID_KSPOZ";
+            //
+            sql += " left join GM_WZPOZ on GM_KSPOZ.ID = GM_WZPOZ.ID_KSPOZ";
             sql += " join gm_ks on gm_kspoz.id_glowki=gm_ks.id ";
             sql += " join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_KSPOZ.ID_TOWARU ";
             sql += " left join GM_RABATY GM_RABATY2 on GM_RABATY2.ID = GM_TOWARY.RABAT ";
