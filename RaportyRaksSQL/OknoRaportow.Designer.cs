@@ -34,6 +34,7 @@
             this.panelParametry = new System.Windows.Forms.Panel();
             this.tabControlParametry = new System.Windows.Forms.TabControl();
             this.tabPageRaportTyp1 = new System.Windows.Forms.TabPage();
+            this.checkBoxPBindex = new System.Windows.Forms.CheckBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.toSearchClear2 = new System.Windows.Forms.Button();
@@ -70,6 +71,8 @@
             this.dateDO2 = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dateOd2 = new System.Windows.Forms.DateTimePicker();
+            this.tabPageImportCSV = new System.Windows.Forms.TabPage();
+            this.bReadFileCSV = new System.Windows.Forms.Button();
             this.panelPodgladDanych = new System.Windows.Forms.Panel();
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -82,28 +85,26 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.checkBoxPBindex = new System.Windows.Forms.CheckBox();
-            this.tabPageImportCSV = new System.Windows.Forms.TabPage();
-            this.bReadFileCSV = new System.Windows.Forms.Button();
+            this.checkBoxKwalifik = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
             this.tabPageRaportTyp1.SuspendLayout();
             this.tabPageRaportTyp2.SuspendLayout();
+            this.tabPageImportCSV.SuspendLayout();
             this.panelPodgladDanych.SuspendLayout();
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
-            this.tabPageImportCSV.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLable});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 695);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 724);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1354, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1433, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -119,7 +120,7 @@
             this.panelParametry.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelParametry.Location = new System.Drawing.Point(0, 0);
             this.panelParametry.Name = "panelParametry";
-            this.panelParametry.Size = new System.Drawing.Size(1354, 202);
+            this.panelParametry.Size = new System.Drawing.Size(1433, 202);
             this.panelParametry.TabIndex = 1;
             // 
             // tabControlParametry
@@ -131,7 +132,7 @@
             this.tabControlParametry.Location = new System.Drawing.Point(0, 0);
             this.tabControlParametry.Name = "tabControlParametry";
             this.tabControlParametry.SelectedIndex = 0;
-            this.tabControlParametry.Size = new System.Drawing.Size(1354, 202);
+            this.tabControlParametry.Size = new System.Drawing.Size(1433, 202);
             this.tabControlParametry.TabIndex = 0;
             this.tabControlParametry.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlParametry_Selected);
             // 
@@ -171,10 +172,20 @@
             this.tabPageRaportTyp1.Location = new System.Drawing.Point(4, 22);
             this.tabPageRaportTyp1.Name = "tabPageRaportTyp1";
             this.tabPageRaportTyp1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRaportTyp1.Size = new System.Drawing.Size(1346, 176);
+            this.tabPageRaportTyp1.Size = new System.Drawing.Size(1425, 176);
             this.tabPageRaportTyp1.TabIndex = 0;
             this.tabPageRaportTyp1.Text = "Typ 1";
             this.tabPageRaportTyp1.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPBindex
+            // 
+            this.checkBoxPBindex.AutoSize = true;
+            this.checkBoxPBindex.Location = new System.Drawing.Point(962, 102);
+            this.checkBoxPBindex.Name = "checkBoxPBindex";
+            this.checkBoxPBindex.Size = new System.Drawing.Size(105, 17);
+            this.checkBoxPBindex.TabIndex = 30;
+            this.checkBoxPBindex.Text = "Skrót zamiast FK";
+            this.checkBoxPBindex.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
@@ -199,7 +210,7 @@
             // 
             // toSearchClear2
             // 
-            this.toSearchClear2.Location = new System.Drawing.Point(1295, 147);
+            this.toSearchClear2.Location = new System.Drawing.Point(1344, 147);
             this.toSearchClear2.Name = "toSearchClear2";
             this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
             this.toSearchClear2.TabIndex = 27;
@@ -212,7 +223,7 @@
             this.toSearch2.Location = new System.Drawing.Point(1187, 149);
             this.toSearch2.Name = "toSearch2";
             this.toSearch2.ReadOnly = true;
-            this.toSearch2.Size = new System.Drawing.Size(102, 20);
+            this.toSearch2.Size = new System.Drawing.Size(148, 20);
             this.toSearch2.TabIndex = 26;
             this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
             // 
@@ -236,7 +247,7 @@
             // 
             // toSearchClear
             // 
-            this.toSearchClear.Location = new System.Drawing.Point(1295, 121);
+            this.toSearchClear.Location = new System.Drawing.Point(1344, 121);
             this.toSearchClear.Name = "toSearchClear";
             this.toSearchClear.Size = new System.Drawing.Size(43, 23);
             this.toSearchClear.TabIndex = 23;
@@ -249,7 +260,7 @@
             this.toSearch.Location = new System.Drawing.Point(1187, 123);
             this.toSearch.Name = "toSearch";
             this.toSearch.ReadOnly = true;
-            this.toSearch.Size = new System.Drawing.Size(102, 20);
+            this.toSearch.Size = new System.Drawing.Size(148, 20);
             this.toSearch.TabIndex = 22;
             this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
             // 
@@ -295,7 +306,7 @@
             // 
             this.bRaport4DlaPB.Location = new System.Drawing.Point(954, 97);
             this.bRaport4DlaPB.Name = "bRaport4DlaPB";
-            this.bRaport4DlaPB.Size = new System.Drawing.Size(384, 26);
+            this.bRaport4DlaPB.Size = new System.Drawing.Size(430, 26);
             this.bRaport4DlaPB.TabIndex = 17;
             this.bRaport4DlaPB.Text = "Wykonaj - Dane do eksportu dla PowerBike";
             this.bRaport4DlaPB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -306,7 +317,7 @@
             // 
             this.bRaport3.Location = new System.Drawing.Point(954, 68);
             this.bRaport3.Name = "bRaport3";
-            this.bRaport3.Size = new System.Drawing.Size(384, 23);
+            this.bRaport3.Size = new System.Drawing.Size(430, 23);
             this.bRaport3.TabIndex = 16;
             this.bRaport3.Text = "Wykonaj - Analiza stanów minimalnych";
             this.bRaport3.UseVisualStyleBackColor = true;
@@ -316,7 +327,7 @@
             // 
             this.bRaport2.Location = new System.Drawing.Point(954, 39);
             this.bRaport2.Name = "bRaport2";
-            this.bRaport2.Size = new System.Drawing.Size(384, 23);
+            this.bRaport2.Size = new System.Drawing.Size(430, 23);
             this.bRaport2.TabIndex = 15;
             this.bRaport2.Text = "Wykonaj - Analiza sprzedaży po dostawcy/producencie";
             this.bRaport2.UseVisualStyleBackColor = true;
@@ -360,7 +371,7 @@
             // 
             this.bWykonajRaport1.Location = new System.Drawing.Point(954, 10);
             this.bWykonajRaport1.Name = "bWykonajRaport1";
-            this.bWykonajRaport1.Size = new System.Drawing.Size(384, 23);
+            this.bWykonajRaport1.Size = new System.Drawing.Size(430, 23);
             this.bWykonajRaport1.TabIndex = 10;
             this.bWykonajRaport1.Text = "Wykonaj - Analiza sprzedaży dla użytkownika z uwzglednieniem zysku";
             this.bWykonajRaport1.UseVisualStyleBackColor = true;
@@ -510,6 +521,27 @@
             this.dateOd2.Size = new System.Drawing.Size(99, 20);
             this.dateOd2.TabIndex = 4;
             // 
+            // tabPageImportCSV
+            // 
+            this.tabPageImportCSV.Controls.Add(this.bReadFileCSV);
+            this.tabPageImportCSV.Location = new System.Drawing.Point(4, 22);
+            this.tabPageImportCSV.Name = "tabPageImportCSV";
+            this.tabPageImportCSV.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageImportCSV.Size = new System.Drawing.Size(1346, 176);
+            this.tabPageImportCSV.TabIndex = 2;
+            this.tabPageImportCSV.Text = "Konwersja plików csv";
+            this.tabPageImportCSV.UseVisualStyleBackColor = true;
+            // 
+            // bReadFileCSV
+            // 
+            this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
+            this.bReadFileCSV.Name = "bReadFileCSV";
+            this.bReadFileCSV.Size = new System.Drawing.Size(190, 23);
+            this.bReadFileCSV.TabIndex = 0;
+            this.bReadFileCSV.Text = "Wczytaj plik CSV";
+            this.bReadFileCSV.UseVisualStyleBackColor = true;
+            this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
+            // 
             // panelPodgladDanych
             // 
             this.panelPodgladDanych.Controls.Add(this.panelGridLista);
@@ -517,7 +549,7 @@
             this.panelPodgladDanych.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPodgladDanych.Location = new System.Drawing.Point(0, 202);
             this.panelPodgladDanych.Name = "panelPodgladDanych";
-            this.panelPodgladDanych.Size = new System.Drawing.Size(1354, 493);
+            this.panelPodgladDanych.Size = new System.Drawing.Size(1433, 522);
             this.panelPodgladDanych.TabIndex = 2;
             // 
             // panelGridLista
@@ -526,7 +558,7 @@
             this.panelGridLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGridLista.Location = new System.Drawing.Point(0, 0);
             this.panelGridLista.Name = "panelGridLista";
-            this.panelGridLista.Size = new System.Drawing.Size(1354, 458);
+            this.panelGridLista.Size = new System.Drawing.Size(1433, 465);
             this.panelGridLista.TabIndex = 2;
             // 
             // dataGridView1
@@ -538,12 +570,13 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1354, 458);
+            this.dataGridView1.Size = new System.Drawing.Size(1433, 465);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.checkBoxKwalifik);
             this.panelGdidStopka.Controls.Add(this.checkBoxIlosc1);
             this.panelGdidStopka.Controls.Add(this.button1);
             this.panelGdidStopka.Controls.Add(this.bSaveToRaksSQLClipboard);
@@ -553,9 +586,9 @@
             this.panelGdidStopka.Controls.Add(this.CzyDodacNaglowek);
             this.panelGdidStopka.Controls.Add(this.bSave);
             this.panelGdidStopka.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelGdidStopka.Location = new System.Drawing.Point(0, 458);
+            this.panelGdidStopka.Location = new System.Drawing.Point(0, 465);
             this.panelGdidStopka.Name = "panelGdidStopka";
-            this.panelGdidStopka.Size = new System.Drawing.Size(1354, 35);
+            this.panelGdidStopka.Size = new System.Drawing.Size(1433, 57);
             this.panelGdidStopka.TabIndex = 1;
             // 
             // checkBoxIlosc1
@@ -604,7 +637,7 @@
             // bSaveFTPPowerbike
             // 
             this.bSaveFTPPowerbike.Enabled = false;
-            this.bSaveFTPPowerbike.Location = new System.Drawing.Point(917, 6);
+            this.bSaveFTPPowerbike.Location = new System.Drawing.Point(1236, 31);
             this.bSaveFTPPowerbike.Name = "bSaveFTPPowerbike";
             this.bSaveFTPPowerbike.Size = new System.Drawing.Size(156, 23);
             this.bSaveFTPPowerbike.TabIndex = 10;
@@ -625,7 +658,7 @@
             // CzyDodacNaglowek
             // 
             this.CzyDodacNaglowek.AutoSize = true;
-            this.CzyDodacNaglowek.Location = new System.Drawing.Point(1092, 10);
+            this.CzyDodacNaglowek.Location = new System.Drawing.Point(1058, 10);
             this.CzyDodacNaglowek.Name = "CzyDodacNaglowek";
             this.CzyDodacNaglowek.Size = new System.Drawing.Size(138, 17);
             this.CzyDodacNaglowek.TabIndex = 1;
@@ -636,48 +669,29 @@
             // 
             this.bSave.Location = new System.Drawing.Point(1236, 6);
             this.bSave.Name = "bSave";
-            this.bSave.Size = new System.Drawing.Size(114, 23);
+            this.bSave.Size = new System.Drawing.Size(155, 23);
             this.bSave.TabIndex = 0;
             this.bSave.Text = "Zapis do pliku";
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // checkBoxPBindex
+            // checkBoxKwalifik
             // 
-            this.checkBoxPBindex.AutoSize = true;
-            this.checkBoxPBindex.Location = new System.Drawing.Point(962, 102);
-            this.checkBoxPBindex.Name = "checkBoxPBindex";
-            this.checkBoxPBindex.Size = new System.Drawing.Size(105, 17);
-            this.checkBoxPBindex.TabIndex = 30;
-            this.checkBoxPBindex.Text = "Skrót zamiast FK";
-            this.checkBoxPBindex.UseVisualStyleBackColor = true;
-            // 
-            // tabPageImportCSV
-            // 
-            this.tabPageImportCSV.Controls.Add(this.bReadFileCSV);
-            this.tabPageImportCSV.Location = new System.Drawing.Point(4, 22);
-            this.tabPageImportCSV.Name = "tabPageImportCSV";
-            this.tabPageImportCSV.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImportCSV.Size = new System.Drawing.Size(1346, 176);
-            this.tabPageImportCSV.TabIndex = 2;
-            this.tabPageImportCSV.Text = "Konwersja plików csv";
-            this.tabPageImportCSV.UseVisualStyleBackColor = true;
-            // 
-            // bReadFileCSV
-            // 
-            this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
-            this.bReadFileCSV.Name = "bReadFileCSV";
-            this.bReadFileCSV.Size = new System.Drawing.Size(190, 23);
-            this.bReadFileCSV.TabIndex = 0;
-            this.bReadFileCSV.Text = "Wczytaj plik CSV";
-            this.bReadFileCSV.UseVisualStyleBackColor = true;
-            this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
+            this.checkBoxKwalifik.AutoSize = true;
+            this.checkBoxKwalifik.Checked = true;
+            this.checkBoxKwalifik.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxKwalifik.Location = new System.Drawing.Point(1058, 33);
+            this.checkBoxKwalifik.Name = "checkBoxKwalifik";
+            this.checkBoxKwalifik.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxKwalifik.TabIndex = 15;
+            this.checkBoxKwalifik.Text = "Dodać kwalifikator tekstu";
+            this.checkBoxKwalifik.UseVisualStyleBackColor = true;
             // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 717);
+            this.ClientSize = new System.Drawing.Size(1433, 746);
             this.Controls.Add(this.panelPodgladDanych);
             this.Controls.Add(this.panelParametry);
             this.Controls.Add(this.statusStrip1);
@@ -693,12 +707,12 @@
             this.tabPageRaportTyp1.PerformLayout();
             this.tabPageRaportTyp2.ResumeLayout(false);
             this.tabPageRaportTyp2.PerformLayout();
+            this.tabPageImportCSV.ResumeLayout(false);
             this.panelPodgladDanych.ResumeLayout(false);
             this.panelGridLista.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
-            this.tabPageImportCSV.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -762,6 +776,7 @@
         private System.Windows.Forms.CheckBox checkBoxPBindex;
         private System.Windows.Forms.TabPage tabPageImportCSV;
         private System.Windows.Forms.Button bReadFileCSV;
+        private System.Windows.Forms.CheckBox checkBoxKwalifik;
     }
 }
 

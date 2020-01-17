@@ -349,7 +349,14 @@ namespace RaportyRaksSQL
                 if (CzyDodacNaglowek.Checked)
                 {
                     for (int i = 0; i < dataGridView1.ColumnCount; i++)
-                        builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " {0}" : "{0};", dataGridView1.Columns[i].HeaderText);
+                        if (checkBoxKwalifik.Checked)
+                        {
+                            builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " \"{0}\"" : "\"{0}\";", dataGridView1.Columns[i].HeaderText);
+                        }
+                        else
+                        {
+                            builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " {0}" : "{0};", dataGridView1.Columns[i].HeaderText);
+                        }
                     builder.AppendLine();
                 }
 
@@ -360,11 +367,25 @@ namespace RaportyRaksSQL
                     {
                         if (cell.ValueType.ToString().Equals("System.Decimal"))
                         {
-                            builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value.ToString().Replace(",","."));
+                            if (checkBoxKwalifik.Checked)
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "\"{0}\"" : "\"{0}\";", cell.Value.ToString().Replace(",", "."));
+                            }
+                            else
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value.ToString().Replace(",", "."));
+                            }
                         }
                         else
                         {
-                            builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value);
+                            if (checkBoxKwalifik.Checked)
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "\"{0}\"" : "\"{0}\";", cell.Value);
+                            }
+                            else
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value);
+                            }
                         }
                     }
                     builder.AppendLine();
@@ -994,7 +1015,14 @@ namespace RaportyRaksSQL
                 if (CzyDodacNaglowek.Checked)
                 {
                     for (int i = 0; i < dataGridView1.ColumnCount; i++)
-                        builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " {0}" : "{0};", dataGridView1.Columns[i].HeaderText);
+                        if (checkBoxKwalifik.Checked)
+                        {
+                            builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " \"{0}\"" : "\"{0}\";", dataGridView1.Columns[i].HeaderText);
+                        }
+                        else
+                        {
+                            builder.AppendFormat(i == (dataGridView1.Columns.Count - 1) ? " {0}" : "{0};", dataGridView1.Columns[i].HeaderText);
+                        }
                     builder.AppendLine();
                 }
 
@@ -1005,11 +1033,25 @@ namespace RaportyRaksSQL
                     {
                         if (cell.ValueType.ToString().Equals("System.Decimal"))
                         {
-                            builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value.ToString().Replace(",", "."));
+                            if (checkBoxKwalifik.Checked)
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "\"{0}\"" : "\"{0}\";", cell.Value.ToString().Replace(",", "."));
+                            }
+                            else
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value.ToString().Replace(",", "."));
+                            }
                         }
                         else
                         {
-                            builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value);
+                            if (checkBoxKwalifik.Checked)
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "\"{0}\"" : "\"{0}\";", cell.Value);
+                            }
+                            else
+                            {
+                                builder.AppendFormat(cell.ColumnIndex == (dataGridView1.Columns.Count - 1) ? "{0}" : "{0};", cell.Value);
+                            }
                         }
                     }
                     builder.AppendLine();
