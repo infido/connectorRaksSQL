@@ -96,6 +96,7 @@
             this.bAddUser = new System.Windows.Forms.Button();
             this.cUsrAdmin = new System.Windows.Forms.CheckBox();
             this.bUsrLock = new System.Windows.Forms.Button();
+            this.bSetPass = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -557,6 +558,7 @@
             // 
             // tabAdmin
             // 
+            this.tabAdmin.Controls.Add(this.bSetPass);
             this.tabAdmin.Controls.Add(this.bUsrLock);
             this.tabAdmin.Controls.Add(this.groupBox1);
             this.tabAdmin.Controls.Add(this.button2);
@@ -802,6 +804,16 @@
             this.bUsrLock.UseVisualStyleBackColor = true;
             this.bUsrLock.Click += new System.EventHandler(this.bUsrLock_Click);
             // 
+            // bSetPass
+            // 
+            this.bSetPass.Location = new System.Drawing.Point(1159, 57);
+            this.bSetPass.Name = "bSetPass";
+            this.bSetPass.Size = new System.Drawing.Size(228, 22);
+            this.bSetPass.TabIndex = 3;
+            this.bSetPass.Text = "Nadaj hasło użytkownika...";
+            this.bSetPass.UseVisualStyleBackColor = true;
+            this.bSetPass.Click += new System.EventHandler(this.bSetPass_Click);
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -905,6 +917,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbUsrLogin;
         private System.Windows.Forms.Button bUsrLock;
+        private System.Windows.Forms.Button bSetPass;
     }
 }
 

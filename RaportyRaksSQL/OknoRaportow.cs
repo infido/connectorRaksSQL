@@ -1141,6 +1141,7 @@ namespace RaportyRaksSQL
                 {
                     bUsrLock.Text = "Odblokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
+                bSetPass.Text = "Nadaj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
             }
             else
             {
@@ -1367,7 +1368,7 @@ namespace RaportyRaksSQL
             Int32 gen_id = 0;
 
             #region pobranie ID z generatora
-            FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(GM_SCHOWEK_POZYCJI_GEN,1) from rdb$database", fbconn.getCurentConnection());
+            FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(MM_USERS_GEN,1) from rdb$database", fbconn.getCurentConnection());
             try
             {
                 gen_id = Convert.ToInt32(gen_id_statement.ExecuteScalar());
@@ -1440,6 +1441,19 @@ namespace RaportyRaksSQL
             }
 
             button2.PerformClick();
+        }
+
+        private void bSetPass_Click(object sender, EventArgs e)
+        {
+            Autentykacja at = new Autentykacja(fbconn, currUserId);
+            if (at.GetAutoryzationResult()==AutoryzationType.PassChanged)
+            {
+                MessageBox.Show("Zmiana przeprowadzona prawidłowo","Zmiana hasła");
+            }
+            else
+            {
+                MessageBox.Show("Zmianę hasła anulowano!","Zmiana hasła");
+            }
         }
     }
 }
