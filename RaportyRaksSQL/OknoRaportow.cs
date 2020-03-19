@@ -1317,5 +1317,84 @@ namespace RaportyRaksSQL
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bSaveToRaksSQLClipboard.Enabled = false;
+            checkBoxIlosc1.Enabled = false;
+
+            string sql = "select * ";
+            sql += " from MM_USERS;";
+
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                FbDataAdapter adapter = new FbDataAdapter(cdk);
+                DataTable dt = new DataTable("RESULT");
+                adapter.Fill(dt);
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
+            }
+            catch (FbException ex)
+            {
+                statusLable.Text = "Błąd wczytania listy użytkowników!";
+                MessageBox.Show("Błąd wczytywania danych o uzytkownikach do okna Raportu: " + ex.Message);
+            }
+        }
+
+        private void bAddUser_Click(object sender, EventArgs e)
+        {
+            bool wynik = false;
+            Int32 gen_id = 0;
+
+            #region pobranie ID z generatora
+            FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(GM_SCHOWEK_POZYCJI_GEN,1) from rdb$database", fbconn.getCurentConnection());
+            try
+            {
+                gen_id = Convert.ToInt32(gen_id_statement.ExecuteScalar());
+            }
+            catch (FbException exgen)
+            {
+                MessageBox.Show("Błąd pobierania nowego ID dla MM_USERS z bazy. Operacje przerwano! " + exgen.Message);
+                throw;
+            }
+            #endregion
+
+            StringBuilder myStringBuilder = new StringBuilder("INSERT INTO MM_USERS (");
+            myStringBuilder.Append("ID, ");
+            myStringBuilder.Append("KOD, ");
+            myStringBuilder.Append("NAZWA, ");
+            myStringBuilder.Append("ISADMIN ");
+
+            myStringBuilder.Append(") VALUES ( ");
+
+            myStringBuilder.Append(gen_id.ToString() + ",");  // ID
+            myStringBuilder.Append("'" + tbUsrLogin.Text.ToString() + "',");  // KOD
+            myStringBuilder.Append("'" + tbUsrName.Text.ToString() + "', ");  // NAZWA
+            myStringBuilder.Append( (cUsrAdmin.Checked ? "1" : "0") );  // ISADMIN
+            myStringBuilder.Append(");"); 
+
+
+            FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+                wynik = true;
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu nowego użytkownika do bazy RaksSQL: " + ex.Message);
+            }
+
+            if (wynik)
+            {
+                tbUsrLogin.Text = "";
+                tbUsrName.Text = "";
+                cUsrAdmin.Checked = false;
+
+                button2.PerformClick();
+            }
+        }
     }
 }
