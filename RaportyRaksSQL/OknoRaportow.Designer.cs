@@ -907,7 +907,6 @@
         private System.Windows.Forms.TabPage tabPageImportCSV;
         private System.Windows.Forms.Button bReadFileCSV;
         private System.Windows.Forms.CheckBox checkBoxKwalifik;
-        private System.Windows.Forms.TabPage tabAdmin;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cUsrAdmin;
@@ -918,6 +917,7 @@
         private System.Windows.Forms.TextBox tbUsrLogin;
         private System.Windows.Forms.Button bUsrLock;
         private System.Windows.Forms.Button bSetPass;
+        public System.Windows.Forms.TabPage tabAdmin;
     }
 }
 

@@ -69,11 +69,33 @@ namespace RaportyRaksSQL
                 magazyny = row[2].ToString();
                 pass = row[3].ToString();
                 row.Close();
-                MessageBox.Show("Odczytano dane dla " + kod);
             }
             catch (FbException ex)
             {
                 MessageBox.Show("Błąd odczytu użytkownika z bazy RaksSQL: " + ex.Message);
+            }
+            return kod;
+        }
+
+        private string GetUserNameByLogin(string login)
+        {
+            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS from MM_USERS ";
+            sql += " where ISLOCK=0 and KOD='" + login +"';";
+
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                FbDataReader row = cdk.ExecuteReader();
+                row.Read();
+                kod = row[0].ToString();
+                isadmin = (Convert.ToInt32(row[1]) == 1) ? true : false;
+                magazyny = row[2].ToString();
+                pass = row[3].ToString();
+                row.Close();
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd odczytu użytkownika z bazy RaksSQL: " + ex.Message,"Bład odczytu z bazy Firebird");
             }
             return kod;
         }
@@ -103,11 +125,28 @@ namespace RaportyRaksSQL
             if (locIdUser==0)
             {
                 //logowanie do systemu
+                GetUserNameByLogin(tLogin.Text);
+                if (SetPassEncription(tPass.Text).Equals(SetPassEncription(pass)))
+                {
+                    if (isadmin)
+                    {
+                        loginResult = AutoryzationType.Administartor;
+                    }
+                    else
+                    {
+                        loginResult = AutoryzationType.Uzytkownik;
+                    }
+                }
+                else
+                {
+                    loginResult = AutoryzationType.Odrzucony;
+                }
+                Visible = false;
             }
             else
             {
                 //ustawianie hasła
-                string sql = "UPDATE MM_USERS SET PASS='" + tPass.Text +"' where ID=" + locIdUser + " ;";
+                string sql = "UPDATE MM_USERS SET PASS='" + SetPassEncription(tPass.Text) +"' where ID=" + locIdUser + " ;";
                
                 FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                 try
@@ -122,6 +161,14 @@ namespace RaportyRaksSQL
                 }
                 Visible = false;
             }
+        }
+
+        private string SetPassEncription(string plainTexPass)
+        {
+            //kodowanie hasła
+            //TODO!!!!!!!!!!!!!!!!!
+            
+            return plainTexPass;
         }
     }
 }

@@ -41,7 +41,33 @@ namespace RaportyRaksSQL
         {
             if (fbconn.getConectedToFB())
             {
-                onLoadWindow();
+                int tryLogin = 3;
+                while (tryLogin > 0)
+                {
+                    Autentykacja logToSys = new Autentykacja(fbconn);
+                    if (logToSys.GetAutoryzationResult().Equals(AutoryzationType.Uzytkownik))
+                    {
+                        //poprawne logowanie uzytkownika
+                        tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
+                        tryLogin = -1;
+                        break;
+                    }else if (logToSys.GetAutoryzationResult().Equals(AutoryzationType.Administartor))
+                    {
+                        //poprawne logowanie administrator
+                        tryLogin = -1;
+                        break;
+                    }
+                    tryLogin--;
+                }
+                if (tryLogin == -1)
+                {
+                    onLoadWindow();
+                }
+                else {
+                    MessageBox.Show("Nieudane logowanie do programu! Program zostanie zamkniety ", "Bład logowania");
+                    fbconn.setConnectionOFF();
+                    Application.Exit();
+                }
             }
             else
             {
