@@ -27,6 +27,7 @@ namespace RaportyRaksSQL
         DateTime mark;
         DataView fDataView;
         bool stanSaveClip = false;
+        Int32 currUserId = 0;
 
         public OknoRaportow()
         {
@@ -1129,34 +1130,50 @@ namespace RaportyRaksSQL
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (radioButton1.Checked)
+            if (tabControlParametry.SelectedTab.Name.Equals("tabAdmin"))
             {
-                labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
-                toSearch.ReadOnly = false;
-                if ((labelCol.Text.Contains("STAN")) ||
-                            labelCol.Text.Contains("DO_ZAM") ||
-                            labelCol.Text.Contains("ILOSC"))
+                currUserId = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
+                if (Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["ISLOCK"].Value)==0)
                 {
-                    toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+                    bUsrLock.Text = "Zablokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
                 else
                 {
-                    toSearch.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                    bUsrLock.Text = "Odblokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
             }
             else
             {
-                labelCol2.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
-                toSearch2.ReadOnly = false;
-                if ((labelCol2.Text.Contains("STAN")) ||
-                            labelCol2.Text.Contains("DO_ZAM") ||
-                            labelCol2.Text.Contains("ILOSC"))
+
+                if (radioButton1.Checked)
                 {
-                    toSearch2.Text = dataGridView1.CurrentCell.Value.ToString();
+                    labelCol.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+                    toSearch.ReadOnly = false;
+                    if ((labelCol.Text.Contains("STAN")) ||
+                                labelCol.Text.Contains("DO_ZAM") ||
+                                labelCol.Text.Contains("ILOSC"))
+                    {
+                        toSearch.Text = dataGridView1.CurrentCell.Value.ToString();
+                    }
+                    else
+                    {
+                        toSearch.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                    }
                 }
                 else
                 {
-                    toSearch2.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                    labelCol2.Text = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+                    toSearch2.ReadOnly = false;
+                    if ((labelCol2.Text.Contains("STAN")) ||
+                                labelCol2.Text.Contains("DO_ZAM") ||
+                                labelCol2.Text.Contains("ILOSC"))
+                    {
+                        toSearch2.Text = dataGridView1.CurrentCell.Value.ToString();
+                    }
+                    else
+                    {
+                        toSearch2.Text = "%" + dataGridView1.CurrentCell.Value.ToString() + "%";
+                    }
                 }
             }
 
@@ -1335,6 +1352,7 @@ namespace RaportyRaksSQL
                 fDataView = new DataView();
                 fDataView.Table = dt;
                 dataGridView1.DataSource = fDataView;
+                dataGridView1.Columns[0].Visible = false;
             }
             catch (FbException ex)
             {
@@ -1395,6 +1413,33 @@ namespace RaportyRaksSQL
 
                 button2.PerformClick();
             }
+        }
+
+        private void bUsrLock_Click(object sender, EventArgs e)
+        {
+            string sql = "";
+
+            if (bUsrLock.Text.StartsWith("Zablo"))
+            {
+                sql = "update MM_USERS set ISLOCK=1 where ID=" + currUserId + ";";
+            }
+            else
+            {
+                sql = "update MM_USERS set ISLOCK=0 where ID=" + currUserId + ";";
+            }
+
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+                MessageBox.Show("Zmieniono status!");
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu statusu blokady użytkownika do bazy RaksSQL: " + ex.Message);
+            }
+
+            button2.PerformClick();
         }
     }
 }

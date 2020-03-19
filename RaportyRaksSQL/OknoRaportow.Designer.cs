@@ -95,6 +95,7 @@
             this.tbUsrName = new System.Windows.Forms.TextBox();
             this.bAddUser = new System.Windows.Forms.Button();
             this.cUsrAdmin = new System.Windows.Forms.CheckBox();
+            this.bUsrLock = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -556,6 +557,7 @@
             // 
             // tabAdmin
             // 
+            this.tabAdmin.Controls.Add(this.bUsrLock);
             this.tabAdmin.Controls.Add(this.groupBox1);
             this.tabAdmin.Controls.Add(this.button2);
             this.tabAdmin.Location = new System.Drawing.Point(4, 22);
@@ -790,6 +792,16 @@
             this.cUsrAdmin.Text = "Administrator";
             this.cUsrAdmin.UseVisualStyleBackColor = true;
             // 
+            // bUsrLock
+            // 
+            this.bUsrLock.Location = new System.Drawing.Point(1160, 26);
+            this.bUsrLock.Name = "bUsrLock";
+            this.bUsrLock.Size = new System.Drawing.Size(227, 25);
+            this.bUsrLock.TabIndex = 2;
+            this.bUsrLock.Text = "Zablokuj użytkownika ...";
+            this.bUsrLock.UseVisualStyleBackColor = true;
+            this.bUsrLock.Click += new System.EventHandler(this.bUsrLock_Click);
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -892,6 +904,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbUsrLogin;
+        private System.Windows.Forms.Button bUsrLock;
     }
 }
 
