@@ -12,6 +12,8 @@ namespace RaportyRaksSQL
         Uzytkownik,
         Administartor,
         PassChanged,
-        Anulowane
+        Anulowane,
+        HasloPuste,
+        HasloUstawione
     }
 }

@@ -1483,7 +1483,7 @@ namespace RaportyRaksSQL
         private void bSetPass_Click(object sender, EventArgs e)
         {
             Autentykacja at = new Autentykacja(fbconn, currUserId);
-            if (at.GetAutoryzationResult()==AutoryzationType.PassChanged)
+            if (at.SetNewPassByUser()== AutoryzationType.PassChanged)
             {
                 MessageBox.Show("Zmiana przeprowadzona prawidłowo","Zmiana hasła");
             }
@@ -1495,7 +1495,7 @@ namespace RaportyRaksSQL
 
         private void bResetPassUser_Click(object sender, EventArgs e)
         {
-            Autentykacja at = new Autentykacja(currUserId, fbconn);
+            Autentykacja at = new Autentykacja(fbconn, currUserId);
             at.SetResetPass();
             if (at.GetAutoryzationResult().Equals(AutoryzationType.PassChanged))
             {

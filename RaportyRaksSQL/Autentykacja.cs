@@ -31,26 +31,33 @@ namespace RaportyRaksSQL
             ShowDialog();
         }
 
-        //wersja ustawienie lub zmiana hasła
+        //wersja reset, ustawienie lub zmiana hasła
         public Autentykacja(FBConn fbc, Int32 idUser)
         {
             InitializeComponent();
             fbconn = fbc;
             locIdUser = idUser;
+            
+        }
+        // sprawdzenie czy prawidłowo podpięte pod button
+        public AutoryzationType SetNewPassByUser()
+        {
             tPassToConfirmation.Visible = true;
             lPassToConfirmation.Visible = true;
-            tLogin.Text = GetUserNameById(idUser);
+            tLogin.Text = GetUserNameById(locIdUser);
             tLogin.ReadOnly = true;
             bLogin.Enabled = false;
             ShowDialog();
+            return loginResult;
         }
 
-        //wersja reset hasła
-        public Autentykacja(Int32 idUser, FBConn fbc)
+        public AutoryzationType GetPassIsEnable()
         {
-            InitializeComponent();
-            fbconn = fbc;
-            locIdUser = idUser;
+            tLogin.Text = GetUserNameById(locIdUser);
+            if (pass.Length > 0)
+                return AutoryzationType.HasloUstawione;
+            else
+                return AutoryzationType.HasloPuste;
         }
 
         public AutoryzationType GetAutoryzationResult()
@@ -88,7 +95,7 @@ namespace RaportyRaksSQL
 
         private string GetUserNameByLogin(string login)
         {
-            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS from MM_USERS ";
+            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS,ID from MM_USERS ";
             sql += " where ISLOCK=0 and KOD='" + login +"';";
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
@@ -100,6 +107,7 @@ namespace RaportyRaksSQL
                 isadmin = (Convert.ToInt32(row[1]) == 1) ? true : false;
                 magazyny = row[2].ToString();
                 pass = row[3].ToString();
+                locIdUser = Convert.ToInt32(row[4]);
                 row.Close();
             }
             catch (FbException ex)
@@ -135,22 +143,34 @@ namespace RaportyRaksSQL
             {
                 //logowanie do systemu
                 GetUserNameByLogin(tLogin.Text);
-                if (GetComparePass(tPass.Text, pass, tLogin.Text) || tLogin.Text.Equals("ADMIN"))
+                if (pass.Length == 0 && kod.Length > 0)
                 {
-                    if (isadmin)
-                    {
-                        loginResult = AutoryzationType.Administartor;
-                    }
-                    else
-                    {
-                        loginResult = AutoryzationType.Uzytkownik;
-                    }
+                    //hasło puste i trzeba ustawić
+                    MessageBox.Show("Hasło jest zresetowane, należy ustawić nowe hasło.","Ustawienie hasła");
+                    lPassWrong.Visible = true;
+                    tPassToConfirmation.Visible = true;
+                    lPassToConfirmation.Visible = true;
+                    tLogin.ReadOnly = true;
                 }
                 else
                 {
-                    loginResult = AutoryzationType.Odrzucony;
+                    if (GetComparePass(tPass.Text, pass, tLogin.Text))
+                    {
+                        if (isadmin)
+                        {
+                            loginResult = AutoryzationType.Administartor;
+                        }
+                        else
+                        {
+                            loginResult = AutoryzationType.Uzytkownik;
+                        }
+                    }
+                    else
+                    {
+                        loginResult = AutoryzationType.Odrzucony;
+                    }
+                    Visible = false;
                 }
-                Visible = false;
             }
             else
             {
