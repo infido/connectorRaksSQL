@@ -1171,12 +1171,13 @@ namespace RaportyRaksSQL
                         bUsrLock.Text = "Odblokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                     }
                     bSetPass.Text = "Nadaj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
+                    bResetPassUser.Text = "Resetuj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
                 catch (Exception a)
                 {
                     bUsrLock.Text = "Nie ustawiono...";
                     bSetPass.Text = "Nie ustawiono...";
-                    throw;
+                    bResetPassUser.Text = "Nie ustawiono...";
                 }
             }
             else
@@ -1489,6 +1490,20 @@ namespace RaportyRaksSQL
             else
             {
                 MessageBox.Show("Zmianę hasła anulowano!","Zmiana hasła");
+            }
+        }
+
+        private void bResetPassUser_Click(object sender, EventArgs e)
+        {
+            Autentykacja at = new Autentykacja(currUserId, fbconn);
+            at.SetResetPass();
+            if (at.GetAutoryzationResult().Equals(AutoryzationType.PassChanged))
+            {
+                MessageBox.Show("Zresetowano hasło do pustego poprawnie.","Reset hasła");
+            }
+            else
+            {
+                MessageBox.Show("Resetowanie hasła przerwano. Operacja anulowana.", "Reset hasła");
             }
         }
     }

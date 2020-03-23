@@ -74,6 +74,15 @@
             this.tabPageImportCSV = new System.Windows.Forms.TabPage();
             this.bReadFileCSV = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.bSetPass = new System.Windows.Forms.Button();
+            this.bUsrLock = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cUsrAdmin = new System.Windows.Forms.CheckBox();
+            this.bAddUser = new System.Windows.Forms.Button();
+            this.tbUsrName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbUsrLogin = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panelPodgladDanych = new System.Windows.Forms.Panel();
             this.panelGridLista = new System.Windows.Forms.Panel();
@@ -88,15 +97,7 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbUsrLogin = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbUsrName = new System.Windows.Forms.TextBox();
-            this.bAddUser = new System.Windows.Forms.Button();
-            this.cUsrAdmin = new System.Windows.Forms.CheckBox();
-            this.bUsrLock = new System.Windows.Forms.Button();
-            this.bSetPass = new System.Windows.Forms.Button();
+            this.bResetPassUser = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -104,11 +105,11 @@
             this.tabPageRaportTyp2.SuspendLayout();
             this.tabPageImportCSV.SuspendLayout();
             this.tabAdmin.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panelPodgladDanych.SuspendLayout();
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -558,6 +559,7 @@
             // 
             // tabAdmin
             // 
+            this.tabAdmin.Controls.Add(this.bResetPassUser);
             this.tabAdmin.Controls.Add(this.bSetPass);
             this.tabAdmin.Controls.Add(this.bUsrLock);
             this.tabAdmin.Controls.Add(this.groupBox1);
@@ -568,6 +570,96 @@
             this.tabAdmin.TabIndex = 3;
             this.tabAdmin.Text = "Administracja";
             this.tabAdmin.UseVisualStyleBackColor = true;
+            // 
+            // bSetPass
+            // 
+            this.bSetPass.Location = new System.Drawing.Point(1159, 57);
+            this.bSetPass.Name = "bSetPass";
+            this.bSetPass.Size = new System.Drawing.Size(228, 22);
+            this.bSetPass.TabIndex = 3;
+            this.bSetPass.Text = "Nadaj hasło użytkownika...";
+            this.bSetPass.UseVisualStyleBackColor = true;
+            this.bSetPass.Click += new System.EventHandler(this.bSetPass_Click);
+            // 
+            // bUsrLock
+            // 
+            this.bUsrLock.Location = new System.Drawing.Point(1160, 26);
+            this.bUsrLock.Name = "bUsrLock";
+            this.bUsrLock.Size = new System.Drawing.Size(227, 25);
+            this.bUsrLock.TabIndex = 2;
+            this.bUsrLock.Text = "Zablokuj użytkownika ...";
+            this.bUsrLock.UseVisualStyleBackColor = true;
+            this.bUsrLock.Click += new System.EventHandler(this.bUsrLock_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cUsrAdmin);
+            this.groupBox1.Controls.Add(this.bAddUser);
+            this.groupBox1.Controls.Add(this.tbUsrName);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.tbUsrLogin);
+            this.groupBox1.Location = new System.Drawing.Point(581, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(248, 137);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Zakładanie użytkownika";
+            // 
+            // cUsrAdmin
+            // 
+            this.cUsrAdmin.AutoSize = true;
+            this.cUsrAdmin.Location = new System.Drawing.Point(147, 31);
+            this.cUsrAdmin.Name = "cUsrAdmin";
+            this.cUsrAdmin.Size = new System.Drawing.Size(86, 17);
+            this.cUsrAdmin.TabIndex = 2;
+            this.cUsrAdmin.Text = "Administrator";
+            this.cUsrAdmin.UseVisualStyleBackColor = true;
+            // 
+            // bAddUser
+            // 
+            this.bAddUser.Location = new System.Drawing.Point(158, 96);
+            this.bAddUser.Name = "bAddUser";
+            this.bAddUser.Size = new System.Drawing.Size(84, 26);
+            this.bAddUser.TabIndex = 4;
+            this.bAddUser.Text = "&Zapisz";
+            this.bAddUser.UseVisualStyleBackColor = true;
+            this.bAddUser.Click += new System.EventHandler(this.bAddUser_Click);
+            // 
+            // tbUsrName
+            // 
+            this.tbUsrName.Location = new System.Drawing.Point(69, 56);
+            this.tbUsrName.MaxLength = 40;
+            this.tbUsrName.Name = "tbUsrName";
+            this.tbUsrName.Size = new System.Drawing.Size(173, 20);
+            this.tbUsrName.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 59);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(40, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Nazwa";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 32);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(33, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Login";
+            // 
+            // tbUsrLogin
+            // 
+            this.tbUsrLogin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbUsrLogin.Location = new System.Drawing.Point(69, 29);
+            this.tbUsrLogin.MaxLength = 8;
+            this.tbUsrLogin.Name = "tbUsrLogin";
+            this.tbUsrLogin.Size = new System.Drawing.Size(72, 20);
+            this.tbUsrLogin.TabIndex = 0;
             // 
             // button2
             // 
@@ -724,95 +816,15 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // groupBox1
+            // bResetPassUser
             // 
-            this.groupBox1.Controls.Add(this.cUsrAdmin);
-            this.groupBox1.Controls.Add(this.bAddUser);
-            this.groupBox1.Controls.Add(this.tbUsrName);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.tbUsrLogin);
-            this.groupBox1.Location = new System.Drawing.Point(581, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(248, 137);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Zakładanie użytkownika";
-            // 
-            // tbUsrLogin
-            // 
-            this.tbUsrLogin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbUsrLogin.Location = new System.Drawing.Point(69, 29);
-            this.tbUsrLogin.MaxLength = 8;
-            this.tbUsrLogin.Name = "tbUsrLogin";
-            this.tbUsrLogin.Size = new System.Drawing.Size(72, 20);
-            this.tbUsrLogin.TabIndex = 0;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 32);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(33, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Login";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 59);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(40, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Nazwa";
-            // 
-            // tbUsrName
-            // 
-            this.tbUsrName.Location = new System.Drawing.Point(69, 56);
-            this.tbUsrName.MaxLength = 40;
-            this.tbUsrName.Name = "tbUsrName";
-            this.tbUsrName.Size = new System.Drawing.Size(173, 20);
-            this.tbUsrName.TabIndex = 3;
-            // 
-            // bAddUser
-            // 
-            this.bAddUser.Location = new System.Drawing.Point(158, 96);
-            this.bAddUser.Name = "bAddUser";
-            this.bAddUser.Size = new System.Drawing.Size(84, 26);
-            this.bAddUser.TabIndex = 4;
-            this.bAddUser.Text = "&Zapisz";
-            this.bAddUser.UseVisualStyleBackColor = true;
-            this.bAddUser.Click += new System.EventHandler(this.bAddUser_Click);
-            // 
-            // cUsrAdmin
-            // 
-            this.cUsrAdmin.AutoSize = true;
-            this.cUsrAdmin.Location = new System.Drawing.Point(147, 31);
-            this.cUsrAdmin.Name = "cUsrAdmin";
-            this.cUsrAdmin.Size = new System.Drawing.Size(86, 17);
-            this.cUsrAdmin.TabIndex = 2;
-            this.cUsrAdmin.Text = "Administrator";
-            this.cUsrAdmin.UseVisualStyleBackColor = true;
-            // 
-            // bUsrLock
-            // 
-            this.bUsrLock.Location = new System.Drawing.Point(1160, 26);
-            this.bUsrLock.Name = "bUsrLock";
-            this.bUsrLock.Size = new System.Drawing.Size(227, 25);
-            this.bUsrLock.TabIndex = 2;
-            this.bUsrLock.Text = "Zablokuj użytkownika ...";
-            this.bUsrLock.UseVisualStyleBackColor = true;
-            this.bUsrLock.Click += new System.EventHandler(this.bUsrLock_Click);
-            // 
-            // bSetPass
-            // 
-            this.bSetPass.Location = new System.Drawing.Point(1159, 57);
-            this.bSetPass.Name = "bSetPass";
-            this.bSetPass.Size = new System.Drawing.Size(228, 22);
-            this.bSetPass.TabIndex = 3;
-            this.bSetPass.Text = "Nadaj hasło użytkownika...";
-            this.bSetPass.UseVisualStyleBackColor = true;
-            this.bSetPass.Click += new System.EventHandler(this.bSetPass_Click);
+            this.bResetPassUser.Location = new System.Drawing.Point(1159, 85);
+            this.bResetPassUser.Name = "bResetPassUser";
+            this.bResetPassUser.Size = new System.Drawing.Size(228, 22);
+            this.bResetPassUser.TabIndex = 4;
+            this.bResetPassUser.Text = "Resetuj hasło uzytkownika...";
+            this.bResetPassUser.UseVisualStyleBackColor = true;
+            this.bResetPassUser.Click += new System.EventHandler(this.bResetPassUser_Click);
             // 
             // OknoRaportow
             // 
@@ -836,13 +848,13 @@
             this.tabPageRaportTyp2.PerformLayout();
             this.tabPageImportCSV.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panelPodgladDanych.ResumeLayout(false);
             this.panelGridLista.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -918,6 +930,7 @@
         private System.Windows.Forms.Button bUsrLock;
         private System.Windows.Forms.Button bSetPass;
         public System.Windows.Forms.TabPage tabAdmin;
+        private System.Windows.Forms.Button bResetPassUser;
     }
 }
 

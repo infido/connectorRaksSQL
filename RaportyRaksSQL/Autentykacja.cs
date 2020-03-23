@@ -45,6 +45,14 @@ namespace RaportyRaksSQL
             ShowDialog();
         }
 
+        //wersja reset hasła
+        public Autentykacja(Int32 idUser, FBConn fbc)
+        {
+            InitializeComponent();
+            fbconn = fbc;
+            locIdUser = idUser;
+        }
+
         public AutoryzationType GetAutoryzationResult()
         {
             return loginResult;
@@ -218,6 +226,26 @@ namespace RaportyRaksSQL
         private string SetStdInputUser(string userKod)
         {
             return (userKod + "12345678").Substring(0, 8);
+        }
+
+        public AutoryzationType SetResetPass()
+        {
+            //czyszczenie hasła
+            string sql = "UPDATE MM_USERS SET PASS='' where ID=" + locIdUser + " ;";
+
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+                loginResult = AutoryzationType.PassChanged;
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu hasła do bazy RaksSQL: " + ex.Message);
+                loginResult = AutoryzationType.Odrzucony;
+            }
+
+            return loginResult;
         }
     }
 }
