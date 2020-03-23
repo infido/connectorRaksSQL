@@ -51,6 +51,7 @@
             // tPass
             // 
             this.tPass.Location = new System.Drawing.Point(106, 48);
+            this.tPass.MaxLength = 20;
             this.tPass.Name = "tPass";
             this.tPass.PasswordChar = '*';
             this.tPass.Size = new System.Drawing.Size(100, 20);
@@ -59,6 +60,7 @@
             // tPassToConfirmation
             // 
             this.tPassToConfirmation.Location = new System.Drawing.Point(106, 75);
+            this.tPassToConfirmation.MaxLength = 20;
             this.tPassToConfirmation.Name = "tPassToConfirmation";
             this.tPassToConfirmation.PasswordChar = '*';
             this.tPassToConfirmation.Size = new System.Drawing.Size(100, 20);

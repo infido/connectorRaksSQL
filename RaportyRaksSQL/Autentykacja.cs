@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KonfiguratorConnectorRaksSQL;
 using FirebirdSql.Data.FirebirdClient;
+using System.Security.Cryptography;
 
 namespace RaportyRaksSQL
 {
@@ -122,11 +123,11 @@ namespace RaportyRaksSQL
 
         private void bLogin_Click(object sender, EventArgs e)
         {
-            if (locIdUser==0)
+            if (locIdUser == 0)
             {
                 //logowanie do systemu
                 GetUserNameByLogin(tLogin.Text);
-                if (SetPassEncription(tPass.Text).Equals(SetPassEncription(pass)))
+                if (GetComparePass(tPass.Text, pass, tLogin.Text) || tLogin.Text.Equals("ADMIN"))
                 {
                     if (isadmin)
                     {
@@ -146,7 +147,10 @@ namespace RaportyRaksSQL
             else
             {
                 //ustawianie hasła
-                string sql = "UPDATE MM_USERS SET PASS='" + SetPassEncription(tPass.Text) +"' where ID=" + locIdUser + " ;";
+                string sql = "UPDATE MM_USERS SET PASS='";
+                //sql += "" + Encoding.UTF8.GetString(GenerateHash(tLogin.Text, tPass.Text));  Encoding.GetEncoding(1250).GetString(
+                sql += "" + Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text));  
+                sql += "' where ID=" + locIdUser + " ;";
                
                 FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                 try
@@ -163,12 +167,57 @@ namespace RaportyRaksSQL
             }
         }
 
-        private string SetPassEncription(string plainTexPass)
+        private bool GetComparePass(string passOkno, string passDB, string userKod)
         {
-            //kodowanie hasła
-            //TODO!!!!!!!!!!!!!!!!!
+            /*
+            bool wynik = true;
             
-            return plainTexPass;
+            byte[] passFromWindow = GenerateHash(userKod,passOkno);
+            byte[] passFromDB = Encoding.UTF8.GetBytes(passDB);
+
+           
+
+            for (int i = 0; i < passFromDB.Length; i++)
+            {
+                if (passFromDB[i] != passFromWindow[i])
+                {
+                    wynik = false;
+                }
+            }
+            */
+            string curPass = Encoding.GetEncoding(1250).GetString(GenerateHash(userKod, passOkno));
+            //string curPass = Encoding.ASCII.GetString(GenerateHash(userKod, passOkno));
+            //passDB = Encoding.ASCII.GetString()
+
+            if (passDB.Equals(curPass))
+                return true;
+            else
+                return false;
+        }
+
+        private byte[] GenerateHash(string userKod, string password)
+        {
+            //create the MD5CryptoServiceProvider object we will use to encrypt the password    
+            //    HMACSHA1 hasher = new HMACSHA1(Encoding.UTF8.GetBytes(SetStdInputUser(userKod)));             
+            //create an array of bytes we will use to store the encrypted password    
+            //Byte[] hashedBytes;
+            //Create a UTF8Encoding object we will use to convert our password string to a byte array    
+            //    UTF8Encoding encoder = new UTF8Encoding();     //encrypt the password and store it in the hashedBytes byte array    
+            //    return hasher.ComputeHash(encoder.GetBytes(SetStdInputPass(password)));     //connect to our db 
+
+            MD5 md5Hasher = MD5.Create();
+            byte[] data = md5Hasher.ComputeHash( Encoding.Default.GetBytes(SetStdInputPass(password, userKod)));
+            return data;
+        }
+
+        private string SetStdInputPass(string pass, string userKod)
+        {
+            return (pass + userKod + "12345678901234567890").Substring(0, 20);
+        }
+
+        private string SetStdInputUser(string userKod)
+        {
+            return (userKod + "12345678").Substring(0, 8);
         }
     }
 }

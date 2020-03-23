@@ -1158,16 +1158,26 @@ namespace RaportyRaksSQL
         {
             if (tabControlParametry.SelectedTab.Name.Equals("tabAdmin"))
             {
-                currUserId = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
-                if (Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["ISLOCK"].Value)==0)
+                currUserId = 0;
+                try
                 {
-                    bUsrLock.Text = "Zablokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
+                    currUserId = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
+                    if (Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["ISLOCK"].Value) == 0)
+                    {
+                        bUsrLock.Text = "Zablokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
+                    }
+                    else
+                    {
+                        bUsrLock.Text = "Odblokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
+                    }
+                    bSetPass.Text = "Nadaj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
-                else
+                catch (Exception a)
                 {
-                    bUsrLock.Text = "Odblokuj użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
+                    bUsrLock.Text = "Nie ustawiono...";
+                    bSetPass.Text = "Nie ustawiono...";
+                    throw;
                 }
-                bSetPass.Text = "Nadaj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
             }
             else
             {
