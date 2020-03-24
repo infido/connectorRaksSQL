@@ -89,6 +89,7 @@ namespace RaportyRaksSQL
                 while (fdk.Read())
                 {
                     chMagazyny1.Items.Add((string)fdk["NUMER"]);
+                    chMagazynyAdmin.Items.Add((string)fdk["NUMER"]);
                 }
             }
             catch (FbException ex)
@@ -1409,6 +1410,15 @@ namespace RaportyRaksSQL
             bool wynik = false;
             Int32 gen_id = 0;
 
+            string magazyny = "";
+            foreach (var item in chMagazynyAdmin.CheckedItems)
+            {
+                if (magazyny.Length == 0)
+                    magazyny = item.ToString() ;
+                else
+                    magazyny += "," + item.ToString();
+            }
+
             #region pobranie ID z generatora
             FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(MM_USERS_GEN,1) from rdb$database", fbconn.getCurentConnection());
             try
@@ -1426,14 +1436,16 @@ namespace RaportyRaksSQL
             myStringBuilder.Append("ID, ");
             myStringBuilder.Append("KOD, ");
             myStringBuilder.Append("NAZWA, ");
-            myStringBuilder.Append("ISADMIN ");
+            myStringBuilder.Append("ISADMIN, ");
+            myStringBuilder.Append("MAGAZYNY ");
 
             myStringBuilder.Append(") VALUES ( ");
 
             myStringBuilder.Append(gen_id.ToString() + ",");  // ID
             myStringBuilder.Append("'" + tbUsrLogin.Text.ToString() + "',");  // KOD
             myStringBuilder.Append("'" + tbUsrName.Text.ToString() + "', ");  // NAZWA
-            myStringBuilder.Append( (cUsrAdmin.Checked ? "1" : "0") );  // ISADMIN
+            myStringBuilder.Append( (cUsrAdmin.Checked ? "1," : "0,") );  // ISADMIN
+            myStringBuilder.Append(" '" + magazyny + "' ");  // MAGAZYNY
             myStringBuilder.Append(");"); 
 
 

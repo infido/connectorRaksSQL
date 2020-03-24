@@ -99,6 +99,9 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.bChangeMyPass = new System.Windows.Forms.Button();
+            this.chMagazynyAdmin = new System.Windows.Forms.CheckedListBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.bReadUser = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -604,15 +607,18 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bReadUser);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.chMagazynyAdmin);
             this.groupBox1.Controls.Add(this.cUsrAdmin);
             this.groupBox1.Controls.Add(this.bAddUser);
             this.groupBox1.Controls.Add(this.tbUsrName);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.tbUsrLogin);
-            this.groupBox1.Location = new System.Drawing.Point(581, 19);
+            this.groupBox1.Location = new System.Drawing.Point(267, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(248, 137);
+            this.groupBox1.Size = new System.Drawing.Size(393, 170);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zakładanie użytkownika";
@@ -629,7 +635,7 @@
             // 
             // bAddUser
             // 
-            this.bAddUser.Location = new System.Drawing.Point(158, 96);
+            this.bAddUser.Location = new System.Drawing.Point(149, 127);
             this.bAddUser.Name = "bAddUser";
             this.bAddUser.Size = new System.Drawing.Size(84, 26);
             this.bAddUser.TabIndex = 4;
@@ -838,6 +844,32 @@
             this.bChangeMyPass.UseVisualStyleBackColor = true;
             this.bChangeMyPass.Click += new System.EventHandler(this.bChangeMyPass_Click);
             // 
+            // chMagazynyAdmin
+            // 
+            this.chMagazynyAdmin.FormattingEnabled = true;
+            this.chMagazynyAdmin.Location = new System.Drawing.Point(257, 40);
+            this.chMagazynyAdmin.Name = "chMagazynyAdmin";
+            this.chMagazynyAdmin.Size = new System.Drawing.Size(111, 124);
+            this.chMagazynyAdmin.TabIndex = 5;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(254, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "Magazyny";
+            // 
+            // bReadUser
+            // 
+            this.bReadUser.Location = new System.Drawing.Point(44, 126);
+            this.bReadUser.Name = "bReadUser";
+            this.bReadUser.Size = new System.Drawing.Size(81, 26);
+            this.bReadUser.TabIndex = 8;
+            this.bReadUser.Text = "Wczytaj";
+            this.bReadUser.UseVisualStyleBackColor = true;
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -944,6 +976,9 @@
         public System.Windows.Forms.TabPage tabAdmin;
         private System.Windows.Forms.Button bResetPassUser;
         private System.Windows.Forms.Button bChangeMyPass;
+        private System.Windows.Forms.Button bReadUser;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckedListBox chMagazynyAdmin;
     }
 }
 
