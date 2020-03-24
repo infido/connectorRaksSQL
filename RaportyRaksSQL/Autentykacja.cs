@@ -182,6 +182,7 @@ namespace RaportyRaksSQL
                         loginResult = AutoryzationType.Odrzucony;
                     }
                     Visible = false;
+                    SetTimeTryToLogin();
                 }
             }
             else
@@ -203,6 +204,21 @@ namespace RaportyRaksSQL
                     loginResult = AutoryzationType.Odrzucony;
                 }
                 Visible = false;
+            }
+        }
+
+        private void SetTimeTryToLogin()
+        {
+            string sql = "UPDATE MM_USERS SET LOGOWANIE_PROBA='NOW' where ID = " + locIdUser + "; ";
+            
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu czasu próby logowania do bazy RaksSQL: " + ex.Message);
             }
         }
 
