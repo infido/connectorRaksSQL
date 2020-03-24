@@ -68,10 +68,9 @@ namespace RaportyRaksSQL
         private string GetUserNameById(Int32 lUserID =  0)
         {
             string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS from MM_USERS ";
-            sql += " where ISLOCK=0 ";
             if (lUserID > 0)
             {
-                sql += " and ID=" + lUserID;
+                sql += "  where ID=" + lUserID;
             }
             sql += ";";
 
@@ -102,12 +101,19 @@ namespace RaportyRaksSQL
             try
             {
                 FbDataReader row = cdk.ExecuteReader();
-                row.Read();
-                kod = row[0].ToString();
-                isadmin = (Convert.ToInt32(row[1]) == 1) ? true : false;
-                magazyny = row[2].ToString();
-                pass = row[3].ToString();
-                locIdUser = Convert.ToInt32(row[4]);
+                if (row.Read())
+                {
+                    kod = row[0].ToString();
+                    isadmin = (Convert.ToInt32(row[1]) == 1) ? true : false;
+                    magazyny = row[2].ToString();
+                    pass = row[3].ToString();
+                    locIdUser = Convert.ToInt32(row[4]);
+                }
+                else
+                {
+                    MessageBox.Show("Brak autoryzacji użytkownika.","Nieprawidłowe logowanie");
+                    loginResult = AutoryzationType.Odrzucony;
+                }
                 row.Close();
             }
             catch (FbException ex)
@@ -133,6 +139,7 @@ namespace RaportyRaksSQL
             else
             {
                 lPassWrong.Visible = true;
+                lPassWrong.Text = "Hasło niezgodne!";
                 bLogin.Enabled = false;
             }
         }
@@ -143,7 +150,7 @@ namespace RaportyRaksSQL
             {
                 //logowanie do systemu
                 GetUserNameByLogin(tLogin.Text);
-                if (pass.Length == 0 && kod.Length > 0)
+                if (pass!=null && pass.Length == 0 && kod.Length > 0)
                 {
                     //hasło puste i trzeba ustawić
                     MessageBox.Show("Hasło jest zresetowane, należy ustawić nowe hasło.","Ustawienie hasła");
@@ -198,7 +205,7 @@ namespace RaportyRaksSQL
         {
             string curPass = Encoding.GetEncoding(1250).GetString(GenerateHash(userKod, passOkno));
             
-            if (passDB.Equals(curPass))
+            if (curPass!=null && passDB!=null && passDB.Equals(curPass))
                 return true;
             else
                 return false;
@@ -239,6 +246,23 @@ namespace RaportyRaksSQL
             }
 
             return loginResult;
+        }
+
+        private void tPass_TextChanged(object sender, EventArgs e)
+        {
+            if (tPassToConfirmation.Visible)
+            {
+                if (tPass.Text.Length < 4)
+                {
+                    bLogin.Enabled = false;
+                    lPassWrong.Text = "Za krótkie hasło!";
+                    lPassWrong.Visible = true;
+                }
+                else
+                {
+                    lPassWrong.Visible = false;
+                }
+            }
         }
     }
 }

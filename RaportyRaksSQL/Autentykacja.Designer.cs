@@ -56,6 +56,7 @@
             this.tPass.PasswordChar = '*';
             this.tPass.Size = new System.Drawing.Size(100, 20);
             this.tPass.TabIndex = 1;
+            this.tPass.TextChanged += new System.EventHandler(this.tPass_TextChanged);
             // 
             // tPassToConfirmation
             // 
