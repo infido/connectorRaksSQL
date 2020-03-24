@@ -49,11 +49,13 @@ namespace RaportyRaksSQL
                     {
                         //poprawne logowanie uzytkownika
                         tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
+                        logToSys.SetTimestampLastLogin();
                         tryLogin = -1;
                         break;
                     }else if (logToSys.GetAutoryzationResult().Equals(AutoryzationType.Administartor))
                     {
                         //poprawne logowanie administrator
+                        logToSys.SetTimestampLastLogin();
                         tryLogin = -1;
                         break;
                     }

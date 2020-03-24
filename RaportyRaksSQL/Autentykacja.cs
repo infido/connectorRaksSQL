@@ -248,6 +248,21 @@ namespace RaportyRaksSQL
             return loginResult;
         }
 
+        public void SetTimestampLastLogin()
+        {
+            string sql = "UPDATE MM_USERS SET LOGOWANIE='NOW' where ID=" + locIdUser + " ;";
+
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu ostatniej daty logowania do bazy RaksSQL: " + ex.Message);
+            }
+        }
+
         private void tPass_TextChanged(object sender, EventArgs e)
         {
             if (tPassToConfirmation.Visible)
