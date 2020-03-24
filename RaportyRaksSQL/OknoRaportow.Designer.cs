@@ -102,6 +102,7 @@
             this.chMagazynyAdmin = new System.Windows.Forms.CheckedListBox();
             this.label14 = new System.Windows.Forms.Label();
             this.bReadUser = new System.Windows.Forms.Button();
+            this.bUsrClear = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -607,6 +608,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bUsrClear);
             this.groupBox1.Controls.Add(this.bReadUser);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.chMagazynyAdmin);
@@ -635,7 +637,7 @@
             // 
             // bAddUser
             // 
-            this.bAddUser.Location = new System.Drawing.Point(149, 127);
+            this.bAddUser.Location = new System.Drawing.Point(167, 127);
             this.bAddUser.Name = "bAddUser";
             this.bAddUser.Size = new System.Drawing.Size(84, 26);
             this.bAddUser.TabIndex = 4;
@@ -863,12 +865,23 @@
             // 
             // bReadUser
             // 
-            this.bReadUser.Location = new System.Drawing.Point(44, 126);
+            this.bReadUser.Location = new System.Drawing.Point(6, 127);
             this.bReadUser.Name = "bReadUser";
             this.bReadUser.Size = new System.Drawing.Size(81, 26);
             this.bReadUser.TabIndex = 8;
             this.bReadUser.Text = "Wczytaj";
             this.bReadUser.UseVisualStyleBackColor = true;
+            this.bReadUser.Click += new System.EventHandler(this.bReadUser_Click);
+            // 
+            // bUsrClear
+            // 
+            this.bUsrClear.Location = new System.Drawing.Point(93, 127);
+            this.bUsrClear.Name = "bUsrClear";
+            this.bUsrClear.Size = new System.Drawing.Size(69, 26);
+            this.bUsrClear.TabIndex = 9;
+            this.bUsrClear.Text = "Wyczyść";
+            this.bUsrClear.UseVisualStyleBackColor = true;
+            this.bUsrClear.Click += new System.EventHandler(this.bUsrClear_Click);
             // 
             // OknoRaportow
             // 
@@ -979,6 +992,7 @@
         private System.Windows.Forms.Button bReadUser;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckedListBox chMagazynyAdmin;
+        private System.Windows.Forms.Button bUsrClear;
     }
 }
 

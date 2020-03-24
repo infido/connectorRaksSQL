@@ -19,6 +19,7 @@ namespace RaportyRaksSQL
         private FBConn fbconn;
         private Int32 locIdUser = 0;
         private string kod;
+        private string nazwa;
         private bool isadmin;
         private string magazyny;
         private string pass;
@@ -72,7 +73,7 @@ namespace RaportyRaksSQL
 
         private string GetUserNameById(Int32 lUserID =  0)
         {
-            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS from MM_USERS ";
+            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS,NAZWA from MM_USERS ";
             if (lUserID > 0)
             {
                 sql += "  where ID=" + lUserID;
@@ -88,6 +89,7 @@ namespace RaportyRaksSQL
                 isadmin = (Convert.ToInt32(row[1]) == 1) ? true : false;
                 magazyny = row[2].ToString();
                 pass = row[3].ToString();
+                nazwa = row[4].ToString();
                 row.Close();
             }
             catch (FbException ex)
@@ -99,7 +101,7 @@ namespace RaportyRaksSQL
 
         private string GetUserNameByLogin(string login)
         {
-            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS,ID from MM_USERS ";
+            string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS,ID,NAZWA from MM_USERS ";
             sql += " where ISLOCK=0 and KOD='" + login +"';";
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
@@ -113,6 +115,7 @@ namespace RaportyRaksSQL
                     magazyny = row[2].ToString();
                     pass = row[3].ToString();
                     locIdUser = Convert.ToInt32(row[4]);
+                    nazwa = row[5].ToString();
                 }
                 else
                 {
@@ -126,6 +129,18 @@ namespace RaportyRaksSQL
                 MessageBox.Show("Błąd odczytu użytkownika z bazy RaksSQL: " + ex.Message,"Bład odczytu z bazy Firebird");
             }
             return kod;
+        }
+
+        public string[] GetUserPropertiesByID(Int32 usrID)
+        {
+            string[] tab = new string[4];
+            GetUserNameById(usrID);
+            tab[0] = kod;
+            tab[1] = isadmin.ToString();
+            tab[2] = nazwa;
+            tab[3] = magazyny;
+
+            return tab;
         }
 
         private void bCancel_Click(object sender, EventArgs e)

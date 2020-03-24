@@ -28,6 +28,7 @@ namespace RaportyRaksSQL
         DataView fDataView;
         bool stanSaveClip = false;
         Int32 currUserId = 0;
+        bool czyUserWczytany = false;
 
         public OknoRaportow()
         {
@@ -1418,36 +1419,49 @@ namespace RaportyRaksSQL
                 else
                     magazyny += "," + item.ToString();
             }
+            StringBuilder myStringBuilder = new StringBuilder();
 
-            #region pobranie ID z generatora
-            FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(MM_USERS_GEN,1) from rdb$database", fbconn.getCurentConnection());
-            try
+            if (czyUserWczytany)
             {
-                gen_id = Convert.ToInt32(gen_id_statement.ExecuteScalar());
+                MessageBox.Show("Update należy napisać");
+                myStringBuilder.Append("UPDATE MM_USERS SET ");
+                myStringBuilder.Append("KOD='" + tbUsrLogin.Text + "', ");
+                myStringBuilder.Append("NAZWA='" + tbUsrName.Text + "', ");
+                myStringBuilder.Append("ISADMIN=" + (cUsrAdmin.Checked ? 1 : 0) + ", ");
+                myStringBuilder.Append("MAGAZYNY='" + magazyny + "' ");
+                myStringBuilder.Append(" WHERE ID=" + currUserId + "; ");
             }
-            catch (FbException exgen)
+            else
             {
-                MessageBox.Show("Błąd pobierania nowego ID dla MM_USERS z bazy. Operacje przerwano! " + exgen.Message);
-                throw;
+                #region pobranie ID z generatora
+                FbCommand gen_id_statement = new FbCommand("SELECT GEN_ID(MM_USERS_GEN,1) from rdb$database", fbconn.getCurentConnection());
+                try
+                {
+                    gen_id = Convert.ToInt32(gen_id_statement.ExecuteScalar());
+                }
+                catch (FbException exgen)
+                {
+                    MessageBox.Show("Błąd pobierania nowego ID dla MM_USERS z bazy. Operacje przerwano! " + exgen.Message);
+                    throw;
+                }
+                #endregion
+
+                myStringBuilder.Append("INSERT INTO MM_USERS (");
+                myStringBuilder.Append("ID, ");
+                myStringBuilder.Append("KOD, ");
+                myStringBuilder.Append("NAZWA, ");
+                myStringBuilder.Append("ISADMIN, ");
+                myStringBuilder.Append("MAGAZYNY ");
+
+                myStringBuilder.Append(") VALUES ( ");
+
+                myStringBuilder.Append(gen_id.ToString() + ",");  // ID
+                myStringBuilder.Append("'" + tbUsrLogin.Text.ToString() + "',");  // KOD
+                myStringBuilder.Append("'" + tbUsrName.Text.ToString() + "', ");  // NAZWA
+                myStringBuilder.Append((cUsrAdmin.Checked ? "1," : "0,"));  // ISADMIN
+                myStringBuilder.Append(" '" + magazyny + "' ");  // MAGAZYNY
+                myStringBuilder.Append(");");
             }
-            #endregion
-
-            StringBuilder myStringBuilder = new StringBuilder("INSERT INTO MM_USERS (");
-            myStringBuilder.Append("ID, ");
-            myStringBuilder.Append("KOD, ");
-            myStringBuilder.Append("NAZWA, ");
-            myStringBuilder.Append("ISADMIN, ");
-            myStringBuilder.Append("MAGAZYNY ");
-
-            myStringBuilder.Append(") VALUES ( ");
-
-            myStringBuilder.Append(gen_id.ToString() + ",");  // ID
-            myStringBuilder.Append("'" + tbUsrLogin.Text.ToString() + "',");  // KOD
-            myStringBuilder.Append("'" + tbUsrName.Text.ToString() + "', ");  // NAZWA
-            myStringBuilder.Append( (cUsrAdmin.Checked ? "1," : "0,") );  // ISADMIN
-            myStringBuilder.Append(" '" + magazyny + "' ");  // MAGAZYNY
-            myStringBuilder.Append(");"); 
-
 
             FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
             try
@@ -1462,10 +1476,7 @@ namespace RaportyRaksSQL
 
             if (wynik)
             {
-                tbUsrLogin.Text = "";
-                tbUsrName.Text = "";
-                cUsrAdmin.Checked = false;
-
+                bUsrClear.PerformClick();
                 button2.PerformClick();
             }
         }
@@ -1532,6 +1543,45 @@ namespace RaportyRaksSQL
         private void bChangeMyPass_Click(object sender, EventArgs e)
         {
             SetChangePassForCurrentUser();
+        }
+
+        private void bReadUser_Click(object sender, EventArgs e)
+        {
+            Autentykacja at = new Autentykacja(fbconn, currUserId);
+            string[] tab = at.GetUserPropertiesByID(currUserId);
+            tbUsrLogin.Text = tab[0].ToString();
+            cUsrAdmin.Checked = (tab[1].ToString().Equals("true") ? true : false);
+            tbUsrName.Text = tab[2].ToString();
+
+            string rightMagazyny = tab[3].ToString();
+
+            for (int i = 0; i < chMagazynyAdmin.Items.Count; i++)
+            {
+
+                if (rightMagazyny.Contains(chMagazynyAdmin.Items[i].ToString()))
+                {
+
+                    chMagazynyAdmin.SetItemChecked(i, true);
+                }
+                else
+                {
+                    chMagazynyAdmin.SetItemChecked(i, false);
+                }
+
+            }
+            czyUserWczytany = true;
+        }
+
+        private void bUsrClear_Click(object sender, EventArgs e)
+        {
+            czyUserWczytany = false;
+            tbUsrLogin.Text = "";
+            tbUsrName.Text = "";
+            cUsrAdmin.Checked = false;
+            for (int i = 0; i < chMagazynyAdmin.Items.Count; i++)
+            {
+                chMagazynyAdmin.SetItemChecked(i, false);
+            }
         }
     }
 }
