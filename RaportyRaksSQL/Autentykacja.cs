@@ -65,6 +65,11 @@ namespace RaportyRaksSQL
             return loginResult;
         }
 
+        public Int32 GetCurrentUserID()
+        {
+            return locIdUser;
+        }
+
         private string GetUserNameById(Int32 lUserID =  0)
         {
             string sql = "SELECT KOD,ISADMIN,MAGAZYNY,PASS from MM_USERS ";

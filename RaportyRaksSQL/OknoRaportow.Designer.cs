@@ -74,6 +74,7 @@
             this.tabPageImportCSV = new System.Windows.Forms.TabPage();
             this.bReadFileCSV = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.bResetPassUser = new System.Windows.Forms.Button();
             this.bSetPass = new System.Windows.Forms.Button();
             this.bUsrLock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -97,7 +98,7 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.bResetPassUser = new System.Windows.Forms.Button();
+            this.bChangeMyPass = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -571,6 +572,16 @@
             this.tabAdmin.Text = "Administracja";
             this.tabAdmin.UseVisualStyleBackColor = true;
             // 
+            // bResetPassUser
+            // 
+            this.bResetPassUser.Location = new System.Drawing.Point(19, 111);
+            this.bResetPassUser.Name = "bResetPassUser";
+            this.bResetPassUser.Size = new System.Drawing.Size(228, 22);
+            this.bResetPassUser.TabIndex = 4;
+            this.bResetPassUser.Text = "Resetuj hasło uzytkownika...";
+            this.bResetPassUser.UseVisualStyleBackColor = true;
+            this.bResetPassUser.Click += new System.EventHandler(this.bResetPassUser_Click);
+            // 
             // bSetPass
             // 
             this.bSetPass.Location = new System.Drawing.Point(19, 83);
@@ -705,6 +716,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.bChangeMyPass);
             this.panelGdidStopka.Controls.Add(this.checkBoxKwalifik);
             this.panelGdidStopka.Controls.Add(this.checkBoxIlosc1);
             this.panelGdidStopka.Controls.Add(this.button1);
@@ -816,15 +828,15 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // bResetPassUser
+            // bChangeMyPass
             // 
-            this.bResetPassUser.Location = new System.Drawing.Point(19, 111);
-            this.bResetPassUser.Name = "bResetPassUser";
-            this.bResetPassUser.Size = new System.Drawing.Size(228, 22);
-            this.bResetPassUser.TabIndex = 4;
-            this.bResetPassUser.Text = "Resetuj hasło uzytkownika...";
-            this.bResetPassUser.UseVisualStyleBackColor = true;
-            this.bResetPassUser.Click += new System.EventHandler(this.bResetPassUser_Click);
+            this.bChangeMyPass.Location = new System.Drawing.Point(66, 32);
+            this.bChangeMyPass.Name = "bChangeMyPass";
+            this.bChangeMyPass.Size = new System.Drawing.Size(167, 21);
+            this.bChangeMyPass.TabIndex = 16;
+            this.bChangeMyPass.Text = "Zmiana mojego hasła";
+            this.bChangeMyPass.UseVisualStyleBackColor = true;
+            this.bChangeMyPass.Click += new System.EventHandler(this.bChangeMyPass_Click);
             // 
             // OknoRaportow
             // 
@@ -931,6 +943,7 @@
         private System.Windows.Forms.Button bSetPass;
         public System.Windows.Forms.TabPage tabAdmin;
         private System.Windows.Forms.Button bResetPassUser;
+        private System.Windows.Forms.Button bChangeMyPass;
     }
 }
 

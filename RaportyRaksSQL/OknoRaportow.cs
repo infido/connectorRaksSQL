@@ -50,12 +50,15 @@ namespace RaportyRaksSQL
                         //poprawne logowanie uzytkownika
                         tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
                         logToSys.SetTimestampLastLogin();
+                        currUserId = logToSys.GetCurrentUserID();
                         tryLogin = -1;
                         break;
                     }else if (logToSys.GetAutoryzationResult().Equals(AutoryzationType.Administartor))
                     {
                         //poprawne logowanie administrator
                         logToSys.SetTimestampLastLogin();
+                        currUserId = logToSys.GetCurrentUserID();
+                        bChangeMyPass.Enabled = false;
                         tryLogin = -1;
                         break;
                     }
@@ -1484,14 +1487,19 @@ namespace RaportyRaksSQL
 
         private void bSetPass_Click(object sender, EventArgs e)
         {
+            SetChangePassForCurrentUser();
+        }
+
+        private void SetChangePassForCurrentUser()
+        {
             Autentykacja at = new Autentykacja(fbconn, currUserId);
-            if (at.SetNewPassByUser()== AutoryzationType.PassChanged)
+            if (at.SetNewPassByUser() == AutoryzationType.PassChanged)
             {
-                MessageBox.Show("Zmiana przeprowadzona prawidłowo","Zmiana hasła");
+                MessageBox.Show("Zmiana przeprowadzona prawidłowo", "Zmiana hasła");
             }
             else
             {
-                MessageBox.Show("Zmianę hasła anulowano!","Zmiana hasła");
+                MessageBox.Show("Zmianę hasła anulowano!", "Zmiana hasła");
             }
         }
 
@@ -1507,6 +1515,11 @@ namespace RaportyRaksSQL
             {
                 MessageBox.Show("Resetowanie hasła przerwano. Operacja anulowana.", "Reset hasła");
             }
+        }
+
+        private void bChangeMyPass_Click(object sender, EventArgs e)
+        {
+            SetChangePassForCurrentUser();
         }
     }
 }
