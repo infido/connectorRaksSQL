@@ -184,7 +184,7 @@ namespace RaportyRaksSQL
                 //ustawianie hasła
                 string sql = "UPDATE MM_USERS SET PASS='";
                 sql += "" + Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text));  
-                sql += "' where ID=" + locIdUser + " ;";
+                sql += "', MODYFIKOWANY='NOW' where ID=" + locIdUser + " ;";
                
                 FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                 try
@@ -231,7 +231,7 @@ namespace RaportyRaksSQL
         public AutoryzationType SetResetPass()
         {
             //czyszczenie hasła
-            string sql = "UPDATE MM_USERS SET PASS='' where ID=" + locIdUser + " ;";
+            string sql = "UPDATE MM_USERS SET PASS='', MODYFIKOWANY='NOW' where ID=" + locIdUser + " ;";
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
             try

@@ -1461,11 +1461,11 @@ namespace RaportyRaksSQL
 
             if (bUsrLock.Text.StartsWith("Zablo"))
             {
-                sql = "update MM_USERS set ISLOCK=1 where ID=" + currUserId + ";";
+                sql = "update MM_USERS set ISLOCK=1, MODYFIKOWANY='NOW' where ID=" + currUserId + ";";
             }
             else
             {
-                sql = "update MM_USERS set ISLOCK=0 where ID=" + currUserId + ";";
+                sql = "update MM_USERS set ISLOCK=0, MODYFIKOWANY='NOW' where ID=" + currUserId + ";";
             }
 
             FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
