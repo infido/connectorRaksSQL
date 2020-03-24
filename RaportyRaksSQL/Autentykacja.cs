@@ -167,59 +167,59 @@ namespace RaportyRaksSQL
         private void bLogin_Click(object sender, EventArgs e)
         {
             if (locIdUser == 0)
-            {
-                //logowanie do systemu
-                GetUserNameByLogin(tLogin.Text);
-                if (pass!=null && pass.Length == 0 && kod.Length > 0)
                 {
-                    //hasło puste i trzeba ustawić
-                    MessageBox.Show("Hasło jest zresetowane, należy ustawić nowe hasło.","Ustawienie hasła");
-                    lPassWrong.Visible = true;
-                    tPassToConfirmation.Visible = true;
-                    lPassToConfirmation.Visible = true;
-                    tLogin.ReadOnly = true;
-                }
-                else
-                {
-                    if (GetComparePass(tPass.Text, pass, tLogin.Text))
+                    //logowanie do systemu
+                    GetUserNameByLogin(tLogin.Text);
+                    if (pass != null && pass.Length == 0 && kod.Length > 0)
                     {
-                        if (isadmin)
-                        {
-                            loginResult = AutoryzationType.Administartor;
-                        }
-                        else
-                        {
-                            loginResult = AutoryzationType.Uzytkownik;
-                        }
+                        //hasło puste i trzeba ustawić
+                        MessageBox.Show("Hasło jest zresetowane, należy ustawić nowe hasło.", "Ustawienie hasła");
+                        lPassWrong.Visible = true;
+                        tPassToConfirmation.Visible = true;
+                        lPassToConfirmation.Visible = true;
+                        tLogin.ReadOnly = true;
                     }
                     else
                     {
+                        if (GetComparePass(tPass.Text, pass, tLogin.Text))
+                        {
+                            if (isadmin)
+                            {
+                                loginResult = AutoryzationType.Administartor;
+                            }
+                            else
+                            {
+                                loginResult = AutoryzationType.Uzytkownik;
+                            }
+                        }
+                        else
+                        {
+                            loginResult = AutoryzationType.Odrzucony;
+                        }
+                        Visible = false;
+                        SetTimeTryToLogin();
+                    }
+                }
+                else
+                {
+                    //ustawianie hasła
+                    string sql = "UPDATE MM_USERS SET PASS='";
+                    sql += "" + Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text));
+                    sql += "', MODYFIKOWANY='NOW' where ID=" + locIdUser + " ;";
+
+                    FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+                    try
+                    {
+                        cdk.ExecuteScalar();
+                        loginResult = AutoryzationType.PassChanged;
+                    }
+                    catch (FbException ex)
+                    {
+                        MessageBox.Show("Błąd zapisu hasła do bazy RaksSQL: " + ex.Message);
                         loginResult = AutoryzationType.Odrzucony;
                     }
                     Visible = false;
-                    SetTimeTryToLogin();
                 }
-            }
-            else
-            {
-                //ustawianie hasła
-                string sql = "UPDATE MM_USERS SET PASS='";
-                sql += "" + Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text));  
-                sql += "', MODYFIKOWANY='NOW' where ID=" + locIdUser + " ;";
-               
-                FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
-                try
-                {
-                    cdk.ExecuteScalar();
-                    loginResult = AutoryzationType.PassChanged;
-                }
-                catch (FbException ex)
-                {
-                    MessageBox.Show("Błąd zapisu hasła do bazy RaksSQL: " + ex.Message);
-                    loginResult = AutoryzationType.Odrzucony;
-                }
-                Visible = false;
-            }
         }
 
         private void SetTimeTryToLogin()
@@ -256,7 +256,13 @@ namespace RaportyRaksSQL
 
         private string SetStdInputPass(string pass, string userKod)
         {
-            return (pass + userKod + "12345678901234567890").Substring(0, 20);
+            if (pass.Length > 0)
+            {
+                return (pass + userKod + "12345678901234567890").Substring(0, 20);
+            } else
+            {
+                return "";
+            }
         }
 
         private string SetStdInputUser(string userKod)
@@ -318,10 +324,19 @@ namespace RaportyRaksSQL
 
         private void tPass_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (tPass.Text.Length==0 && tPassToConfirmation.Visible)
+            {
+                //nic nie robie
+            }
+            else if (e.KeyCode == Keys.Enter)
             {
                 bLogin.PerformClick();
             }
+        }
+
+        public string GetMagazyny()
+        {
+            return magazyny;
         }
     }
 }

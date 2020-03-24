@@ -29,6 +29,7 @@ namespace RaportyRaksSQL
         bool stanSaveClip = false;
         Int32 currUserId = 0;
         bool czyUserWczytany = false;
+        bool czyAdmin = false;
 
         public OknoRaportow()
         {
@@ -52,6 +53,8 @@ namespace RaportyRaksSQL
                         tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
                         logToSys.SetTimestampLastLogin();
                         currUserId = logToSys.GetCurrentUserID();
+                        magazyny = logToSys.GetMagazyny();
+                        czyAdmin = false;
                         tryLogin = -1;
                         break;
                     }else if (logToSys.GetAutoryzationResult().Equals(AutoryzationType.Administartor))
@@ -59,7 +62,9 @@ namespace RaportyRaksSQL
                         //poprawne logowanie administrator
                         logToSys.SetTimestampLastLogin();
                         currUserId = logToSys.GetCurrentUserID();
+                        magazyny = logToSys.GetMagazyny();
                         bChangeMyPass.Enabled = false;
+                        czyAdmin = true;
                         tryLogin = -1;
                         break;
                     }
@@ -83,13 +88,24 @@ namespace RaportyRaksSQL
 
         private void onLoadWindow()
         {
+            if (magazyny.Length == 0)
+            {
+                bWykonajRaport1.Enabled = false;
+                bRaport2.Enabled = false;
+                bRaport3.Enabled = false;
+                bRaport4DlaPB.Enabled = false;
+                bRaportSprzedazyStary.Enabled = false;
+            }
             FbCommand cdk = new FbCommand("SELECT NUMER from GM_MAGAZYNY order by NUMER;", fbconn.getCurentConnection());
             try
             {
                 FbDataReader fdk = cdk.ExecuteReader();
                 while (fdk.Read())
                 {
-                    chMagazyny1.Items.Add((string)fdk["NUMER"]);
+                    if (czyAdmin || magazyny.Contains((string)fdk["NUMER"]))
+                    {
+                        chMagazyny1.Items.Add((string)fdk["NUMER"]);
+                    }
                     chMagazynyAdmin.Items.Add((string)fdk["NUMER"]);
                 }
             }
@@ -454,6 +470,16 @@ namespace RaportyRaksSQL
                     magazyny = "'" + item.ToString() + "'";
                 else
                     magazyny += ",'" + item.ToString() + "'";
+            }
+            if (magazyny.Length==0 && czyAdmin == false)
+            {
+                foreach (var item in chMagazyny1.Items)
+                {
+                    if (magazyny.Length == 0)
+                        magazyny = "'" + item.ToString() + "'";
+                    else
+                        magazyny += ",'" + item.ToString() + "'";
+                }
             }
 
             podstawoweGT = "";
