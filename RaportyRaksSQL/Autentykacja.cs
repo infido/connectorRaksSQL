@@ -264,5 +264,13 @@ namespace RaportyRaksSQL
                 }
             }
         }
+
+        private void tPass_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bLogin.PerformClick();
+            }
+        }
     }
 }

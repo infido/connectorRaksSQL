@@ -57,6 +57,7 @@
             this.tPass.Size = new System.Drawing.Size(100, 20);
             this.tPass.TabIndex = 1;
             this.tPass.TextChanged += new System.EventHandler(this.tPass_TextChanged);
+            this.tPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tPass_KeyUp);
             // 
             // tPassToConfirmation
             // 
