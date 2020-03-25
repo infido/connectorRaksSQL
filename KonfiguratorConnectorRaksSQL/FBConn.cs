@@ -35,6 +35,17 @@ namespace KonfiguratorConnectorRaksSQL
             checkDefultKeysformRegistryForPresta();
         }
 
+        public FBConn(string user, string pass, string path, string ip)
+        {
+            this.user = user;
+            this.pass = pass;
+            this.path = path;
+            this.ip = ip;
+            setConnectionStringToRegistry(user, pass, path, ip);
+            setConnectionON(true);
+            checkDefultKeysformRegistryForPresta();
+        }
+
         public static void checkDefultKeysformRegistryForPresta()
         {
             Logg logg = new Logg(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9301: Ustawianie parametrow połaczenia. ", true);
@@ -162,7 +173,7 @@ namespace KonfiguratorConnectorRaksSQL
             Logg logg = new Logg(Logg.RodzajLogowania.Info, Logg.MediumLoga.File, "9003: Rozłaczono! Status=" + conn.State);
         }
 
-        public void setConnectionStringToRegistry(string user,string pass,string path, string ip, string kluczPresta)
+        public void setConnectionStringToRegistry(string user,string pass,string path, string ip, string kluczPresta=null)
         {
             try
             {
@@ -177,7 +188,10 @@ namespace KonfiguratorConnectorRaksSQL
                 rejestr.SetValue("Pass", (pass.Length>0) ? pass : "masterkey");
                 rejestr.SetValue("Path", (path.Length>0) ? path : "C:\\Program Files\\Raks\\Data\\F00001.FDB" );
                 rejestr.SetValue("IP", (ip.Length>0) ? ip : "127.0.0.1");
-                rejestr.SetValue("val", (kluczPresta.Length > 0) ? kluczPresta : "1279M52HVGJ7RMAM2N19V78FAL1NTZ8");
+                if (kluczPresta != null)
+                {
+                    rejestr.SetValue("val", (kluczPresta.Length > 0) ? kluczPresta : "1279M52HVGJ7RMAM2N19V78FAL1NTZ8");
+                }
             }
             catch (Exception ex)
             {

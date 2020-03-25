@@ -33,10 +33,11 @@ namespace RaportyRaksSQL
 
         public OknoRaportow()
         {
+            WaitStarting ws = new WaitStarting();
             InitializeComponent();
             Text += " " + Application.ProductVersion;
             fbconn = new FBConn();
-            
+            ws.Close();
         }
 
         private void OknoRaportow_Load(object sender, EventArgs e)
@@ -83,6 +84,9 @@ namespace RaportyRaksSQL
             else
             {
                 MessageBox.Show("Brak połączenia do bazy danych RaksSQL");
+                OknoKonfiguracjiPolaczenia ok = new OknoKonfiguracjiPolaczenia();
+                ok.ShowDialog();
+                Application.Exit();
             }
         }
 
@@ -1613,6 +1617,12 @@ namespace RaportyRaksSQL
             {
                 chMagazynyAdmin.SetItemChecked(i, false);
             }
+        }
+
+        private void bConnectionSet_Click(object sender, EventArgs e)
+        {
+            OknoKonfiguracjiPolaczenia conDef = new OknoKonfiguracjiPolaczenia();
+            conDef.ShowDialog();
         }
     }
 }

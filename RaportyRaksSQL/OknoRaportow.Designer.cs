@@ -103,6 +103,7 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
+            this.bConnectionSet = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -761,6 +762,7 @@
             // 
             // panelGdidStopka
             // 
+            this.panelGdidStopka.Controls.Add(this.bConnectionSet);
             this.panelGdidStopka.Controls.Add(this.bChangeMyPass);
             this.panelGdidStopka.Controls.Add(this.checkBoxKwalifik);
             this.panelGdidStopka.Controls.Add(this.checkBoxIlosc1);
@@ -779,7 +781,7 @@
             // 
             // bChangeMyPass
             // 
-            this.bChangeMyPass.Location = new System.Drawing.Point(66, 32);
+            this.bChangeMyPass.Location = new System.Drawing.Point(83, 32);
             this.bChangeMyPass.Name = "bChangeMyPass";
             this.bChangeMyPass.Size = new System.Drawing.Size(167, 21);
             this.bChangeMyPass.TabIndex = 16;
@@ -834,7 +836,7 @@
             // 
             // bCheckFtpPowerBike
             // 
-            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(66, 7);
+            this.bCheckFtpPowerBike.Location = new System.Drawing.Point(83, 7);
             this.bCheckFtpPowerBike.Name = "bCheckFtpPowerBike";
             this.bCheckFtpPowerBike.Size = new System.Drawing.Size(167, 22);
             this.bCheckFtpPowerBike.TabIndex = 11;
@@ -882,6 +884,16 @@
             this.bSave.Text = "Zapis do pliku";
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
+            // 
+            // bConnectionSet
+            // 
+            this.bConnectionSet.Location = new System.Drawing.Point(4, 32);
+            this.bConnectionSet.Name = "bConnectionSet";
+            this.bConnectionSet.Size = new System.Drawing.Size(76, 20);
+            this.bConnectionSet.TabIndex = 17;
+            this.bConnectionSet.Text = "Połączenie";
+            this.bConnectionSet.UseVisualStyleBackColor = true;
+            this.bConnectionSet.Click += new System.EventHandler(this.bConnectionSet_Click);
             // 
             // OknoRaportow
             // 
@@ -993,6 +1005,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckedListBox chMagazynyAdmin;
         private System.Windows.Forms.Button bUsrClear;
+        private System.Windows.Forms.Button bConnectionSet;
     }
 }
 

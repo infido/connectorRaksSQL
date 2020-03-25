@@ -82,6 +82,7 @@
             // 
             // bCancel
             // 
+            this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bCancel.Location = new System.Drawing.Point(20, 113);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
@@ -132,8 +133,10 @@
             // 
             // Autentykacja
             // 
+            this.AcceptButton = this.bLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.bCancel;
             this.ClientSize = new System.Drawing.Size(229, 148);
             this.Controls.Add(this.lPassWrong);
             this.Controls.Add(this.lPassToConfirmation);
