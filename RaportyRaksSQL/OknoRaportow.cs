@@ -1575,7 +1575,13 @@ namespace RaportyRaksSQL
             Autentykacja at = new Autentykacja(fbconn, currUserId);
             string[] tab = at.GetUserPropertiesByID(currUserId);
             tbUsrLogin.Text = tab[0].ToString();
-            cUsrAdmin.Checked = (tab[1].ToString().Equals("true") ? true : false);
+            if (tab[1].ToString().Equals("True") || tab[1].ToString().Equals("1"))
+            {
+                cUsrAdmin.Checked = true;
+            }else
+            {
+                cUsrAdmin.Checked = false;
+            }
             tbUsrName.Text = tab[2].ToString();
 
             string rightMagazyny = tab[3].ToString();

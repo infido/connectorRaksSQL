@@ -78,6 +78,10 @@
             this.bSetPass = new System.Windows.Forms.Button();
             this.bUsrLock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bUsrClear = new System.Windows.Forms.Button();
+            this.bReadUser = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.chMagazynyAdmin = new System.Windows.Forms.CheckedListBox();
             this.cUsrAdmin = new System.Windows.Forms.CheckBox();
             this.bAddUser = new System.Windows.Forms.Button();
             this.tbUsrName = new System.Windows.Forms.TextBox();
@@ -89,6 +93,7 @@
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelGdidStopka = new System.Windows.Forms.Panel();
+            this.bChangeMyPass = new System.Windows.Forms.Button();
             this.checkBoxKwalifik = new System.Windows.Forms.CheckBox();
             this.checkBoxIlosc1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -98,11 +103,6 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.bChangeMyPass = new System.Windows.Forms.Button();
-            this.chMagazynyAdmin = new System.Windows.Forms.CheckedListBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.bReadUser = new System.Windows.Forms.Button();
-            this.bUsrClear = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -625,6 +625,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zakładanie użytkownika";
             // 
+            // bUsrClear
+            // 
+            this.bUsrClear.Location = new System.Drawing.Point(93, 127);
+            this.bUsrClear.Name = "bUsrClear";
+            this.bUsrClear.Size = new System.Drawing.Size(69, 26);
+            this.bUsrClear.TabIndex = 9;
+            this.bUsrClear.Text = "Wyczyść";
+            this.bUsrClear.UseVisualStyleBackColor = true;
+            this.bUsrClear.Click += new System.EventHandler(this.bUsrClear_Click);
+            // 
+            // bReadUser
+            // 
+            this.bReadUser.Location = new System.Drawing.Point(6, 127);
+            this.bReadUser.Name = "bReadUser";
+            this.bReadUser.Size = new System.Drawing.Size(81, 26);
+            this.bReadUser.TabIndex = 8;
+            this.bReadUser.Text = "Wczytaj";
+            this.bReadUser.UseVisualStyleBackColor = true;
+            this.bReadUser.Click += new System.EventHandler(this.bReadUser_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(254, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "Magazyny";
+            // 
+            // chMagazynyAdmin
+            // 
+            this.chMagazynyAdmin.FormattingEnabled = true;
+            this.chMagazynyAdmin.Location = new System.Drawing.Point(257, 40);
+            this.chMagazynyAdmin.Name = "chMagazynyAdmin";
+            this.chMagazynyAdmin.Size = new System.Drawing.Size(111, 124);
+            this.chMagazynyAdmin.TabIndex = 5;
+            // 
             // cUsrAdmin
             // 
             this.cUsrAdmin.AutoSize = true;
@@ -740,6 +777,16 @@
             this.panelGdidStopka.Size = new System.Drawing.Size(1433, 57);
             this.panelGdidStopka.TabIndex = 1;
             // 
+            // bChangeMyPass
+            // 
+            this.bChangeMyPass.Location = new System.Drawing.Point(66, 32);
+            this.bChangeMyPass.Name = "bChangeMyPass";
+            this.bChangeMyPass.Size = new System.Drawing.Size(167, 21);
+            this.bChangeMyPass.TabIndex = 16;
+            this.bChangeMyPass.Text = "Zmiana mojego hasła";
+            this.bChangeMyPass.UseVisualStyleBackColor = true;
+            this.bChangeMyPass.Click += new System.EventHandler(this.bChangeMyPass_Click);
+            // 
             // checkBoxKwalifik
             // 
             this.checkBoxKwalifik.AutoSize = true;
@@ -835,53 +882,6 @@
             this.bSave.Text = "Zapis do pliku";
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
-            // 
-            // bChangeMyPass
-            // 
-            this.bChangeMyPass.Location = new System.Drawing.Point(66, 32);
-            this.bChangeMyPass.Name = "bChangeMyPass";
-            this.bChangeMyPass.Size = new System.Drawing.Size(167, 21);
-            this.bChangeMyPass.TabIndex = 16;
-            this.bChangeMyPass.Text = "Zmiana mojego hasła";
-            this.bChangeMyPass.UseVisualStyleBackColor = true;
-            this.bChangeMyPass.Click += new System.EventHandler(this.bChangeMyPass_Click);
-            // 
-            // chMagazynyAdmin
-            // 
-            this.chMagazynyAdmin.FormattingEnabled = true;
-            this.chMagazynyAdmin.Location = new System.Drawing.Point(257, 40);
-            this.chMagazynyAdmin.Name = "chMagazynyAdmin";
-            this.chMagazynyAdmin.Size = new System.Drawing.Size(111, 124);
-            this.chMagazynyAdmin.TabIndex = 5;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(254, 23);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(55, 13);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "Magazyny";
-            // 
-            // bReadUser
-            // 
-            this.bReadUser.Location = new System.Drawing.Point(6, 127);
-            this.bReadUser.Name = "bReadUser";
-            this.bReadUser.Size = new System.Drawing.Size(81, 26);
-            this.bReadUser.TabIndex = 8;
-            this.bReadUser.Text = "Wczytaj";
-            this.bReadUser.UseVisualStyleBackColor = true;
-            this.bReadUser.Click += new System.EventHandler(this.bReadUser_Click);
-            // 
-            // bUsrClear
-            // 
-            this.bUsrClear.Location = new System.Drawing.Point(93, 127);
-            this.bUsrClear.Name = "bUsrClear";
-            this.bUsrClear.Size = new System.Drawing.Size(69, 26);
-            this.bUsrClear.TabIndex = 9;
-            this.bUsrClear.Text = "Wyczyść";
-            this.bUsrClear.UseVisualStyleBackColor = true;
-            this.bUsrClear.Click += new System.EventHandler(this.bUsrClear_Click);
             // 
             // OknoRaportow
             // 
