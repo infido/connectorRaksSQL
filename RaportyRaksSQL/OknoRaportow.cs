@@ -1449,7 +1449,6 @@ namespace RaportyRaksSQL
 
             if (czyUserWczytany)
             {
-                MessageBox.Show("Update należy napisać");
                 myStringBuilder.Append("UPDATE MM_USERS SET ");
                 myStringBuilder.Append("KOD='" + tbUsrLogin.Text + "', ");
                 myStringBuilder.Append("NAZWA='" + tbUsrName.Text + "', ");
