@@ -93,6 +93,7 @@
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelGdidStopka = new System.Windows.Forms.Panel();
+            this.bConnectionSet = new System.Windows.Forms.Button();
             this.bChangeMyPass = new System.Windows.Forms.Button();
             this.checkBoxKwalifik = new System.Windows.Forms.CheckBox();
             this.checkBoxIlosc1 = new System.Windows.Forms.CheckBox();
@@ -103,7 +104,6 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.bConnectionSet = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -779,6 +779,16 @@
             this.panelGdidStopka.Size = new System.Drawing.Size(1433, 57);
             this.panelGdidStopka.TabIndex = 1;
             // 
+            // bConnectionSet
+            // 
+            this.bConnectionSet.Location = new System.Drawing.Point(4, 32);
+            this.bConnectionSet.Name = "bConnectionSet";
+            this.bConnectionSet.Size = new System.Drawing.Size(76, 20);
+            this.bConnectionSet.TabIndex = 17;
+            this.bConnectionSet.Text = "Połączenie";
+            this.bConnectionSet.UseVisualStyleBackColor = true;
+            this.bConnectionSet.Click += new System.EventHandler(this.bConnectionSet_Click);
+            // 
             // bChangeMyPass
             // 
             this.bChangeMyPass.Location = new System.Drawing.Point(83, 32);
@@ -884,16 +894,6 @@
             this.bSave.Text = "Zapis do pliku";
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
-            // 
-            // bConnectionSet
-            // 
-            this.bConnectionSet.Location = new System.Drawing.Point(4, 32);
-            this.bConnectionSet.Name = "bConnectionSet";
-            this.bConnectionSet.Size = new System.Drawing.Size(76, 20);
-            this.bConnectionSet.TabIndex = 17;
-            this.bConnectionSet.Text = "Połączenie";
-            this.bConnectionSet.UseVisualStyleBackColor = true;
-            this.bConnectionSet.Click += new System.EventHandler(this.bConnectionSet_Click);
             // 
             // OknoRaportow
             // 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OknoZapisDoSchowkaRaks));
             this.bCancel = new System.Windows.Forms.Button();
             this.bSave = new System.Windows.Forms.Button();
             this.tnameClipboard = new System.Windows.Forms.TextBox();
@@ -112,8 +113,8 @@
             this.Controls.Add(this.tnameClipboard);
             this.Controls.Add(this.bSave);
             this.Controls.Add(this.bCancel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OknoZapisDoSchowkaRaks";
-            this.ShowIcon = false;
             this.Text = "OknoZapisDoSchowkaRaks";
             this.Load += new System.EventHandler(this.OknoZapisDoSchowkaRaks_Load);
             this.ResumeLayout(false);

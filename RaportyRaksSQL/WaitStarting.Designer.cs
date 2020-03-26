@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitStarting));
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -49,8 +50,8 @@
             this.ClientSize = new System.Drawing.Size(405, 99);
             this.Controls.Add(this.label1);
             this.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitStarting";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RaportyRaksSQL";
             this.Load += new System.EventHandler(this.WaitStarting_Load);

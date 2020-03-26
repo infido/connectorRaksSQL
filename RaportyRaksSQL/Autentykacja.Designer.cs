@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Autentykacja));
             this.tLogin = new System.Windows.Forms.TextBox();
             this.tPass = new System.Windows.Forms.TextBox();
             this.tPassToConfirmation = new System.Windows.Forms.TextBox();
@@ -42,7 +43,7 @@
             // tLogin
             // 
             this.tLogin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tLogin.Location = new System.Drawing.Point(106, 21);
+            this.tLogin.Location = new System.Drawing.Point(115, 12);
             this.tLogin.MaxLength = 8;
             this.tLogin.Name = "tLogin";
             this.tLogin.Size = new System.Drawing.Size(100, 20);
@@ -50,7 +51,7 @@
             // 
             // tPass
             // 
-            this.tPass.Location = new System.Drawing.Point(106, 48);
+            this.tPass.Location = new System.Drawing.Point(115, 39);
             this.tPass.MaxLength = 20;
             this.tPass.Name = "tPass";
             this.tPass.PasswordChar = '*';
@@ -61,7 +62,7 @@
             // 
             // tPassToConfirmation
             // 
-            this.tPassToConfirmation.Location = new System.Drawing.Point(106, 75);
+            this.tPassToConfirmation.Location = new System.Drawing.Point(115, 66);
             this.tPassToConfirmation.MaxLength = 20;
             this.tPassToConfirmation.Name = "tPassToConfirmation";
             this.tPassToConfirmation.PasswordChar = '*';
@@ -72,7 +73,7 @@
             // 
             // bLogin
             // 
-            this.bLogin.Location = new System.Drawing.Point(131, 113);
+            this.bLogin.Location = new System.Drawing.Point(140, 104);
             this.bLogin.Name = "bLogin";
             this.bLogin.Size = new System.Drawing.Size(75, 23);
             this.bLogin.TabIndex = 3;
@@ -83,7 +84,7 @@
             // bCancel
             // 
             this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancel.Location = new System.Drawing.Point(20, 113);
+            this.bCancel.Location = new System.Drawing.Point(29, 104);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 4;
@@ -94,7 +95,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 24);
+            this.label1.Location = new System.Drawing.Point(26, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 5;
@@ -103,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 51);
+            this.label2.Location = new System.Drawing.Point(26, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 6;
@@ -112,7 +113,7 @@
             // lPassToConfirmation
             // 
             this.lPassToConfirmation.AutoSize = true;
-            this.lPassToConfirmation.Location = new System.Drawing.Point(17, 78);
+            this.lPassToConfirmation.Location = new System.Drawing.Point(26, 69);
             this.lPassToConfirmation.Name = "lPassToConfirmation";
             this.lPassToConfirmation.Size = new System.Drawing.Size(83, 13);
             this.lPassToConfirmation.TabIndex = 7;
@@ -124,7 +125,7 @@
             this.lPassWrong.AutoSize = true;
             this.lPassWrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lPassWrong.ForeColor = System.Drawing.Color.Red;
-            this.lPassWrong.Location = new System.Drawing.Point(103, 98);
+            this.lPassWrong.Location = new System.Drawing.Point(112, 89);
             this.lPassWrong.Name = "lPassWrong";
             this.lPassWrong.Size = new System.Drawing.Size(107, 13);
             this.lPassWrong.TabIndex = 8;
@@ -137,7 +138,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(229, 148);
+            this.ClientSize = new System.Drawing.Size(246, 142);
             this.Controls.Add(this.lPassWrong);
             this.Controls.Add(this.lPassToConfirmation);
             this.Controls.Add(this.label2);
@@ -147,8 +148,8 @@
             this.Controls.Add(this.tPassToConfirmation);
             this.Controls.Add(this.tPass);
             this.Controls.Add(this.tLogin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Autentykacja";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Autentykacja";
             this.ResumeLayout(false);

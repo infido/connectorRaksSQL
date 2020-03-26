@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OknoKonfiguracjiPolaczenia));
             this.button1 = new System.Windows.Forms.Button();
             this.tIP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -175,8 +176,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tPass);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OknoKonfiguracjiPolaczenia";
-            this.ShowIcon = false;
             this.Text = "Konfiguracja połączenia";
             this.Load += new System.EventHandler(this.OknoKonfiguracjiPolaczenia_Load);
             this.ResumeLayout(false);

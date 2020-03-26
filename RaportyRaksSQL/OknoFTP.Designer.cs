@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OknoFTP));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox = new System.Windows.Forms.TextBox();
             this.bClose = new System.Windows.Forms.Button();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,6 +44,17 @@
             this.panel1.Size = new System.Drawing.Size(656, 38);
             this.panel1.TabIndex = 0;
             // 
+            // bClose
+            // 
+            this.bClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.bClose.Location = new System.Drawing.Point(556, 6);
+            this.bClose.Name = "bClose";
+            this.bClose.Size = new System.Drawing.Size(97, 29);
+            this.bClose.TabIndex = 0;
+            this.bClose.Text = "&Zamknij";
+            this.bClose.UseVisualStyleBackColor = true;
+            this.bClose.Click += new System.EventHandler(this.bClose_Click);
+            // 
             // textBox
             // 
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -52,16 +64,6 @@
             this.textBox.Size = new System.Drawing.Size(656, 487);
             this.textBox.TabIndex = 1;
             // 
-            // bClose
-            // 
-            this.bClose.Location = new System.Drawing.Point(556, 6);
-            this.bClose.Name = "bClose";
-            this.bClose.Size = new System.Drawing.Size(97, 29);
-            this.bClose.TabIndex = 0;
-            this.bClose.Text = "&Zamknij";
-            this.bClose.UseVisualStyleBackColor = true;
-            this.bClose.Click += new System.EventHandler(this.bClose_Click);
-            // 
             // OknoFTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -70,8 +72,8 @@
             this.ClientSize = new System.Drawing.Size(656, 525);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OknoFTP";
-            this.ShowIcon = false;
             this.Text = "OknoFTP";
             this.Load += new System.EventHandler(this.OknoFTP_Load);
             this.panel1.ResumeLayout(false);
