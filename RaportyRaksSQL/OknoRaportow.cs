@@ -1548,6 +1548,7 @@ namespace RaportyRaksSQL
             if (at.SetNewPassByUser() == AutoryzationType.PassChanged)
             {
                 MessageBox.Show("Zmiana przeprowadzona prawidłowo", "Zmiana hasła");
+                button2.PerformClick();
             }
             else
             {
@@ -1562,6 +1563,7 @@ namespace RaportyRaksSQL
             if (at.GetAutoryzationResult().Equals(AutoryzationType.PassChanged))
             {
                 MessageBox.Show("Zresetowano hasło do pustego poprawnie.","Reset hasła");
+                button2.PerformClick();
             }
             else
             {
