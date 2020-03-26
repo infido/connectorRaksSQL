@@ -29,6 +29,7 @@ namespace RaportyRaksSQL
         {
             InitializeComponent();
             fbconn = fbc;
+            GetMMUSERSexists();
             ShowDialog();
         }
 
@@ -38,7 +39,6 @@ namespace RaportyRaksSQL
             InitializeComponent();
             fbconn = fbc;
             locIdUser = idUser;
-            
         }
         // sprawdzenie czy prawidłowo podpięte pod button
         public AutoryzationType SetNewPassByUser()
@@ -337,6 +337,61 @@ namespace RaportyRaksSQL
         public string GetMagazyny()
         {
             return magazyny;
+        }
+
+        private void GetMMUSERSexists()
+        {
+            string sql = "select 1 from rdb$relations where rdb$relation_name = 'MM_USERS'";
+            
+            FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
+            try
+            {
+                if (cdk.ExecuteScalar()==null)
+                {
+                    sql = "CREATE TABLE MM_USERS";
+                    sql += "(";
+                    sql += "  ID ID_D NOT NULL,";
+                    sql += "  KOD STRING8_D NOT NULL,";
+                    sql += "  ISADMIN BOOLEAN_D,";
+                    sql += "  ISLOCK BOOLEAN_D,";
+                    sql += "  NAZWA STRING40_D NOT NULL,";
+                    sql += "  MAGAZYNY STRING100_D,";
+                    sql += "  UTWORZONY timestamp DEFAULT current_timestamp,";
+                    sql += "  MODYFIKOWANY timestamp DEFAULT current_timestamp,";
+                    sql += "  LOGOWANIE timestamp,";
+                    sql += "  PASS STRING100_D,";
+                    sql += "  LOGOWANIE_PROBA timestamp,";
+                    sql += "  RIGHT_READ STRING120_D,";
+                    sql += "  RIGHT_ADD STRING120_D,";
+                    sql += "  RIGHT_UPDATE STRING120_D,";
+                    sql += "  RIGHT_DEL STRING120_D,";
+                    sql += "  RIGHT_ADM STRING120_D,";
+                    sql += "  CONSTRAINT MM_USERS_PK_ PRIMARY KEY (ID)";
+                    sql += ");";
+                    cdk.CommandText = sql;
+                    cdk.ExecuteScalar();
+
+                    cdk.CommandText = "CREATE UNIQUE INDEX MM_USERS_ID_IDX ON MM_USERS (KOD); ";
+                    cdk.ExecuteNonQuery();
+                    cdk.CommandText = "CREATE INDEX MM_USERS_ISLOCK_ISADM_IND ON MM_USERS (ISLOCK,ISADMIN,KOD); ";
+                    cdk.ExecuteNonQuery();
+                    cdk.CommandText = "CREATE INDEX MM_USERS_ISLOCK_KOD_IND ON MM_USERS (ISLOCK,KOD); ";
+                    cdk.ExecuteNonQuery();
+
+                    cdk.CommandText = "CREATE GENERATOR MM_USERS_GEN;";
+                    cdk.ExecuteNonQuery();
+
+                    cdk.CommandText = "SELECT GEN_ID(MM_USERS_GEN,1) from rdb$database;";
+                    cdk.ExecuteScalar();
+
+                    cdk.CommandText = "INSERT INTO MM_USERS (ID,KOD,NAZWA,ISADMIN) values (1,'ADMIN','Administrator systemu',1);";
+                    cdk.ExecuteScalar();
+                }
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd sprawdzenia istnienia tabeli MM_USERS bazy RaksSQL: " + ex.Message);
+            }
         }
     }
 }
