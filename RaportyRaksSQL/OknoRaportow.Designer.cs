@@ -581,7 +581,7 @@
             // 
             this.bResetPassUser.Location = new System.Drawing.Point(19, 111);
             this.bResetPassUser.Name = "bResetPassUser";
-            this.bResetPassUser.Size = new System.Drawing.Size(228, 22);
+            this.bResetPassUser.Size = new System.Drawing.Size(356, 22);
             this.bResetPassUser.TabIndex = 4;
             this.bResetPassUser.Text = "Resetuj hasło uzytkownika...";
             this.bResetPassUser.UseVisualStyleBackColor = true;
@@ -591,7 +591,7 @@
             // 
             this.bSetPass.Location = new System.Drawing.Point(19, 83);
             this.bSetPass.Name = "bSetPass";
-            this.bSetPass.Size = new System.Drawing.Size(228, 22);
+            this.bSetPass.Size = new System.Drawing.Size(356, 22);
             this.bSetPass.TabIndex = 3;
             this.bSetPass.Text = "Nadaj hasło użytkownika...";
             this.bSetPass.UseVisualStyleBackColor = true;
@@ -601,7 +601,7 @@
             // 
             this.bUsrLock.Location = new System.Drawing.Point(20, 52);
             this.bUsrLock.Name = "bUsrLock";
-            this.bUsrLock.Size = new System.Drawing.Size(227, 25);
+            this.bUsrLock.Size = new System.Drawing.Size(355, 25);
             this.bUsrLock.TabIndex = 2;
             this.bUsrLock.Text = "Zablokuj użytkownika ...";
             this.bUsrLock.UseVisualStyleBackColor = true;
@@ -619,7 +619,7 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.tbUsrLogin);
-            this.groupBox1.Location = new System.Drawing.Point(267, 3);
+            this.groupBox1.Location = new System.Drawing.Point(421, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(393, 170);
             this.groupBox1.TabIndex = 1;
@@ -722,7 +722,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(20, 19);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(226, 27);
+            this.button2.Size = new System.Drawing.Size(354, 27);
             this.button2.TabIndex = 0;
             this.button2.Text = "Wczytanie listy użytkowników";
             this.button2.UseVisualStyleBackColor = true;
