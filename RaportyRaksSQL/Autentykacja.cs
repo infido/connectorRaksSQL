@@ -204,7 +204,7 @@ namespace RaportyRaksSQL
                 {
                     //ustawianie hasła
                     string sql = "UPDATE MM_USERS SET PASS='";
-                    sql += "" + Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text));
+                    sql += "" + (Encoding.GetEncoding(1250).GetString(GenerateHash(tLogin.Text, tPass.Text))).Replace("'","");
                     sql += "', MODYFIKOWANY='NOW' where ID=" + locIdUser + " ;";
 
                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
@@ -239,7 +239,7 @@ namespace RaportyRaksSQL
 
         private bool GetComparePass(string passOkno, string passDB, string userKod)
         {
-            string curPass = Encoding.GetEncoding(1250).GetString(GenerateHash(userKod, passOkno));
+            string curPass = (Encoding.GetEncoding(1250).GetString(GenerateHash(userKod, passOkno))).Replace("'", "");
             
             if (curPass!=null && passDB!=null && passDB.Equals(curPass))
                 return true;
