@@ -355,7 +355,7 @@ namespace RaportyRaksSQL
                     sql += "  ISADMIN BOOLEAN_D,";
                     sql += "  ISLOCK BOOLEAN_D,";
                     sql += "  NAZWA STRING40_D NOT NULL,";
-                    sql += "  MAGAZYNY STRING100_D,";
+                    sql += "  MAGAZYNY STRING200_D,";
                     sql += "  UTWORZONY timestamp DEFAULT current_timestamp,";
                     sql += "  MODYFIKOWANY timestamp DEFAULT current_timestamp,";
                     sql += "  LOGOWANIE timestamp,";
