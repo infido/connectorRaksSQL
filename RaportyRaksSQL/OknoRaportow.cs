@@ -261,7 +261,7 @@ namespace RaportyRaksSQL
             sql += " IIF (GM_KSPOZ.CENA_SP_PLN_NETTO_PO = 0, -1,(";
             sql += "((GM_KSPOZ.CENA_SP_PLN_NETTO_PO-GM_WZPOZ.CENA_ZAKUPU_PO) /GM_KSPOZ.CENA_SP_PLN_NETTO_PO)";
             sql += " - ";
-            sql += "((GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED-GM_WZPOZ.CENA_ZAKUPU_PO) /GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED)";
+            sql += "IIF (GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED=0, -1, ((GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED-GM_WZPOZ.CENA_ZAKUPU_PO) /GM_KSPOZ.CENA_SP_PLN_NETTO_PRZED))";
             sql += ")) MARZA,";
             
             sql += " (";
