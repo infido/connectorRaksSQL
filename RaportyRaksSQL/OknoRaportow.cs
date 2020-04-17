@@ -11,6 +11,7 @@ using FirebirdSql.Data.FirebirdClient;
 using System.IO;
 using System.Net;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace RaportyRaksSQL
 {
@@ -1306,7 +1307,11 @@ namespace RaportyRaksSQL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Lokalizacja pliku konf.ini to: " + Directory.GetCurrentDirectory());
+            if (MessageBox.Show("Lokalizacja pliku konf.ini to: " + Directory.GetCurrentDirectory() + "  Czy edytować plik ini?","Konfiguracja ini", MessageBoxButtons.YesNo)==DialogResult.Yes)
+            {
+                //edycja pliku ini
+                Process.Start(Directory.GetCurrentDirectory() + "\\konf.ini");
+            }
         }
 
         private void toSearchClear2_Click(object sender, EventArgs e)
