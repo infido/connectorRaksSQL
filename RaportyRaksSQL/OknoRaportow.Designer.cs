@@ -160,16 +160,6 @@
             // tabPageRaportTyp1
             // 
             this.tabPageRaportTyp1.Controls.Add(this.checkBoxPBindex);
-            this.tabPageRaportTyp1.Controls.Add(this.radioButton2);
-            this.tabPageRaportTyp1.Controls.Add(this.radioButton1);
-            this.tabPageRaportTyp1.Controls.Add(this.toSearchClear2);
-            this.tabPageRaportTyp1.Controls.Add(this.toSearch2);
-            this.tabPageRaportTyp1.Controls.Add(this.label11);
-            this.tabPageRaportTyp1.Controls.Add(this.labelCol2);
-            this.tabPageRaportTyp1.Controls.Add(this.toSearchClear);
-            this.tabPageRaportTyp1.Controls.Add(this.toSearch);
-            this.tabPageRaportTyp1.Controls.Add(this.label10);
-            this.tabPageRaportTyp1.Controls.Add(this.labelCol);
             this.tabPageRaportTyp1.Controls.Add(this.chPominArchiwalne);
             this.tabPageRaportTyp1.Controls.Add(this.chTylkoTowar);
             this.tabPageRaportTyp1.Controls.Add(this.bRaport4DlaPB);
@@ -211,7 +201,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(943, 152);
+            this.radioButton2.Location = new System.Drawing.Point(359, 37);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(14, 13);
             this.radioButton2.TabIndex = 29;
@@ -221,7 +211,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(943, 126);
+            this.radioButton1.Location = new System.Drawing.Point(359, 11);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(14, 13);
             this.radioButton1.TabIndex = 28;
@@ -231,7 +221,7 @@
             // 
             // toSearchClear2
             // 
-            this.toSearchClear2.Location = new System.Drawing.Point(1344, 147);
+            this.toSearchClear2.Location = new System.Drawing.Point(760, 32);
             this.toSearchClear2.Name = "toSearchClear2";
             this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
             this.toSearchClear2.TabIndex = 27;
@@ -241,7 +231,7 @@
             // 
             // toSearch2
             // 
-            this.toSearch2.Location = new System.Drawing.Point(1187, 149);
+            this.toSearch2.Location = new System.Drawing.Point(603, 34);
             this.toSearch2.Name = "toSearch2";
             this.toSearch2.ReadOnly = true;
             this.toSearch2.Size = new System.Drawing.Size(148, 20);
@@ -251,7 +241,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(959, 152);
+            this.label11.Location = new System.Drawing.Point(375, 37);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(110, 13);
             this.label11.TabIndex = 25;
@@ -260,7 +250,7 @@
             // labelCol2
             // 
             this.labelCol2.AutoSize = true;
-            this.labelCol2.Location = new System.Drawing.Point(1067, 152);
+            this.labelCol2.Location = new System.Drawing.Point(483, 37);
             this.labelCol2.Name = "labelCol2";
             this.labelCol2.Size = new System.Drawing.Size(88, 13);
             this.labelCol2.TabIndex = 24;
@@ -268,7 +258,7 @@
             // 
             // toSearchClear
             // 
-            this.toSearchClear.Location = new System.Drawing.Point(1344, 121);
+            this.toSearchClear.Location = new System.Drawing.Point(760, 6);
             this.toSearchClear.Name = "toSearchClear";
             this.toSearchClear.Size = new System.Drawing.Size(43, 23);
             this.toSearchClear.TabIndex = 23;
@@ -278,7 +268,7 @@
             // 
             // toSearch
             // 
-            this.toSearch.Location = new System.Drawing.Point(1187, 123);
+            this.toSearch.Location = new System.Drawing.Point(603, 8);
             this.toSearch.Name = "toSearch";
             this.toSearch.ReadOnly = true;
             this.toSearch.Size = new System.Drawing.Size(148, 20);
@@ -288,7 +278,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(959, 126);
+            this.label10.Location = new System.Drawing.Point(375, 11);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(110, 13);
             this.label10.TabIndex = 21;
@@ -297,7 +287,7 @@
             // labelCol
             // 
             this.labelCol.AutoSize = true;
-            this.labelCol.Location = new System.Drawing.Point(1067, 126);
+            this.labelCol.Location = new System.Drawing.Point(483, 11);
             this.labelCol.Name = "labelCol";
             this.labelCol.Size = new System.Drawing.Size(88, 13);
             this.labelCol.TabIndex = 20;
@@ -763,14 +753,24 @@
             // panelGdidStopka
             // 
             this.panelGdidStopka.Controls.Add(this.bConnectionSet);
+            this.panelGdidStopka.Controls.Add(this.radioButton2);
             this.panelGdidStopka.Controls.Add(this.bChangeMyPass);
+            this.panelGdidStopka.Controls.Add(this.labelCol);
+            this.panelGdidStopka.Controls.Add(this.radioButton1);
             this.panelGdidStopka.Controls.Add(this.checkBoxKwalifik);
+            this.panelGdidStopka.Controls.Add(this.label10);
             this.panelGdidStopka.Controls.Add(this.checkBoxIlosc1);
+            this.panelGdidStopka.Controls.Add(this.toSearchClear2);
             this.panelGdidStopka.Controls.Add(this.button1);
+            this.panelGdidStopka.Controls.Add(this.toSearch);
             this.panelGdidStopka.Controls.Add(this.bSaveToRaksSQLClipboard);
+            this.panelGdidStopka.Controls.Add(this.toSearch2);
             this.panelGdidStopka.Controls.Add(this.bCheckFtpPowerBike);
+            this.panelGdidStopka.Controls.Add(this.toSearchClear);
             this.panelGdidStopka.Controls.Add(this.bSaveFTPPowerbike);
+            this.panelGdidStopka.Controls.Add(this.label11);
             this.panelGdidStopka.Controls.Add(this.bSetYear2009);
+            this.panelGdidStopka.Controls.Add(this.labelCol2);
             this.panelGdidStopka.Controls.Add(this.CzyDodacNaglowek);
             this.panelGdidStopka.Controls.Add(this.bSave);
             this.panelGdidStopka.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -815,7 +815,7 @@
             // 
             this.checkBoxIlosc1.AutoSize = true;
             this.checkBoxIlosc1.Enabled = false;
-            this.checkBoxIlosc1.Location = new System.Drawing.Point(790, 10);
+            this.checkBoxIlosc1.Location = new System.Drawing.Point(910, 31);
             this.checkBoxIlosc1.Name = "checkBoxIlosc1";
             this.checkBoxIlosc1.Size = new System.Drawing.Size(101, 17);
             this.checkBoxIlosc1.TabIndex = 14;
@@ -835,12 +835,12 @@
             // bSaveToRaksSQLClipboard
             // 
             this.bSaveToRaksSQLClipboard.Enabled = false;
-            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(637, 6);
+            this.bSaveToRaksSQLClipboard.Location = new System.Drawing.Point(900, 7);
             this.bSaveToRaksSQLClipboard.Name = "bSaveToRaksSQLClipboard";
-            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(265, 23);
+            this.bSaveToRaksSQLClipboard.Size = new System.Drawing.Size(152, 46);
             this.bSaveToRaksSQLClipboard.TabIndex = 12;
             this.bSaveToRaksSQLClipboard.Text = "Zapis do schowka RaksSQL";
-            this.bSaveToRaksSQLClipboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bSaveToRaksSQLClipboard.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.bSaveToRaksSQLClipboard.UseVisualStyleBackColor = true;
             this.bSaveToRaksSQLClipboard.Click += new System.EventHandler(this.bSaveToRaksSQLClipboard_Click);
             // 

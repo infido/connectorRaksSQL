@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\ConnectorRaksSQL",
+    "\\KonfiguratorConnectorRaksSQL",
     "\\RaportyRaksSQL"
   ],
-  "SelectedNode": "\\ConnectorRaksSQL.sln",
+  "SelectedNode": "\\KonfiguratorConnectorRaksSQL\\RaksRepo.cs",
   "PreviewInSolutionExplorer": false
 }
