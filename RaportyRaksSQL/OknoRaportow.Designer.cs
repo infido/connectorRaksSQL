@@ -104,6 +104,11 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
+            this.tabPageGencen = new System.Windows.Forms.TabPage();
+            this.bReadFileForHeaders = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lFilePath = new System.Windows.Forms.Label();
+            this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -116,6 +121,7 @@
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
+            this.tabPageGencen.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -148,6 +154,7 @@
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp1);
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp2);
             this.tabControlParametry.Controls.Add(this.tabPageImportCSV);
+            this.tabControlParametry.Controls.Add(this.tabPageGencen);
             this.tabControlParametry.Controls.Add(this.tabAdmin);
             this.tabControlParametry.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlParametry.Location = new System.Drawing.Point(0, 0);
@@ -547,9 +554,9 @@
             // 
             this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
             this.bReadFileCSV.Name = "bReadFileCSV";
-            this.bReadFileCSV.Size = new System.Drawing.Size(190, 23);
+            this.bReadFileCSV.Size = new System.Drawing.Size(226, 23);
             this.bReadFileCSV.TabIndex = 0;
-            this.bReadFileCSV.Text = "Wczytaj plik CSV";
+            this.bReadFileCSV.Text = "Wczytaj plik CSV 2 kolumny (SKROT,CENA)";
             this.bReadFileCSV.UseVisualStyleBackColor = true;
             this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
             // 
@@ -895,6 +902,52 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
+            // tabPageGencen
+            // 
+            this.tabPageGencen.Controls.Add(this.lFilePath);
+            this.tabPageGencen.Controls.Add(this.label15);
+            this.tabPageGencen.Controls.Add(this.bReadFileForHeaders);
+            this.tabPageGencen.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGencen.Name = "tabPageGencen";
+            this.tabPageGencen.Size = new System.Drawing.Size(1425, 176);
+            this.tabPageGencen.TabIndex = 4;
+            this.tabPageGencen.Text = "Import cenników";
+            this.tabPageGencen.UseVisualStyleBackColor = true;
+            // 
+            // bReadFileForHeaders
+            // 
+            this.bReadFileForHeaders.Location = new System.Drawing.Point(9, 14);
+            this.bReadFileForHeaders.Name = "bReadFileForHeaders";
+            this.bReadFileForHeaders.Size = new System.Drawing.Size(147, 23);
+            this.bReadFileForHeaders.TabIndex = 0;
+            this.bReadFileForHeaders.Text = "Wczytaj plik z nagłówkami";
+            this.bReadFileForHeaders.UseVisualStyleBackColor = true;
+            this.bReadFileForHeaders.Click += new System.EventHandler(this.bReadFileForHeaders_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(162, 19);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(27, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Plik:";
+            // 
+            // lFilePath
+            // 
+            this.lFilePath.AutoSize = true;
+            this.lFilePath.Location = new System.Drawing.Point(187, 19);
+            this.lFilePath.Name = "lFilePath";
+            this.lFilePath.Size = new System.Drawing.Size(47, 13);
+            this.lFilePath.TabIndex = 2;
+            this.lFilePath.Text = "lFilePath";
+            // 
+            // openFileDialogCSV
+            // 
+            this.openFileDialogCSV.DefaultExt = "csv";
+            this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
+            this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -924,6 +977,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
+            this.tabPageGencen.ResumeLayout(false);
+            this.tabPageGencen.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1006,6 +1061,11 @@
         private System.Windows.Forms.CheckedListBox chMagazynyAdmin;
         private System.Windows.Forms.Button bUsrClear;
         private System.Windows.Forms.Button bConnectionSet;
+        private System.Windows.Forms.TabPage tabPageGencen;
+        private System.Windows.Forms.Label lFilePath;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button bReadFileForHeaders;
+        private System.Windows.Forms.OpenFileDialog openFileDialogCSV;
     }
 }
 

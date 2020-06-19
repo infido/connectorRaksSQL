@@ -12,6 +12,8 @@ using System.IO;
 using System.Net;
 using Microsoft.Win32;
 using System.Diagnostics;
+using CsvHelper;
+using System.Globalization;
 
 namespace RaportyRaksSQL
 {
@@ -1631,5 +1633,36 @@ namespace RaportyRaksSQL
             OknoKonfiguracjiPolaczenia conDef = new OknoKonfiguracjiPolaczenia();
             conDef.ShowDialog();
         }
+
+        private void bReadFileForHeaders_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogCSV.ShowDialog()==DialogResult.OK)
+            {
+                string pathToFile = openFileDialogCSV.FileName;
+                lFilePath.Text = pathToFile;
+
+                using (var reader = new StreamReader(pathToFile))
+                using (var csv = new CsvReader(reader, CultureInfo.CurrentCulture))
+                {
+                    // Do any configuration to `CsvReader` before creating CsvDataReader.
+                    csv.Configuration.BadDataFound = null;
+                    csv.Configuration.Delimiter = ",";
+                    csv.Configuration.HasHeaderRecord = true;
+
+
+                    using (var dr = new CsvDataReader(csv))
+                    {
+                        var dt = new DataTable();
+                        dt.Load(dr);
+                        dataGridView1.DataSource = dt;
+                    }
+                }
+            }
+            else
+            {
+                lFilePath.Text = "Zrezygnowano ze wskazania pliku cennika do imporu...";
+            }
+        }
+
     }
 }
