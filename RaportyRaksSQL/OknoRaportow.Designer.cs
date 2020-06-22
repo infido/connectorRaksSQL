@@ -109,8 +109,6 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tNazwaCennika = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.cCena = new System.Windows.Forms.ComboBox();
             this.cMapKodTowaru = new System.Windows.Forms.ComboBox();
@@ -121,6 +119,10 @@
             this.cMapBrutto = new System.Windows.Forms.ComboBox();
             this.bSaveGenCen = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cMapGTIN = new System.Windows.Forms.ComboBox();
+            this.bGTINcheck = new System.Windows.Forms.Button();
+            this.bGTINupdate = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -472,14 +474,18 @@
             // 
             this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
             this.bReadFileCSV.Name = "bReadFileCSV";
-            this.bReadFileCSV.Size = new System.Drawing.Size(226, 23);
+            this.bReadFileCSV.Size = new System.Drawing.Size(303, 23);
             this.bReadFileCSV.TabIndex = 0;
-            this.bReadFileCSV.Text = "Wczytaj plik CSV 2 kolumny (SKROT,CENA)";
+            this.bReadFileCSV.Text = "Wczytaj plik CSV 2 kolumny (SKROT,CENA_BRUTTO)";
             this.bReadFileCSV.UseVisualStyleBackColor = true;
             this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
             // 
             // tabPageUpdate
             // 
+            this.tabPageUpdate.Controls.Add(this.bGTINupdate);
+            this.tabPageUpdate.Controls.Add(this.bGTINcheck);
+            this.tabPageUpdate.Controls.Add(this.label16);
+            this.tabPageUpdate.Controls.Add(this.cMapGTIN);
             this.tabPageUpdate.Controls.Add(this.bSaveGenCen);
             this.tabPageUpdate.Controls.Add(this.label20);
             this.tabPageUpdate.Controls.Add(this.cMapBrutto);
@@ -489,8 +495,6 @@
             this.tabPageUpdate.Controls.Add(this.cMapKodTowaru);
             this.tabPageUpdate.Controls.Add(this.cCena);
             this.tabPageUpdate.Controls.Add(this.label17);
-            this.tabPageUpdate.Controls.Add(this.tNazwaCennika);
-            this.tabPageUpdate.Controls.Add(this.label16);
             this.tabPageUpdate.Controls.Add(this.lFilePath);
             this.tabPageUpdate.Controls.Add(this.label15);
             this.tabPageUpdate.Controls.Add(this.bReadFileForHeaders);
@@ -972,44 +976,29 @@
             this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
             this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 56);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "Nazwa cennika";
-            // 
-            // tNazwaCennika
-            // 
-            this.tNazwaCennika.Location = new System.Drawing.Point(102, 53);
-            this.tNazwaCennika.MaxLength = 99;
-            this.tNazwaCennika.Name = "tNazwaCennika";
-            this.tNazwaCennika.Size = new System.Drawing.Size(445, 20);
-            this.tNazwaCennika.TabIndex = 4;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(606, 56);
+            this.label17.Location = new System.Drawing.Point(270, 55);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(66, 13);
             this.label17.TabIndex = 5;
             this.label17.Text = "Rodzaj ceny";
+            this.label17.Visible = false;
             // 
             // cCena
             // 
             this.cCena.FormattingEnabled = true;
-            this.cCena.Location = new System.Drawing.Point(678, 53);
+            this.cCena.Location = new System.Drawing.Point(342, 52);
             this.cCena.Name = "cCena";
             this.cCena.Size = new System.Drawing.Size(121, 21);
             this.cCena.TabIndex = 6;
+            this.cCena.Visible = false;
             // 
             // cMapKodTowaru
             // 
             this.cMapKodTowaru.FormattingEnabled = true;
-            this.cMapKodTowaru.Location = new System.Drawing.Point(102, 79);
+            this.cMapKodTowaru.Location = new System.Drawing.Point(130, 52);
             this.cMapKodTowaru.Name = "cMapKodTowaru";
             this.cMapKodTowaru.Size = new System.Drawing.Size(121, 21);
             this.cMapKodTowaru.TabIndex = 7;
@@ -1017,7 +1006,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(15, 82);
+            this.label18.Location = new System.Drawing.Point(16, 55);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(61, 13);
             this.label18.TabIndex = 8;
@@ -1031,6 +1020,7 @@
             this.label19.Size = new System.Drawing.Size(109, 13);
             this.label19.TabIndex = 10;
             this.label19.Text = "Cena sprzedaży netto";
+            this.label19.Visible = false;
             // 
             // cMapNetto
             // 
@@ -1039,6 +1029,7 @@
             this.cMapNetto.Name = "cMapNetto";
             this.cMapNetto.Size = new System.Drawing.Size(121, 21);
             this.cMapNetto.TabIndex = 9;
+            this.cMapNetto.Visible = false;
             // 
             // label20
             // 
@@ -1048,6 +1039,7 @@
             this.label20.Size = new System.Drawing.Size(112, 13);
             this.label20.TabIndex = 12;
             this.label20.Text = "Cena sprzedaży brutto";
+            this.label20.Visible = false;
             // 
             // cMapBrutto
             // 
@@ -1056,15 +1048,17 @@
             this.cMapBrutto.Name = "cMapBrutto";
             this.cMapBrutto.Size = new System.Drawing.Size(121, 21);
             this.cMapBrutto.TabIndex = 11;
+            this.cMapBrutto.Visible = false;
             // 
             // bSaveGenCen
             // 
-            this.bSaveGenCen.Location = new System.Drawing.Point(1243, 136);
+            this.bSaveGenCen.Location = new System.Drawing.Point(469, 50);
             this.bSaveGenCen.Name = "bSaveGenCen";
             this.bSaveGenCen.Size = new System.Drawing.Size(159, 23);
             this.bSaveGenCen.TabIndex = 13;
             this.bSaveGenCen.Text = "Zapisz cennik do RaksSQL";
             this.bSaveGenCen.UseVisualStyleBackColor = true;
+            this.bSaveGenCen.Visible = false;
             this.bSaveGenCen.Click += new System.EventHandler(this.bSaveGenCen_Click);
             // 
             // label21
@@ -1075,6 +1069,44 @@
             this.label21.Size = new System.Drawing.Size(246, 104);
             this.label21.TabIndex = 1;
             this.label21.Text = resources.GetString("label21.Text");
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(16, 82);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(33, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "GTIN";
+            // 
+            // cMapGTIN
+            // 
+            this.cMapGTIN.FormattingEnabled = true;
+            this.cMapGTIN.Location = new System.Drawing.Point(130, 79);
+            this.cMapGTIN.Name = "cMapGTIN";
+            this.cMapGTIN.Size = new System.Drawing.Size(121, 21);
+            this.cMapGTIN.TabIndex = 14;
+            // 
+            // bGTINcheck
+            // 
+            this.bGTINcheck.Location = new System.Drawing.Point(261, 77);
+            this.bGTINcheck.Name = "bGTINcheck";
+            this.bGTINcheck.Size = new System.Drawing.Size(100, 23);
+            this.bGTINcheck.TabIndex = 16;
+            this.bGTINcheck.Text = "Porównaj GTIN";
+            this.bGTINcheck.UseVisualStyleBackColor = true;
+            this.bGTINcheck.Visible = false;
+            this.bGTINcheck.Click += new System.EventHandler(this.bGTINcheck_Click);
+            // 
+            // bGTINupdate
+            // 
+            this.bGTINupdate.Location = new System.Drawing.Point(367, 77);
+            this.bGTINupdate.Name = "bGTINupdate";
+            this.bGTINupdate.Size = new System.Drawing.Size(100, 23);
+            this.bGTINupdate.TabIndex = 17;
+            this.bGTINupdate.Text = "Aktualizuj GTIN";
+            this.bGTINupdate.UseVisualStyleBackColor = true;
+            this.bGTINupdate.Visible = false;
             // 
             // OknoRaportow
             // 
@@ -1204,9 +1236,11 @@
         private System.Windows.Forms.ComboBox cMapKodTowaru;
         private System.Windows.Forms.ComboBox cCena;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox tNazwaCennika;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cMapGTIN;
+        private System.Windows.Forms.Button bGTINupdate;
+        private System.Windows.Forms.Button bGTINcheck;
     }
 }
 

@@ -1677,8 +1677,42 @@ namespace RaportyRaksSQL
                         var dt = new DataTable();
                         dt.Load(dr);
                         dataGridView1.DataSource = dt;
+
+                        Dictionary<int, string> listaKolumn = new Dictionary<int, string>();
+                        try
+                        {
+                            int ndx = 1;
+                            foreach (DataColumn kolumna in dt.Columns)
+                            {
+                                listaKolumn.Add(ndx, kolumna.ColumnName);
+                                ndx++;
+                            }
+
+                        }
+                        catch (FbException ex)
+                        {
+                            MessageBox.Show("Błąd wczytywania listy kolumn do combobox-ów: " + ex.Message);
+                        }
+
+                        cMapKodTowaru.DataSource = new BindingSource(listaKolumn, null);
+                        cMapKodTowaru.DisplayMember = "Value";
+                        cMapKodTowaru.ValueMember = "Key";
+
+                        cMapGTIN.DataSource = new BindingSource(listaKolumn, null);
+                        cMapGTIN.DisplayMember = "Value";
+                        cMapGTIN.ValueMember = "Key";
+
+                        cMapNetto.DataSource = new BindingSource(listaKolumn, null);
+                        cMapNetto.DisplayMember = "Value";
+                        cMapNetto.ValueMember = "Key";
+
+                        cMapBrutto.DataSource = new BindingSource(listaKolumn, null);
+                        cMapBrutto.DisplayMember = "Value";
+                        cMapBrutto.ValueMember = "Key";
                     }
                 }
+                bGTINcheck.Visible = true;
+                bGTINupdate.Visible = false;
             }
             else
             {
@@ -1691,51 +1725,50 @@ namespace RaportyRaksSQL
             int idNag;
 
             #region pobranie nowego id nagłówka z bazy
-            FbCommand gen_id_nag = new FbCommand("SELECT GEN_ID(GM_GENCEN_GEN,1) from rdb$database", fbconn.getCurentConnection());
-            try
-            {
-                idNag = Convert.ToInt32(gen_id_nag.ExecuteScalar());
-            }
-            catch (FbException exgen)
-            {
-                MessageBox.Show("Błąd pobierania nowego ID z bazy. Operacje przerwano! " + exgen.Message);
-                throw;
-            }
+            //FbCommand gen_id_nag = new FbCommand("SELECT GEN_ID(GM_GENCEN_GEN,1) from rdb$database", fbconn.getCurentConnection());
+            //try
+            //{
+            //    idNag = Convert.ToInt32(gen_id_nag.ExecuteScalar());
+            //}
+            //catch (FbException exgen)
+            //{
+            //    MessageBox.Show("Błąd pobierania nowego ID z bazy. Operacje przerwano! " + exgen.Message);
+            //    throw;
+            //}
             #endregion
 
-            StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_GENCEN (");
-            myStringBuilder.Append("ID, ");
-            myStringBuilder.Append("ROK, ");
-            myStringBuilder.Append("MIESIAC, ");
-            myStringBuilder.Append("NAZWA_CENNIKA, ");
-            myStringBuilder.Append("OPERATOR, ");
-            myStringBuilder.Append("ZMIENIL, "); 
-            myStringBuilder.Append("GUID ");
+            //StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_GENCEN (");
+            //myStringBuilder.Append("ID, ");
+            //myStringBuilder.Append("ROK, ");
+            //myStringBuilder.Append("MIESIAC, ");
+            //myStringBuilder.Append("NAZWA_CENNIKA, ");
+            //myStringBuilder.Append("OPERATOR, ");
+            //myStringBuilder.Append("ZMIENIL, "); 
+            //myStringBuilder.Append("GUID ");
 
-            myStringBuilder.Append(") VALUES ( ");
+            //myStringBuilder.Append(") VALUES ( ");
 
-            myStringBuilder.Append(idNag.ToString() + ",");  // ID
-            myStringBuilder.Append( DateTime.Now.Year.ToString() + ", ");  //ROK
-            myStringBuilder.Append(DateTime.Now.Month.ToString() + ", ");  //MIESIAC
-            myStringBuilder.Append("'" + tNazwaCennika.Text + "', ");  //NAZWA_CENNIKA
+            //myStringBuilder.Append(idNag.ToString() + ",");  // ID
+            //myStringBuilder.Append( DateTime.Now.Year.ToString() + ", ");  //ROK
+            //myStringBuilder.Append(DateTime.Now.Month.ToString() + ", ");  //MIESIAC
+            //myStringBuilder.Append("'" + tNazwaCennika.Text + "', ");  //NAZWA_CENNIKA
 
-//TODO Pobranie użytkownika z logowania
-            myStringBuilder.Append("'ADMIN', ");  // OPERATOR
-            myStringBuilder.Append("'ADMIN', ");  // ZMIENIL
+            //myStringBuilder.Append("'ADMIN', ");  // OPERATOR
+            //myStringBuilder.Append("'ADMIN', ");  // ZMIENIL
 
-            System.Guid gd = new System.Guid();
-            myStringBuilder.Append("'" + gd.ToString("D") +  "'); ");  //GUID
+            //System.Guid gd = new System.Guid();
+            //myStringBuilder.Append("'" + gd.ToString("D") +  "'); ");  //GUID
             
 
-            FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
-            try
-            {
-                cdk.ExecuteScalar();
-            }
-            catch (FbException ex)
-            {
-                MessageBox.Show("Błąd zapisu nagłówka cennika: " + ex.Message);
-            }
+            //FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
+            //try
+            //{
+            //    cdk.ExecuteScalar();
+            //}
+            //catch (FbException ex)
+            //{
+            //    MessageBox.Show("Błąd zapisu nagłówka cennika: " + ex.Message);
+            //}
 
 
 
@@ -1754,6 +1787,47 @@ namespace RaportyRaksSQL
             //}
 
             #endregion
+        }
+
+        private void bGTINcheck_Click(object sender, EventArgs e)
+        {
+            DataSet fdsr = new DataSet();
+            fdsr.Tables.Add("TAB");
+            fdsr.Tables["TAB"].Columns.Add("SKROT", typeof(String));
+            fdsr.Tables["TAB"].Columns.Add("STARY_GTIN", typeof(String));
+            fdsr.Tables["TAB"].Columns.Add("NOWY_GETIN", typeof(String));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[cMapKodTowaru.Text].Value != null)
+                {
+                    #region obliczanie ID towaru z Indeksu
+                    string stary = "BRAK INDEKSU";
+                    FbCommand gen_id_towaru = new FbCommand("SELECT GTIN from GM_TOWARY where SKROT='" + row.Cells[cMapKodTowaru.Text].Value.ToString() + "';", fbconn.getCurentConnection());
+                    try
+                    {
+                        if (gen_id_towaru.ExecuteScalar() != null)
+                        {
+                            stary = (gen_id_towaru.ExecuteScalar()).ToString();
+                        }
+                    }
+                    catch (FbException exgen)
+                    {
+                        MessageBox.Show("Błąd pobierania nowego ID_TOWARU na podstawie skrótu" + row.Cells["SKROT"].Value.ToString() + " . Operacje przerwano! " + exgen.Message);
+                        throw;
+                    }
+
+                    #endregion
+                    fdsr.Tables["TAB"].Rows.Add(row.Cells[cMapKodTowaru.Text].Value.ToString(), stary, row.Cells[cMapGTIN.Text].Value.ToString());
+                }
+            }
+
+            fDataView = new DataView();
+            fDataView.Table = fdsr.Tables["TAB"];
+            dataGridView1.DataSource = fDataView;
+
+            bGTINupdate.Visible = true;
+            bGTINcheck.Visible = false;
         }
     }
 }
