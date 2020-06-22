@@ -18,7 +18,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>C:\Program Files\Infido\RaportyRaksSQL\</PublishUrl>
+    <PublishUrl>C:\setups\raporty\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -31,8 +31,8 @@
     <ProductName>RaporyRaksSQL</ProductName>
     <PublisherName>Jacek Dziwoki</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.2.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -219,7 +219,7 @@
     </BootstrapperPackage>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 i x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

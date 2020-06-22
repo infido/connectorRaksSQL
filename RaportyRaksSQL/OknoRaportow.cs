@@ -177,6 +177,25 @@ namespace RaportyRaksSQL
             {
                 MessageBox.Show("Błąd wczytywania listy producentów do słownika parametrów: " + ex.Message);
             }
+
+            Dictionary<int, string> listCeny = new Dictionary<int, string>();
+            cdk.CommandText = ("SELECT ID,NAZWA FROM GM_CENY;");
+            try
+            {
+                FbDataReader fdk = cdk.ExecuteReader();
+                while (fdk.Read())
+                {
+                    listCeny.Add((int)fdk["ID"], (string)fdk["NAZWA"]);
+                }
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd wczytywania listy magazynów: " + ex.Message);
+            }
+
+            cCena.DataSource = new BindingSource(listCeny, null);
+            cCena.DisplayMember = "Value";
+            cCena.ValueMember = "Key";
         }
 
         private void bWykonajRaport1_Click(object sender, EventArgs e)
@@ -1664,5 +1683,74 @@ namespace RaportyRaksSQL
             }
         }
 
+        private void bSaveGenCen_Click(object sender, EventArgs e)
+        {
+            int idNag;
+
+            #region pobranie nowego id nagłówka z bazy
+            FbCommand gen_id_nag = new FbCommand("SELECT GEN_ID(GM_GENCEN_GEN,1) from rdb$database", fbconn.getCurentConnection());
+            try
+            {
+                idNag = Convert.ToInt32(gen_id_nag.ExecuteScalar());
+            }
+            catch (FbException exgen)
+            {
+                MessageBox.Show("Błąd pobierania nowego ID z bazy. Operacje przerwano! " + exgen.Message);
+                throw;
+            }
+            #endregion
+
+            StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_GENCEN (");
+            myStringBuilder.Append("ID, ");
+            myStringBuilder.Append("ROK, ");
+            myStringBuilder.Append("MIESIAC, ");
+            myStringBuilder.Append("NAZWA_CENNIKA, ");
+            myStringBuilder.Append("OPERATOR, ");
+            myStringBuilder.Append("ZMIENIL, "); 
+            myStringBuilder.Append("GUID ");
+
+            myStringBuilder.Append(") VALUES ( ");
+
+            myStringBuilder.Append(idNag.ToString() + ",");  // ID
+            myStringBuilder.Append( DateTime.Now.Year.ToString() + ", ");  //ROK
+            myStringBuilder.Append(DateTime.Now.Month.ToString() + ", ");  //MIESIAC
+            myStringBuilder.Append("'" + tNazwaCennika.Text + "', ");  //NAZWA_CENNIKA
+
+//TODO Pobranie użytkownika z logowania
+            myStringBuilder.Append("'ADMIN', ");  // OPERATOR
+            myStringBuilder.Append("'ADMIN', ");  // ZMIENIL
+
+            System.Guid gd = new System.Guid();
+            myStringBuilder.Append("'" + gd.ToString("D") +  "'); ");  //GUID
+            
+
+            FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
+            try
+            {
+                cdk.ExecuteScalar();
+            }
+            catch (FbException ex)
+            {
+                MessageBox.Show("Błąd zapisu nagłówka cennika: " + ex.Message);
+            }
+
+
+
+
+            #region obliczanie ID towaru z Indeksu
+            //string idtow = "0";
+            //FbCommand gen_id_towaru = new FbCommand("SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "';", fbconn.getCurentConnection());
+            //try
+            //{
+            //    idtow = (gen_id_towaru.ExecuteScalar()).ToString();
+            //}
+            //catch (FbException exgen)
+            //{
+            //    MessageBox.Show("Błąd pobierania nowego ID_TOWARU na podstawie skrótu" + row.Cells["SKROT"].Value.ToString() + " . Operacje przerwano! " + exgen.Message);
+            //    throw;
+            //}
+
+            #endregion
+        }
     }
 }

@@ -35,16 +35,6 @@
             this.tabControlParametry = new System.Windows.Forms.TabControl();
             this.tabPageRaportTyp1 = new System.Windows.Forms.TabPage();
             this.checkBoxPBindex = new System.Windows.Forms.CheckBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.toSearchClear2 = new System.Windows.Forms.Button();
-            this.toSearch2 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.labelCol2 = new System.Windows.Forms.Label();
-            this.toSearchClear = new System.Windows.Forms.Button();
-            this.toSearch = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.labelCol = new System.Windows.Forms.Label();
             this.chPominArchiwalne = new System.Windows.Forms.CheckBox();
             this.chTylkoTowar = new System.Windows.Forms.CheckBox();
             this.bRaport4DlaPB = new System.Windows.Forms.Button();
@@ -73,6 +63,10 @@
             this.dateOd2 = new System.Windows.Forms.DateTimePicker();
             this.tabPageImportCSV = new System.Windows.Forms.TabPage();
             this.bReadFileCSV = new System.Windows.Forms.Button();
+            this.tabPageGencen = new System.Windows.Forms.TabPage();
+            this.lFilePath = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.bReadFileForHeaders = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
             this.bResetPassUser = new System.Windows.Forms.Button();
             this.bSetPass = new System.Windows.Forms.Button();
@@ -89,6 +83,16 @@
             this.label12 = new System.Windows.Forms.Label();
             this.tbUsrLogin = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.toSearchClear2 = new System.Windows.Forms.Button();
+            this.toSearch2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelCol2 = new System.Windows.Forms.Label();
+            this.toSearchClear = new System.Windows.Forms.Button();
+            this.toSearch = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelCol = new System.Windows.Forms.Label();
             this.panelPodgladDanych = new System.Windows.Forms.Panel();
             this.panelGridLista = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -104,24 +108,31 @@
             this.bSetYear2009 = new System.Windows.Forms.Button();
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
-            this.tabPageGencen = new System.Windows.Forms.TabPage();
-            this.bReadFileForHeaders = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lFilePath = new System.Windows.Forms.Label();
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tNazwaCennika = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cCena = new System.Windows.Forms.ComboBox();
+            this.cMapKodTowaru = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cMapNetto = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cMapBrutto = new System.Windows.Forms.ComboBox();
+            this.bSaveGenCen = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
             this.tabPageRaportTyp1.SuspendLayout();
             this.tabPageRaportTyp2.SuspendLayout();
             this.tabPageImportCSV.SuspendLayout();
+            this.tabPageGencen.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelPodgladDanych.SuspendLayout();
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
-            this.tabPageGencen.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -204,101 +215,6 @@
             this.checkBoxPBindex.TabIndex = 30;
             this.checkBoxPBindex.Text = "Skrót zamiast FK";
             this.checkBoxPBindex.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(359, 37);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(14, 13);
-            this.radioButton2.TabIndex = 29;
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(359, 11);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(14, 13);
-            this.radioButton1.TabIndex = 28;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // toSearchClear2
-            // 
-            this.toSearchClear2.Location = new System.Drawing.Point(760, 32);
-            this.toSearchClear2.Name = "toSearchClear2";
-            this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
-            this.toSearchClear2.TabIndex = 27;
-            this.toSearchClear2.Text = "Usuń";
-            this.toSearchClear2.UseVisualStyleBackColor = true;
-            this.toSearchClear2.Click += new System.EventHandler(this.toSearchClear2_Click);
-            // 
-            // toSearch2
-            // 
-            this.toSearch2.Location = new System.Drawing.Point(603, 34);
-            this.toSearch2.Name = "toSearch2";
-            this.toSearch2.ReadOnly = true;
-            this.toSearch2.Size = new System.Drawing.Size(148, 20);
-            this.toSearch2.TabIndex = 26;
-            this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(375, 37);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Filtowanie w kolmnie: ";
-            // 
-            // labelCol2
-            // 
-            this.labelCol2.AutoSize = true;
-            this.labelCol2.Location = new System.Drawing.Point(483, 37);
-            this.labelCol2.Name = "labelCol2";
-            this.labelCol2.Size = new System.Drawing.Size(88, 13);
-            this.labelCol2.TabIndex = 24;
-            this.labelCol2.Text = "kliknij w komórkę";
-            // 
-            // toSearchClear
-            // 
-            this.toSearchClear.Location = new System.Drawing.Point(760, 6);
-            this.toSearchClear.Name = "toSearchClear";
-            this.toSearchClear.Size = new System.Drawing.Size(43, 23);
-            this.toSearchClear.TabIndex = 23;
-            this.toSearchClear.Text = "Usuń";
-            this.toSearchClear.UseVisualStyleBackColor = true;
-            this.toSearchClear.Click += new System.EventHandler(this.toSearchClear_Click);
-            // 
-            // toSearch
-            // 
-            this.toSearch.Location = new System.Drawing.Point(603, 8);
-            this.toSearch.Name = "toSearch";
-            this.toSearch.ReadOnly = true;
-            this.toSearch.Size = new System.Drawing.Size(148, 20);
-            this.toSearch.TabIndex = 22;
-            this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(375, 11);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(110, 13);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Filtowanie w kolmnie: ";
-            // 
-            // labelCol
-            // 
-            this.labelCol.AutoSize = true;
-            this.labelCol.Location = new System.Drawing.Point(483, 11);
-            this.labelCol.Name = "labelCol";
-            this.labelCol.Size = new System.Drawing.Size(88, 13);
-            this.labelCol.TabIndex = 20;
-            this.labelCol.Text = "kliknij w komórkę";
             // 
             // chPominArchiwalne
             // 
@@ -560,6 +476,57 @@
             this.bReadFileCSV.UseVisualStyleBackColor = true;
             this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
             // 
+            // tabPageGencen
+            // 
+            this.tabPageGencen.Controls.Add(this.bSaveGenCen);
+            this.tabPageGencen.Controls.Add(this.label20);
+            this.tabPageGencen.Controls.Add(this.cMapBrutto);
+            this.tabPageGencen.Controls.Add(this.label19);
+            this.tabPageGencen.Controls.Add(this.cMapNetto);
+            this.tabPageGencen.Controls.Add(this.label18);
+            this.tabPageGencen.Controls.Add(this.cMapKodTowaru);
+            this.tabPageGencen.Controls.Add(this.cCena);
+            this.tabPageGencen.Controls.Add(this.label17);
+            this.tabPageGencen.Controls.Add(this.tNazwaCennika);
+            this.tabPageGencen.Controls.Add(this.label16);
+            this.tabPageGencen.Controls.Add(this.lFilePath);
+            this.tabPageGencen.Controls.Add(this.label15);
+            this.tabPageGencen.Controls.Add(this.bReadFileForHeaders);
+            this.tabPageGencen.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGencen.Name = "tabPageGencen";
+            this.tabPageGencen.Size = new System.Drawing.Size(1425, 176);
+            this.tabPageGencen.TabIndex = 4;
+            this.tabPageGencen.Text = "Import cenników";
+            this.tabPageGencen.UseVisualStyleBackColor = true;
+            // 
+            // lFilePath
+            // 
+            this.lFilePath.AutoSize = true;
+            this.lFilePath.Location = new System.Drawing.Point(187, 19);
+            this.lFilePath.Name = "lFilePath";
+            this.lFilePath.Size = new System.Drawing.Size(47, 13);
+            this.lFilePath.TabIndex = 2;
+            this.lFilePath.Text = "lFilePath";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(162, 19);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(27, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Plik:";
+            // 
+            // bReadFileForHeaders
+            // 
+            this.bReadFileForHeaders.Location = new System.Drawing.Point(9, 14);
+            this.bReadFileForHeaders.Name = "bReadFileForHeaders";
+            this.bReadFileForHeaders.Size = new System.Drawing.Size(147, 23);
+            this.bReadFileForHeaders.TabIndex = 0;
+            this.bReadFileForHeaders.Text = "Wczytaj plik z nagłówkami";
+            this.bReadFileForHeaders.UseVisualStyleBackColor = true;
+            this.bReadFileForHeaders.Click += new System.EventHandler(this.bReadFileForHeaders_Click);
+            // 
             // tabAdmin
             // 
             this.tabAdmin.Controls.Add(this.bResetPassUser);
@@ -724,6 +691,101 @@
             this.button2.Text = "Wczytanie listy użytkowników";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(359, 37);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(14, 13);
+            this.radioButton2.TabIndex = 29;
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(359, 11);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 28;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // toSearchClear2
+            // 
+            this.toSearchClear2.Location = new System.Drawing.Point(760, 32);
+            this.toSearchClear2.Name = "toSearchClear2";
+            this.toSearchClear2.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear2.TabIndex = 27;
+            this.toSearchClear2.Text = "Usuń";
+            this.toSearchClear2.UseVisualStyleBackColor = true;
+            this.toSearchClear2.Click += new System.EventHandler(this.toSearchClear2_Click);
+            // 
+            // toSearch2
+            // 
+            this.toSearch2.Location = new System.Drawing.Point(603, 34);
+            this.toSearch2.Name = "toSearch2";
+            this.toSearch2.ReadOnly = true;
+            this.toSearch2.Size = new System.Drawing.Size(148, 20);
+            this.toSearch2.TabIndex = 26;
+            this.toSearch2.TextChanged += new System.EventHandler(this.toSearch2_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(375, 37);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(110, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Filtowanie w kolmnie: ";
+            // 
+            // labelCol2
+            // 
+            this.labelCol2.AutoSize = true;
+            this.labelCol2.Location = new System.Drawing.Point(483, 37);
+            this.labelCol2.Name = "labelCol2";
+            this.labelCol2.Size = new System.Drawing.Size(88, 13);
+            this.labelCol2.TabIndex = 24;
+            this.labelCol2.Text = "kliknij w komórkę";
+            // 
+            // toSearchClear
+            // 
+            this.toSearchClear.Location = new System.Drawing.Point(760, 6);
+            this.toSearchClear.Name = "toSearchClear";
+            this.toSearchClear.Size = new System.Drawing.Size(43, 23);
+            this.toSearchClear.TabIndex = 23;
+            this.toSearchClear.Text = "Usuń";
+            this.toSearchClear.UseVisualStyleBackColor = true;
+            this.toSearchClear.Click += new System.EventHandler(this.toSearchClear_Click);
+            // 
+            // toSearch
+            // 
+            this.toSearch.Location = new System.Drawing.Point(603, 8);
+            this.toSearch.Name = "toSearch";
+            this.toSearch.ReadOnly = true;
+            this.toSearch.Size = new System.Drawing.Size(148, 20);
+            this.toSearch.TabIndex = 22;
+            this.toSearch.TextChanged += new System.EventHandler(this.toSearch_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(375, 11);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(110, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Filtowanie w kolmnie: ";
+            // 
+            // labelCol
+            // 
+            this.labelCol.AutoSize = true;
+            this.labelCol.Location = new System.Drawing.Point(483, 11);
+            this.labelCol.Name = "labelCol";
+            this.labelCol.Size = new System.Drawing.Size(88, 13);
+            this.labelCol.TabIndex = 20;
+            this.labelCol.Text = "kliknij w komórkę";
             // 
             // panelPodgladDanych
             // 
@@ -902,51 +964,106 @@
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
-            // tabPageGencen
-            // 
-            this.tabPageGencen.Controls.Add(this.lFilePath);
-            this.tabPageGencen.Controls.Add(this.label15);
-            this.tabPageGencen.Controls.Add(this.bReadFileForHeaders);
-            this.tabPageGencen.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGencen.Name = "tabPageGencen";
-            this.tabPageGencen.Size = new System.Drawing.Size(1425, 176);
-            this.tabPageGencen.TabIndex = 4;
-            this.tabPageGencen.Text = "Import cenników";
-            this.tabPageGencen.UseVisualStyleBackColor = true;
-            // 
-            // bReadFileForHeaders
-            // 
-            this.bReadFileForHeaders.Location = new System.Drawing.Point(9, 14);
-            this.bReadFileForHeaders.Name = "bReadFileForHeaders";
-            this.bReadFileForHeaders.Size = new System.Drawing.Size(147, 23);
-            this.bReadFileForHeaders.TabIndex = 0;
-            this.bReadFileForHeaders.Text = "Wczytaj plik z nagłówkami";
-            this.bReadFileForHeaders.UseVisualStyleBackColor = true;
-            this.bReadFileForHeaders.Click += new System.EventHandler(this.bReadFileForHeaders_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(162, 19);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(27, 13);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Plik:";
-            // 
-            // lFilePath
-            // 
-            this.lFilePath.AutoSize = true;
-            this.lFilePath.Location = new System.Drawing.Point(187, 19);
-            this.lFilePath.Name = "lFilePath";
-            this.lFilePath.Size = new System.Drawing.Size(47, 13);
-            this.lFilePath.TabIndex = 2;
-            this.lFilePath.Text = "lFilePath";
-            // 
             // openFileDialogCSV
             // 
             this.openFileDialogCSV.DefaultExt = "csv";
             this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
             this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 56);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Nazwa cennika";
+            // 
+            // tNazwaCennika
+            // 
+            this.tNazwaCennika.Location = new System.Drawing.Point(102, 53);
+            this.tNazwaCennika.MaxLength = 99;
+            this.tNazwaCennika.Name = "tNazwaCennika";
+            this.tNazwaCennika.Size = new System.Drawing.Size(445, 20);
+            this.tNazwaCennika.TabIndex = 4;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(606, 56);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(66, 13);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "Rodzaj ceny";
+            // 
+            // cCena
+            // 
+            this.cCena.FormattingEnabled = true;
+            this.cCena.Location = new System.Drawing.Point(678, 53);
+            this.cCena.Name = "cCena";
+            this.cCena.Size = new System.Drawing.Size(121, 21);
+            this.cCena.TabIndex = 6;
+            // 
+            // cMapKodTowaru
+            // 
+            this.cMapKodTowaru.FormattingEnabled = true;
+            this.cMapKodTowaru.Location = new System.Drawing.Point(102, 79);
+            this.cMapKodTowaru.Name = "cMapKodTowaru";
+            this.cMapKodTowaru.Size = new System.Drawing.Size(121, 21);
+            this.cMapKodTowaru.TabIndex = 7;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 82);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(61, 13);
+            this.label18.TabIndex = 8;
+            this.label18.Text = "Kod towaru";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(15, 109);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(109, 13);
+            this.label19.TabIndex = 10;
+            this.label19.Text = "Cena sprzedaży netto";
+            // 
+            // cMapNetto
+            // 
+            this.cMapNetto.FormattingEnabled = true;
+            this.cMapNetto.Location = new System.Drawing.Point(130, 106);
+            this.cMapNetto.Name = "cMapNetto";
+            this.cMapNetto.Size = new System.Drawing.Size(121, 21);
+            this.cMapNetto.TabIndex = 9;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 136);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(112, 13);
+            this.label20.TabIndex = 12;
+            this.label20.Text = "Cena sprzedaży brutto";
+            // 
+            // cMapBrutto
+            // 
+            this.cMapBrutto.FormattingEnabled = true;
+            this.cMapBrutto.Location = new System.Drawing.Point(130, 133);
+            this.cMapBrutto.Name = "cMapBrutto";
+            this.cMapBrutto.Size = new System.Drawing.Size(121, 21);
+            this.cMapBrutto.TabIndex = 11;
+            // 
+            // bSaveGenCen
+            // 
+            this.bSaveGenCen.Location = new System.Drawing.Point(1243, 136);
+            this.bSaveGenCen.Name = "bSaveGenCen";
+            this.bSaveGenCen.Size = new System.Drawing.Size(159, 23);
+            this.bSaveGenCen.TabIndex = 13;
+            this.bSaveGenCen.Text = "Zapisz cennik do RaksSQL";
+            this.bSaveGenCen.UseVisualStyleBackColor = true;
+            this.bSaveGenCen.Click += new System.EventHandler(this.bSaveGenCen_Click);
             // 
             // OknoRaportow
             // 
@@ -969,6 +1086,8 @@
             this.tabPageRaportTyp2.ResumeLayout(false);
             this.tabPageRaportTyp2.PerformLayout();
             this.tabPageImportCSV.ResumeLayout(false);
+            this.tabPageGencen.ResumeLayout(false);
+            this.tabPageGencen.PerformLayout();
             this.tabAdmin.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -977,8 +1096,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
-            this.tabPageGencen.ResumeLayout(false);
-            this.tabPageGencen.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1066,6 +1183,17 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button bReadFileForHeaders;
         private System.Windows.Forms.OpenFileDialog openFileDialogCSV;
+        private System.Windows.Forms.Button bSaveGenCen;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox cMapBrutto;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cMapNetto;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cMapKodTowaru;
+        private System.Windows.Forms.ComboBox cCena;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tNazwaCennika;
+        private System.Windows.Forms.Label label16;
     }
 }
 
