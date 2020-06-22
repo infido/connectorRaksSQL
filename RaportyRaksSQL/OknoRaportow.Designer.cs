@@ -63,7 +63,7 @@
             this.dateOd2 = new System.Windows.Forms.DateTimePicker();
             this.tabPageImportCSV = new System.Windows.Forms.TabPage();
             this.bReadFileCSV = new System.Windows.Forms.Button();
-            this.tabPageGencen = new System.Windows.Forms.TabPage();
+            this.tabPageUpdate = new System.Windows.Forms.TabPage();
             this.lFilePath = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.bReadFileForHeaders = new System.Windows.Forms.Button();
@@ -120,13 +120,14 @@
             this.label20 = new System.Windows.Forms.Label();
             this.cMapBrutto = new System.Windows.Forms.ComboBox();
             this.bSaveGenCen = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
             this.tabPageRaportTyp1.SuspendLayout();
             this.tabPageRaportTyp2.SuspendLayout();
             this.tabPageImportCSV.SuspendLayout();
-            this.tabPageGencen.SuspendLayout();
+            this.tabPageUpdate.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelPodgladDanych.SuspendLayout();
@@ -165,7 +166,7 @@
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp1);
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp2);
             this.tabControlParametry.Controls.Add(this.tabPageImportCSV);
-            this.tabControlParametry.Controls.Add(this.tabPageGencen);
+            this.tabControlParametry.Controls.Add(this.tabPageUpdate);
             this.tabControlParametry.Controls.Add(this.tabAdmin);
             this.tabControlParametry.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlParametry.Location = new System.Drawing.Point(0, 0);
@@ -457,13 +458,14 @@
             // 
             // tabPageImportCSV
             // 
+            this.tabPageImportCSV.Controls.Add(this.label21);
             this.tabPageImportCSV.Controls.Add(this.bReadFileCSV);
             this.tabPageImportCSV.Location = new System.Drawing.Point(4, 22);
             this.tabPageImportCSV.Name = "tabPageImportCSV";
             this.tabPageImportCSV.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageImportCSV.Size = new System.Drawing.Size(1425, 176);
             this.tabPageImportCSV.TabIndex = 2;
-            this.tabPageImportCSV.Text = "Konwersja plików csv";
+            this.tabPageImportCSV.Text = "Import plików csv do schowka";
             this.tabPageImportCSV.UseVisualStyleBackColor = true;
             // 
             // bReadFileCSV
@@ -476,28 +478,28 @@
             this.bReadFileCSV.UseVisualStyleBackColor = true;
             this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
             // 
-            // tabPageGencen
+            // tabPageUpdate
             // 
-            this.tabPageGencen.Controls.Add(this.bSaveGenCen);
-            this.tabPageGencen.Controls.Add(this.label20);
-            this.tabPageGencen.Controls.Add(this.cMapBrutto);
-            this.tabPageGencen.Controls.Add(this.label19);
-            this.tabPageGencen.Controls.Add(this.cMapNetto);
-            this.tabPageGencen.Controls.Add(this.label18);
-            this.tabPageGencen.Controls.Add(this.cMapKodTowaru);
-            this.tabPageGencen.Controls.Add(this.cCena);
-            this.tabPageGencen.Controls.Add(this.label17);
-            this.tabPageGencen.Controls.Add(this.tNazwaCennika);
-            this.tabPageGencen.Controls.Add(this.label16);
-            this.tabPageGencen.Controls.Add(this.lFilePath);
-            this.tabPageGencen.Controls.Add(this.label15);
-            this.tabPageGencen.Controls.Add(this.bReadFileForHeaders);
-            this.tabPageGencen.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGencen.Name = "tabPageGencen";
-            this.tabPageGencen.Size = new System.Drawing.Size(1425, 176);
-            this.tabPageGencen.TabIndex = 4;
-            this.tabPageGencen.Text = "Import cenników";
-            this.tabPageGencen.UseVisualStyleBackColor = true;
+            this.tabPageUpdate.Controls.Add(this.bSaveGenCen);
+            this.tabPageUpdate.Controls.Add(this.label20);
+            this.tabPageUpdate.Controls.Add(this.cMapBrutto);
+            this.tabPageUpdate.Controls.Add(this.label19);
+            this.tabPageUpdate.Controls.Add(this.cMapNetto);
+            this.tabPageUpdate.Controls.Add(this.label18);
+            this.tabPageUpdate.Controls.Add(this.cMapKodTowaru);
+            this.tabPageUpdate.Controls.Add(this.cCena);
+            this.tabPageUpdate.Controls.Add(this.label17);
+            this.tabPageUpdate.Controls.Add(this.tNazwaCennika);
+            this.tabPageUpdate.Controls.Add(this.label16);
+            this.tabPageUpdate.Controls.Add(this.lFilePath);
+            this.tabPageUpdate.Controls.Add(this.label15);
+            this.tabPageUpdate.Controls.Add(this.bReadFileForHeaders);
+            this.tabPageUpdate.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUpdate.Name = "tabPageUpdate";
+            this.tabPageUpdate.Size = new System.Drawing.Size(1425, 176);
+            this.tabPageUpdate.TabIndex = 4;
+            this.tabPageUpdate.Text = "Aktualizacja kartotek";
+            this.tabPageUpdate.UseVisualStyleBackColor = true;
             // 
             // lFilePath
             // 
@@ -1065,6 +1067,15 @@
             this.bSaveGenCen.UseVisualStyleBackColor = true;
             this.bSaveGenCen.Click += new System.EventHandler(this.bSaveGenCen_Click);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(20, 48);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(246, 104);
+            this.label21.TabIndex = 1;
+            this.label21.Text = resources.GetString("label21.Text");
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1086,8 +1097,9 @@
             this.tabPageRaportTyp2.ResumeLayout(false);
             this.tabPageRaportTyp2.PerformLayout();
             this.tabPageImportCSV.ResumeLayout(false);
-            this.tabPageGencen.ResumeLayout(false);
-            this.tabPageGencen.PerformLayout();
+            this.tabPageImportCSV.PerformLayout();
+            this.tabPageUpdate.ResumeLayout(false);
+            this.tabPageUpdate.PerformLayout();
             this.tabAdmin.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1178,7 +1190,7 @@
         private System.Windows.Forms.CheckedListBox chMagazynyAdmin;
         private System.Windows.Forms.Button bUsrClear;
         private System.Windows.Forms.Button bConnectionSet;
-        private System.Windows.Forms.TabPage tabPageGencen;
+        private System.Windows.Forms.TabPage tabPageUpdate;
         private System.Windows.Forms.Label lFilePath;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button bReadFileForHeaders;
@@ -1194,6 +1206,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tNazwaCennika;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label21;
     }
 }
 

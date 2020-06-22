@@ -1420,7 +1420,10 @@ namespace RaportyRaksSQL
                         DataRow workRow = dt.NewRow();
                         workRow["SKROT"] = tablica[0].ToString();
                         workRow["CENA"] = Convert.ToDouble(tablica[1].ToString());
-                        dt.Rows.Add(workRow); 
+                        if (workRow["SKROT"].ToString() != "")
+                        {
+                            dt.Rows.Add(workRow);
+                        }
                     }
 
                     fDataView = new DataView();

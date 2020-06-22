@@ -39,6 +39,7 @@ namespace RaportyRaksSQL
             string tmpLab = label3.Text;
             label3.Text += " WYKONUJE...";
             int count = 0; 
+
             if (tnameClipboard.Text.Length > 0 && tnameUser.Text.Length > 0)
             {
                 //FbTransaction myTransaction = fbconn.getCurentConnection().BeginTransaction();
@@ -68,7 +69,14 @@ namespace RaportyRaksSQL
                         FbCommand gen_id_towaru = new FbCommand("SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "';", fbconn.getCurentConnection());
                         try
                         {
-                            idtow = (gen_id_towaru.ExecuteScalar()).ToString();
+                            if (gen_id_towaru.ExecuteScalar() != null)
+                            {
+                                idtow = (gen_id_towaru.ExecuteScalar()).ToString();
+                            }
+                            else
+                            {
+                                tBrakiTowarow.Text += row.Cells["SKROT"].Value.ToString() + ";" + System.Environment.NewLine;
+                            }
                         }
                         catch (FbException exgen)
                         {
@@ -77,16 +85,18 @@ namespace RaportyRaksSQL
                         }
 
                         #endregion
-                        
+
                         //Tutaj dopiero ilości z innej kolumny ILOSC
-                        if (currentTabName.Contains("tabPageImportCSV"))
+                        if (idtow != "0")
                         {
-                            #region zapisywanie schowka w wariancie do importu cenników
+                            if (currentTabName.Contains("tabPageImportCSV"))
+                            {
+                                #region zapisywanie schowka w wariancie do importu cenników
                                 double cena = Convert.ToDouble(row.Cells["CENA"].Value);
                                 if (cena > 0)
                                 {
                                     double cenaNet = (cena > 0 ? cena / 1.23 : 0);
-                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString(), (cena/1.23).ToString());
+                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString(), (cena / 1.23).ToString());
 
                                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                                     try
@@ -98,11 +108,13 @@ namespace RaportyRaksSQL
                                     {
                                         MessageBox.Show("Błąd zapisu danych do schowka z okna z import z pliku CSV: " + ex.Message);
                                     }
-                            
+
                                 }
-                            #endregion
-                        }else{
-                            #region zapisywanie schowka w wariancie do importu zamówień
+                                #endregion
+                            }
+                            else
+                            {
+                                #region zapisywanie schowka w wariancie do importu zamówień
                                 double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
                                 if (dozam > 0)
                                 {
@@ -118,9 +130,10 @@ namespace RaportyRaksSQL
                                     {
                                         MessageBox.Show("Błąd zapisu danych do schowka z okna z Raportu 1: " + ex.Message);
                                     }
-                            
+
                                 }
-                            #endregion
+                                #endregion
+                            }
                         }
                     }
                 }

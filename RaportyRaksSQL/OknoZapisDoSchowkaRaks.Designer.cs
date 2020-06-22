@@ -36,11 +36,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tBrakiTowarow = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bCancel
             // 
-            this.bCancel.Location = new System.Drawing.Point(192, 106);
+            this.bCancel.Location = new System.Drawing.Point(192, 241);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             // bSave
             // 
-            this.bSave.Location = new System.Drawing.Point(273, 106);
+            this.bSave.Location = new System.Drawing.Point(273, 241);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(75, 23);
             this.bSave.TabIndex = 1;
@@ -101,11 +103,31 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "label3";
             // 
+            // tBrakiTowarow
+            // 
+            this.tBrakiTowarow.Location = new System.Drawing.Point(25, 120);
+            this.tBrakiTowarow.Multiline = true;
+            this.tBrakiTowarow.Name = "tBrakiTowarow";
+            this.tBrakiTowarow.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tBrakiTowarow.Size = new System.Drawing.Size(323, 115);
+            this.tBrakiTowarow.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(22, 104);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(169, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Towary, których brak w kartotece:";
+            // 
             // OknoZapisDoSchowkaRaks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 141);
+            this.ClientSize = new System.Drawing.Size(360, 271);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tBrakiTowarow);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -131,5 +153,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tBrakiTowarow;
+        private System.Windows.Forms.Label label4;
     }
 }
