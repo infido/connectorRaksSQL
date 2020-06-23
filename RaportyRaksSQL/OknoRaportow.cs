@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using CsvHelper;
 using System.Globalization;
+using LinqToDB.Common;
 
 namespace RaportyRaksSQL
 {
@@ -1293,6 +1294,22 @@ namespace RaportyRaksSQL
                             fDataView.RowFilter = search1;
                         dataGridView1.Refresh();
                     }
+                    else if(labelCol.Text.Contains("DO_AKTUALIZACJI"))
+                    {
+                        if ((bool)dataGridView1.CurrentCell.Value)
+                        {
+                            search1 = " " + labelCol.Text + " = " + 1;
+                        }
+                        else
+                        {
+                            search1 = " " + labelCol.Text + " = " + 0;
+                        }
+                        if (search2.Length > 0)
+                            fDataView.RowFilter = search1 + " AND " + search2;
+                        else
+                            fDataView.RowFilter = search1;
+                        dataGridView1.Refresh();
+                    }
                     else
                     {
                         search1 = " " + labelCol.Text + " Like '" + toSearch.Text + "'";
@@ -1794,8 +1811,11 @@ namespace RaportyRaksSQL
             DataSet fdsr = new DataSet();
             fdsr.Tables.Add("TAB");
             fdsr.Tables["TAB"].Columns.Add("SKROT", typeof(String));
-            fdsr.Tables["TAB"].Columns.Add("STARY_GTIN", typeof(String));
-            fdsr.Tables["TAB"].Columns.Add("NOWY_GETIN", typeof(String));
+            fdsr.Tables["TAB"].Columns.Add("ARCHIWALNY", typeof(int));
+            fdsr.Tables["TAB"].Columns.Add("STAN_W_RAKS", typeof(Double));
+            fdsr.Tables["TAB"].Columns.Add("GTIN_W_RAKS", typeof(String));
+            fdsr.Tables["TAB"].Columns.Add("NOWY_GTIN", typeof(String));
+            fdsr.Tables["TAB"].Columns.Add("DO_AKTUALIZACJI", typeof(bool));
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -1803,12 +1823,25 @@ namespace RaportyRaksSQL
                 {
                     #region obliczanie ID towaru z Indeksu
                     string stary = "BRAK INDEKSU";
+                    Double stan = 0.0;
+                    int arch;
                     FbCommand gen_id_towaru = new FbCommand("SELECT GTIN from GM_TOWARY where SKROT='" + row.Cells[cMapKodTowaru.Text].Value.ToString() + "';", fbconn.getCurentConnection());
+                    FbCommand get_archiv_towaru = new FbCommand("SELECT ARCHIWALNY from GM_TOWARY where SKROT='" + row.Cells[cMapKodTowaru.Text].Value.ToString() + "';", fbconn.getCurentConnection());
+                    FbCommand get_stan_towaru = new FbCommand("SELECT sum(ILOSC) from GM_MAGAZYN join GM_TOWARY on GM_TOWARY.ID_TOWARU=GM_MAGAZYN.ID_TOWAR where GM_TOWARY.SKROT='" + row.Cells[cMapKodTowaru.Text].Value.ToString() + "';", fbconn.getCurentConnection());
                     try
                     {
                         if (gen_id_towaru.ExecuteScalar() != null)
                         {
                             stary = (gen_id_towaru.ExecuteScalar()).ToString();
+                            arch = Convert.ToInt16(get_archiv_towaru.ExecuteScalar());
+                            if (get_stan_towaru.ExecuteScalar() != DBNull.Value)
+                            {
+                                stan = Convert.ToDouble(get_stan_towaru.ExecuteScalar());
+                            }
+                        }
+                        else
+                        {
+                            arch = -2;
                         }
                     }
                     catch (FbException exgen)
@@ -1818,7 +1851,7 @@ namespace RaportyRaksSQL
                     }
 
                     #endregion
-                    fdsr.Tables["TAB"].Rows.Add(row.Cells[cMapKodTowaru.Text].Value.ToString(), stary, row.Cells[cMapGTIN.Text].Value.ToString());
+                    fdsr.Tables["TAB"].Rows.Add(row.Cells[cMapKodTowaru.Text].Value.ToString(), arch, stan, stary, row.Cells[cMapGTIN.Text].Value.ToString(), (!stary.Equals(row.Cells[cMapGTIN.Text].Value.ToString()) && !stary.Equals("BRAK INDEKSU")) );
                 }
             }
 
@@ -1828,6 +1861,33 @@ namespace RaportyRaksSQL
 
             bGTINupdate.Visible = true;
             bGTINcheck.Visible = false;
+        }
+
+        private void bGTINupdate_Click(object sender, EventArgs e)
+        {
+            int przetworzono = 0; 
+            int zaktualizowano = 0;
+
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                przetworzono++;
+                if (item.Cells["DO_AKTUALIZACJI"].Value!=null && (bool)item.Cells["DO_AKTUALIZACJI"].Value && !item.Cells["SKROT"].Value.ToString().IsNullOrEmpty())
+                {
+                    FbCommand update_towar = new FbCommand("UPDATE GM_TOWARY set GTIN='" + item.Cells["NOWY_GTIN"].Value.ToString() + "' where SKROT='" + item.Cells["SKROT"].Value.ToString() + "';", fbconn.getCurentConnection());
+                    try
+                    {
+                        update_towar.ExecuteScalar();
+                        zaktualizowano++;
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show("Błąd aktualizacji pola GTIN na towarze o indeksie: " + item.Cells["SKROT"].Value.ToString() + System.Environment.NewLine + exp.Message);
+                        throw;
+                    }
+                }
+            }
+            MessageBox.Show("Przetworzono: " + przetworzono + " indeksów, a zaktualizowano: " + zaktualizowano);
+            bGTINupdate.Visible = false;
         }
     }
 }
