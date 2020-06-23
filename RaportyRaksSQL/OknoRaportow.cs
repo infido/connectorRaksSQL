@@ -486,6 +486,16 @@ namespace RaportyRaksSQL
         private void bSetYear2009_Click(object sender, EventArgs e)
         {
             dateOD1.Text = dateOd2.Text = "2018-10-01";
+            //FbCommand update_towar = new FbCommand("ALTER TABLE GM_TOWARY ALTER SKROT TYPE STRING25_D;", fbconn.getCurentConnection());
+            //try
+            //{
+            //    update_towar.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Test" + ex.Message);
+            //    throw;
+            //}
         }
 
         private void SetWartosciParametrowDlaWhere()
@@ -1339,7 +1349,7 @@ namespace RaportyRaksSQL
 
         private void bSaveToRaksSQLClipboard_Click(object sender, EventArgs e)
         {
-            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn, ref dataGridView1, checkBoxIlosc1.Checked, tabControlParametry.SelectedTab.Name.ToString());
+            OknoZapisDoSchowkaRaks okno = new OknoZapisDoSchowkaRaks(fbconn, ref dataGridView1, checkBoxIlosc1.Checked, tabControlParametry.SelectedTab.Name.ToString(), rbSkrot.Checked);
             okno.Show();
         }
 
@@ -1424,7 +1434,11 @@ namespace RaportyRaksSQL
                 try
                 {
                     DataTable dt = new DataTable("RESULT");
-                    dt.Columns.Add(new DataColumn("SKROT",typeof(String)));
+                    if (rbSkrot.Checked)
+                        dt.Columns.Add(new DataColumn("SKROT",typeof(String)));
+                    else
+                        dt.Columns.Add(new DataColumn("KONTOFK", typeof(String)));
+
                     dt.Columns.Add(new DataColumn("CENA",typeof(Double)));
 
                     
@@ -1435,11 +1449,27 @@ namespace RaportyRaksSQL
                         // Use a tab to indent each line of the file.
                         Console.WriteLine("\t" + tablica[0].ToString() + ";;" + tablica[1].ToString());
                         DataRow workRow = dt.NewRow();
-                        workRow["SKROT"] = tablica[0].ToString();
+
+                        if (rbSkrot.Checked)
+                            workRow["SKROT"] = tablica[0].ToString();
+                        else
+                            workRow["KONTOFK"] = tablica[0].ToString();
+
                         workRow["CENA"] = Convert.ToDouble(tablica[1].ToString());
-                        if (workRow["SKROT"].ToString() != "")
+
+                        if (rbSkrot.Checked)
                         {
-                            dt.Rows.Add(workRow);
+                            if (workRow["SKROT"].ToString() != "")
+                            {
+                                dt.Rows.Add(workRow);
+                            }
+                        }
+                        else
+                        {
+                            if (workRow["KONTOFK"].ToString() != "")
+                            {
+                                dt.Rows.Add(workRow);
+                            }
                         }
                     }
 

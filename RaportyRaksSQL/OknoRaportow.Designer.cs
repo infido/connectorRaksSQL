@@ -123,6 +123,9 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbSkrot = new System.Windows.Forms.RadioButton();
+            this.rbKonto = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -136,6 +139,7 @@
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -460,6 +464,7 @@
             // 
             // tabPageImportCSV
             // 
+            this.tabPageImportCSV.Controls.Add(this.groupBox2);
             this.tabPageImportCSV.Controls.Add(this.label21);
             this.tabPageImportCSV.Controls.Add(this.bReadFileCSV);
             this.tabPageImportCSV.Location = new System.Drawing.Point(4, 22);
@@ -473,7 +478,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(20, 48);
+            this.label21.Location = new System.Drawing.Point(203, 22);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(246, 104);
             this.label21.TabIndex = 1;
@@ -481,11 +486,11 @@
             // 
             // bReadFileCSV
             // 
-            this.bReadFileCSV.Location = new System.Drawing.Point(20, 18);
+            this.bReadFileCSV.Location = new System.Drawing.Point(20, 100);
             this.bReadFileCSV.Name = "bReadFileCSV";
-            this.bReadFileCSV.Size = new System.Drawing.Size(303, 23);
+            this.bReadFileCSV.Size = new System.Drawing.Size(168, 23);
             this.bReadFileCSV.TabIndex = 0;
-            this.bReadFileCSV.Text = "Wczytaj plik CSV 2 kolumny (SKROT,CENA_BRUTTO)";
+            this.bReadFileCSV.Text = "Wczytaj plik CSV 2 kolumny \r\n";
             this.bReadFileCSV.UseVisualStyleBackColor = true;
             this.bReadFileCSV.Click += new System.EventHandler(this.bReadFileCSV_Click);
             // 
@@ -1109,6 +1114,39 @@
             this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
             this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbKonto);
+            this.groupBox2.Controls.Add(this.rbSkrot);
+            this.groupBox2.Location = new System.Drawing.Point(20, 22);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(168, 72);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Układ pliku do importu";
+            // 
+            // rbSkrot
+            // 
+            this.rbSkrot.AutoSize = true;
+            this.rbSkrot.Checked = true;
+            this.rbSkrot.Location = new System.Drawing.Point(7, 20);
+            this.rbSkrot.Name = "rbSkrot";
+            this.rbSkrot.Size = new System.Drawing.Size(145, 17);
+            this.rbSkrot.TabIndex = 0;
+            this.rbSkrot.TabStop = true;
+            this.rbSkrot.Text = "SKROT,CENA_BRUTTO";
+            this.rbSkrot.UseVisualStyleBackColor = true;
+            // 
+            // rbKonto
+            // 
+            this.rbKonto.AutoSize = true;
+            this.rbKonto.Location = new System.Drawing.Point(7, 43);
+            this.rbKonto.Name = "rbKonto";
+            this.rbKonto.Size = new System.Drawing.Size(159, 17);
+            this.rbKonto.TabIndex = 1;
+            this.rbKonto.Text = "KONTOFK,CENA_BRUTTO";
+            this.rbKonto.UseVisualStyleBackColor = true;
+            // 
             // OknoRaportow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1141,6 +1179,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1242,6 +1282,9 @@
         private System.Windows.Forms.ComboBox cMapGTIN;
         private System.Windows.Forms.Button bGTINupdate;
         private System.Windows.Forms.Button bGTINcheck;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbKonto;
+        private System.Windows.Forms.RadioButton rbSkrot;
     }
 }
 

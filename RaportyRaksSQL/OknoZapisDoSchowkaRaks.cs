@@ -16,15 +16,17 @@ namespace RaportyRaksSQL
         FBConn fbconn;
         DataGridView view;
         bool wszystkoJako1 = false;
+        bool czyKolSkrot;
         string currentTabName = "";
 
-        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv, bool czyWartoscJeden, string tabName)
+        public OknoZapisDoSchowkaRaks(FBConn fbc, ref DataGridView dgv, bool czyWartoscJeden, string tabName, bool czySkrot)
         {
             InitializeComponent();
             fbconn = new FBConn();
             fbconn = fbc;
             wszystkoJako1 = czyWartoscJeden;
             currentTabName = tabName;
+            czyKolSkrot = czySkrot;
             view = new DataGridView();
             view = dgv;
         }
@@ -50,7 +52,9 @@ namespace RaportyRaksSQL
 
                 foreach (DataGridViewRow row in view.Rows)
                 {
-                    if (row.Cells["SKROT"].Value != null)
+                    if ( (czyKolSkrot && row.Cells["SKROT"].Value != null) ||
+                          row.Cells["KONTOFK"].Value != null
+                        )
                     {
                         #region pobranie nowego id z bazy
                         try
@@ -66,7 +70,13 @@ namespace RaportyRaksSQL
 
                         #region obliczanie ID towaru z Indeksu
                         string idtow = "0";
-                        FbCommand gen_id_towaru = new FbCommand("SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "';", fbconn.getCurentConnection());
+                        string sql;
+                        if (czyKolSkrot)
+                            sql = "SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "';";
+                        else
+                            sql = "SELECT ID_TOWARU from GM_TOWARY where KONTOFK='" + row.Cells["KONTOFK"].Value.ToString() + "';";
+
+                        FbCommand gen_id_towaru = new FbCommand(sql, fbconn.getCurentConnection());
                         try
                         {
                             if (gen_id_towaru.ExecuteScalar() != null)
@@ -75,12 +85,18 @@ namespace RaportyRaksSQL
                             }
                             else
                             {
-                                tBrakiTowarow.Text += row.Cells["SKROT"].Value.ToString() + ";" + System.Environment.NewLine;
+                                if (czyKolSkrot)
+                                    tBrakiTowarow.Text += row.Cells["SKROT"].Value.ToString() + ";" + System.Environment.NewLine;
+                                else
+                                    tBrakiTowarow.Text += row.Cells["KONTOFK"].Value.ToString() + ";" + System.Environment.NewLine;
                             }
                         }
                         catch (FbException exgen)
                         {
-                            MessageBox.Show("Błąd pobierania nowego ID_TOWARU na podstawie skrótu" + row.Cells["SKROT"].Value.ToString() + " . Operacje przerwano! " + exgen.Message);
+                            if (czyKolSkrot) 
+                                MessageBox.Show("Błąd pobierania nowego ID_TOWARU na podstawie skrótu" + row.Cells["SKROT"].Value.ToString() + " . Operacje przerwano! " + exgen.Message);
+                            else
+                                MessageBox.Show("Błąd pobierania nowego ID_TOWARU na podstawie konta FK" + row.Cells["KONTOFK"].Value.ToString() + " . Operacje przerwano! " + exgen.Message);
                             throw;
                         }
 
@@ -96,7 +112,7 @@ namespace RaportyRaksSQL
                                 if (cena > 0)
                                 {
                                     double cenaNet = (cena > 0 ? cena / 1.23 : 0);
-                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString(), (cena / 1.23).ToString());
+                                    sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, "1.0", cena.ToString(), (cena / 1.23).ToString());
 
                                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                                     try
@@ -118,7 +134,7 @@ namespace RaportyRaksSQL
                                 double dozam = wszystkoJako1 ? 1.0 : Convert.ToDouble(row.Cells["DO_ZAMOWIENIA"].Value);
                                 if (dozam > 0)
                                 {
-                                    string sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"), "0.0", "0.0");
+                                    sql = setSQLInsertSchowek(idscho, idtow, tnameClipboard.Text, tnameUser.Text, dozam.ToString("F"), "0.0", "0.0");
 
                                     FbCommand cdk = new FbCommand(sql, fbconn.getCurentConnection());
                                     try
