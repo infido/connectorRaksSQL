@@ -1919,5 +1919,215 @@ namespace RaportyRaksSQL
             MessageBox.Show("Przetworzono: " + przetworzono + " indeksów, a zaktualizowano: " + zaktualizowano);
             bGTINupdate.Visible = false;
         }
+
+        private void bImportFakturEPP_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dial = new OpenFileDialog();
+            dial.Filter = "EPP files (*.epp)|*.epp";
+            if (dial.ShowDialog() == DialogResult.OK || dial.ShowDialog() == DialogResult.Yes)
+            {
+                try
+                {
+                    DataTable dt = new DataTable("PLIK");
+                    dt.Columns.Add(new DataColumn("SEKCJA", typeof(String)));
+                    dt.Columns.Add(new DataColumn("TYP", typeof(String)));
+                    dt.Columns.Add(new DataColumn("LINIA", typeof(String)));
+                    dt.Columns.Add(new DataColumn("LP", typeof(int)));
+                    dt.Columns.Add(new DataColumn("ILOSC", typeof(int)));
+                    dt.Columns.Add(new DataColumn("SKROT", typeof(String)));
+                    dt.Columns.Add(new DataColumn("KOD_KRESKOWY", typeof(String)));
+                    dt.Columns.Add(new DataColumn("NAZWA", typeof(String)));
+                    dt.Columns.Add(new DataColumn("JM", typeof(String)));
+                    dt.Columns.Add(new DataColumn("PROC_VAT", typeof(Decimal)));
+                    dt.Columns.Add(new DataColumn("CENA_KAT_NETTO", typeof(Decimal)));
+                    dt.Columns.Add(new DataColumn("CENA_KAT_BRUTTO", typeof(Decimal)));
+                    dt.Columns.Add(new DataColumn("CENA_NETTO", typeof(Decimal)));
+                    dt.Columns.Add(new DataColumn("VAT", typeof(Decimal)));
+                    dt.Columns.Add(new DataColumn("CENA_BRUTTO", typeof(Decimal)));
+
+
+                    string[] lines = System.IO.File.ReadAllLines(dial.FileName.ToString(), Encoding.Default);
+                    string sekcja = "";
+                    string typ = "";
+                    foreach (string line in lines)
+                    {
+                        string[] tablica = line.Split(',');
+                        if (line.StartsWith("[") && !line.Equals("[ZAWARTOSC]"))
+                        {
+                            sekcja = line;
+                            typ = "";
+                        }else if (sekcja.Equals("[ZAWARTOSC]"))
+                        {
+                            //nic typ pozostaje
+                        }
+                        else if (typ.Equals(""))
+                        {
+                            typ = tablica[0].ToString();
+                        }
+
+                        if (line.StartsWith("\"FS"))
+                            lSymbolFakturyZakupu.Text = tablica[4].ToString().Replace("\"","");
+
+                        if (typ != "" && typ!=line && line!="" && line!="[ZAWARTOSC]")
+                        {
+                            if (typ.Equals("\"FS\"") && !line.StartsWith("\"FS"))
+                            {
+                                DataRow workRow = dt.NewRow();
+                                workRow["SEKCJA"] = sekcja;
+                                workRow["TYP"] = typ;
+                                workRow["LINIA"] = line;
+                                workRow["LP"]= tablica[0].ToString();
+                                workRow["ILOSC"] = Convert.ToInt32(tablica[1]);
+                                workRow["SKROT"] = tablica[2].ToString().Replace("\"", "");
+
+                                workRow["JM"]= tablica[9].ToString().Replace("\"", "");
+                                workRow["CENA_NETTO"] = Convert.ToDecimal(tablica[16].ToString().Replace(".", ","));
+                                workRow["VAT"] = Convert.ToDecimal(tablica[17].ToString().Replace(".", ","));
+                                workRow["CENA_BRUTTO"] = Math.Round( Convert.ToDecimal(tablica[16].ToString().Replace(".", ",")) + Convert.ToDecimal(tablica[17].ToString().Replace(".", ",")),2);
+
+                                workRow["PROC_VAT"] = Convert.ToDecimal(tablica[15].ToString().Replace(".", ","));
+                                workRow["CENA_KAT_BRUTTO"] = Convert.ToDecimal(tablica[14].ToString().Replace(".", ","));
+                                workRow["CENA_KAT_NETTO"] = Math.Round(Convert.ToDecimal(tablica[14].ToString().Replace(".", ",")) / (1 + (Convert.ToDecimal(tablica[15].ToString().Replace(".", ","))/100) ),2) ;
+
+                                dt.Rows.Add(workRow);
+                            }
+                        }
+                    }
+
+                    fDataView = new DataView();
+                    fDataView.Table = dt;
+                    dataGridView1.DataSource = fDataView;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Błąd importu pliku: " + ex.Message);
+                    throw;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Operację importu faktur anulowano","Anulowano import:");
+            }
+        }
+
+        private void bZapiszFakZakdoSchowka_Click(object sender, EventArgs e)
+        {
+            int idscho = 0;
+            int iloscSkip = 0;
+            int iloscSave = 0;
+            FbCommand gen_id_schowek = new FbCommand("SELECT GEN_ID(GM_SCHOWEK_POZYCJI_GEN,1) from rdb$database", fbconn.getCurentConnection());
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["SKROT"].Value!=null)
+                {
+                    try
+                    {
+                        idscho = Convert.ToInt32(gen_id_schowek.ExecuteScalar());
+                    }
+                    catch (FbException exgen)
+                    {
+                        MessageBox.Show("Błąd pobierania nowego ID z bazy. Operacje przerwano! " + exgen.Message);
+                        throw;
+                    }
+
+
+                    StringBuilder myStringBuilder = new StringBuilder("INSERT INTO GM_SCHOWEK_POZYCJI (");
+                    myStringBuilder.Append("ID, ");
+                    myStringBuilder.Append("OPERATOR, ");
+                    myStringBuilder.Append("IDENTYFIKATOR, ");
+                    myStringBuilder.Append("PUBLICZNA, ");
+                    myStringBuilder.Append("ID_TOWARU, ");
+                    myStringBuilder.Append("ILOSC, ");
+                    myStringBuilder.Append("CENA_SP_PLN_NETTO_PO_RAB, ");
+                    myStringBuilder.Append("CENA_SP_PLN_BRUTTO_PO_RAB, ");
+                    myStringBuilder.Append("CENA_SP_PLN_NETTO_PRZED_RAB, ");
+                    myStringBuilder.Append("CENA_SP_PLN_BRUTTO_PRZED_RAB, ");
+                    myStringBuilder.Append("CENA_SP_WAL_NETTO_PRZED_RAB, ");
+                    myStringBuilder.Append("CENA_SP_WAL_BRUTTO_PRZED_RAB, ");
+                    myStringBuilder.Append("CENA_SP_WAL_NETTO_PO_RAB, ");
+                    myStringBuilder.Append("CENA_SP_WAL_BRUTTO_PO_RAB, ");
+                    myStringBuilder.Append("CENA_KATALOGOWA_NETTO, "); 
+                    myStringBuilder.Append("CENA_KATALOGOWA_BRUTTO, ");
+                    myStringBuilder.Append("CENA_ZAKUPU_PLN_NETTO, "); 
+                    myStringBuilder.Append("CENA_ZAKUPU_PLN_BRUTTO, "); 
+                    myStringBuilder.Append("ZNACZNIKI, ");
+                    myStringBuilder.Append("UWAGI");
+
+                    myStringBuilder.Append(") VALUES ( ");
+
+                    myStringBuilder.Append(idscho.ToString() + ",");  // ID
+                    myStringBuilder.Append("'EPP', ");  // OPERATOR
+                    myStringBuilder.Append("'EPP " + lSymbolFakturyZakupu.Text + "', ");  //IDENTYFIKATOR
+                    myStringBuilder.Append("1, ");  //PUBLICZNA
+
+                    string sql = "SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "'";
+                    sql += " OR SKROT2='" + row.Cells["SKROT"].Value.ToString() + "'";
+                    sql += " OR KONTOFK='" + row.Cells["SKROT"].Value.ToString() + "'";
+                    sql += ";";
+                    FbCommand gen_id_towaru = new FbCommand(sql, fbconn.getCurentConnection());
+                    string idtow = "0";
+                    try
+                    {
+                        if (gen_id_towaru.ExecuteScalar() != null)
+                        {
+                            idtow = (gen_id_towaru.ExecuteScalar()).ToString();
+                        }
+                        else
+                        {
+                            tPodsumowanieZeSchowka.Text += "Brak towaru: " + row.Cells["SKROT"].Value.ToString() + ";" + System.Environment.NewLine;
+
+                        }
+                    }
+                    catch (FbException fex)
+                    {
+                        MessageBox.Show("Bład pobierania ID towaru: " + row.Cells["SKROT"].Value.ToString() + System.Environment.NewLine + fex.Message);
+                        throw;
+                    }
+
+
+                    myStringBuilder.Append(idtow + ", ");  //ID_TOWARU
+
+                    myStringBuilder.Append(row.Cells["ILOSC"].Value.ToString().Replace(",", ".") + ", ");  //ILOSC
+                    myStringBuilder.Append(row.Cells["CENA_KAT_NETTO"].Value.ToString().ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_NETTO_PO_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_BRUTTO"].Value.ToString().ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_BRUTTO_PO_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_NETTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_NETTO_PRZED_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_BRUTTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_SP_PLN_BRUTTO_PRZED_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_NETTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_SP_WAL_NETTO_PRZED_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_BRUTTO"].Value.ToString().Replace(",", ".") + ", ");  //CCENA_SP_WAL_BRUTTO_PRZED_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_NETTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_SP_WAL_NETTO_PO_RAB
+                    myStringBuilder.Append(row.Cells["CENA_KAT_BRUTTO"].Value.ToString().Replace(",", ".") + ", ");  //CCENA_SP_WAL_BRUTTO_PO_RAB
+
+                    myStringBuilder.Append(row.Cells["CENA_KAT_NETTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_KATALOGOWA_NETTO
+                    myStringBuilder.Append(row.Cells["CENA_KAT_BRUTTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_KATALOGOWA_BRUTTO
+
+                    myStringBuilder.Append(row.Cells["CENA_NETTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_ZAKUPU_PLN_NETTO
+                    myStringBuilder.Append(row.Cells["CENA_BRUTTO"].Value.ToString().Replace(",", ".") + ", ");  //CENA_ZAKUPU_PLN_BRUTTO
+
+                    myStringBuilder.Append("NULL, ");  //ZNACZNIKI
+                    myStringBuilder.Append("NULL");  //UWAGI
+                    myStringBuilder.Append(");");
+
+                    FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
+                    try
+                    {
+                        if (idtow.Equals("0"))
+                        {
+                            iloscSkip++;
+                        }
+                        else
+                        {
+                            cdk.ExecuteScalar();
+                            iloscSave++;
+                        }
+                    }
+                    catch (FbException ex)
+                    {
+                        MessageBox.Show("Błąd zapisu danych do schowka z okna z import faktur EPP: " + ex.Message);
+                    }
+                }
+            }
+            tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Zapisano " + iloscSave + " pozycji...";
+            tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Pominieto " + iloscSkip + " pozycji...";
+        }
     }
 }

@@ -62,6 +62,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dateOd2 = new System.Windows.Forms.DateTimePicker();
             this.tabPageImportCSV = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbKonto = new System.Windows.Forms.RadioButton();
+            this.rbSkrot = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
             this.bReadFileCSV = new System.Windows.Forms.Button();
             this.tabPageUpdate = new System.Windows.Forms.TabPage();
@@ -123,15 +126,19 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rbSkrot = new System.Windows.Forms.RadioButton();
-            this.rbKonto = new System.Windows.Forms.RadioButton();
+            this.tabImportFaktur = new System.Windows.Forms.TabPage();
+            this.bImportFakturEPP = new System.Windows.Forms.Button();
+            this.lSymbolFakturyZakupu = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.bZapiszFakZakdoSchowka = new System.Windows.Forms.Button();
+            this.tPodsumowanieZeSchowka = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
             this.tabPageRaportTyp1.SuspendLayout();
             this.tabPageRaportTyp2.SuspendLayout();
             this.tabPageImportCSV.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -139,7 +146,7 @@
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.tabImportFaktur.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -173,6 +180,7 @@
             this.tabControlParametry.Controls.Add(this.tabPageRaportTyp2);
             this.tabControlParametry.Controls.Add(this.tabPageImportCSV);
             this.tabControlParametry.Controls.Add(this.tabPageUpdate);
+            this.tabControlParametry.Controls.Add(this.tabImportFaktur);
             this.tabControlParametry.Controls.Add(this.tabAdmin);
             this.tabControlParametry.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlParametry.Location = new System.Drawing.Point(0, 0);
@@ -474,6 +482,39 @@
             this.tabPageImportCSV.TabIndex = 2;
             this.tabPageImportCSV.Text = "Import plików csv do schowka";
             this.tabPageImportCSV.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbKonto);
+            this.groupBox2.Controls.Add(this.rbSkrot);
+            this.groupBox2.Location = new System.Drawing.Point(20, 22);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(168, 72);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Układ pliku do importu";
+            // 
+            // rbKonto
+            // 
+            this.rbKonto.AutoSize = true;
+            this.rbKonto.Location = new System.Drawing.Point(7, 43);
+            this.rbKonto.Name = "rbKonto";
+            this.rbKonto.Size = new System.Drawing.Size(159, 17);
+            this.rbKonto.TabIndex = 1;
+            this.rbKonto.Text = "KONTOFK,CENA_BRUTTO";
+            this.rbKonto.UseVisualStyleBackColor = true;
+            // 
+            // rbSkrot
+            // 
+            this.rbSkrot.AutoSize = true;
+            this.rbSkrot.Checked = true;
+            this.rbSkrot.Location = new System.Drawing.Point(7, 20);
+            this.rbSkrot.Name = "rbSkrot";
+            this.rbSkrot.Size = new System.Drawing.Size(145, 17);
+            this.rbSkrot.TabIndex = 0;
+            this.rbSkrot.TabStop = true;
+            this.rbSkrot.Text = "SKROT,CENA_BRUTTO";
+            this.rbSkrot.UseVisualStyleBackColor = true;
             // 
             // label21
             // 
@@ -1114,38 +1155,66 @@
             this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
             this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
             // 
-            // groupBox2
+            // tabImportFaktur
             // 
-            this.groupBox2.Controls.Add(this.rbKonto);
-            this.groupBox2.Controls.Add(this.rbSkrot);
-            this.groupBox2.Location = new System.Drawing.Point(20, 22);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(168, 72);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Układ pliku do importu";
+            this.tabImportFaktur.Controls.Add(this.tPodsumowanieZeSchowka);
+            this.tabImportFaktur.Controls.Add(this.bZapiszFakZakdoSchowka);
+            this.tabImportFaktur.Controls.Add(this.label23);
+            this.tabImportFaktur.Controls.Add(this.lSymbolFakturyZakupu);
+            this.tabImportFaktur.Controls.Add(this.bImportFakturEPP);
+            this.tabImportFaktur.Location = new System.Drawing.Point(4, 22);
+            this.tabImportFaktur.Name = "tabImportFaktur";
+            this.tabImportFaktur.Size = new System.Drawing.Size(1425, 176);
+            this.tabImportFaktur.TabIndex = 5;
+            this.tabImportFaktur.Text = "Import faktur zakupowych";
+            this.tabImportFaktur.UseVisualStyleBackColor = true;
             // 
-            // rbSkrot
+            // bImportFakturEPP
             // 
-            this.rbSkrot.AutoSize = true;
-            this.rbSkrot.Checked = true;
-            this.rbSkrot.Location = new System.Drawing.Point(7, 20);
-            this.rbSkrot.Name = "rbSkrot";
-            this.rbSkrot.Size = new System.Drawing.Size(145, 17);
-            this.rbSkrot.TabIndex = 0;
-            this.rbSkrot.TabStop = true;
-            this.rbSkrot.Text = "SKROT,CENA_BRUTTO";
-            this.rbSkrot.UseVisualStyleBackColor = true;
+            this.bImportFakturEPP.Location = new System.Drawing.Point(20, 20);
+            this.bImportFakturEPP.Name = "bImportFakturEPP";
+            this.bImportFakturEPP.Size = new System.Drawing.Size(176, 23);
+            this.bImportFakturEPP.TabIndex = 0;
+            this.bImportFakturEPP.Text = "Import Faktur z epp";
+            this.bImportFakturEPP.UseVisualStyleBackColor = true;
+            this.bImportFakturEPP.Click += new System.EventHandler(this.bImportFakturEPP_Click);
             // 
-            // rbKonto
+            // lSymbolFakturyZakupu
             // 
-            this.rbKonto.AutoSize = true;
-            this.rbKonto.Location = new System.Drawing.Point(7, 43);
-            this.rbKonto.Name = "rbKonto";
-            this.rbKonto.Size = new System.Drawing.Size(159, 17);
-            this.rbKonto.TabIndex = 1;
-            this.rbKonto.Text = "KONTOFK,CENA_BRUTTO";
-            this.rbKonto.UseVisualStyleBackColor = true;
+            this.lSymbolFakturyZakupu.AutoSize = true;
+            this.lSymbolFakturyZakupu.Location = new System.Drawing.Point(86, 150);
+            this.lSymbolFakturyZakupu.Name = "lSymbolFakturyZakupu";
+            this.lSymbolFakturyZakupu.Size = new System.Drawing.Size(115, 13);
+            this.lSymbolFakturyZakupu.TabIndex = 1;
+            this.lSymbolFakturyZakupu.Text = "lSymbolFakturyZakupu";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(9, 150);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(79, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Symbol faktury:";
+            // 
+            // bZapiszFakZakdoSchowka
+            // 
+            this.bZapiszFakZakdoSchowka.Location = new System.Drawing.Point(272, 145);
+            this.bZapiszFakZakdoSchowka.Name = "bZapiszFakZakdoSchowka";
+            this.bZapiszFakZakdoSchowka.Size = new System.Drawing.Size(266, 23);
+            this.bZapiszFakZakdoSchowka.TabIndex = 3;
+            this.bZapiszFakZakdoSchowka.Text = "Zapisz fakturę zakupową do schowka RaksSQL";
+            this.bZapiszFakZakdoSchowka.UseVisualStyleBackColor = true;
+            this.bZapiszFakZakdoSchowka.Click += new System.EventHandler(this.bZapiszFakZakdoSchowka_Click);
+            // 
+            // tPodsumowanieZeSchowka
+            // 
+            this.tPodsumowanieZeSchowka.Location = new System.Drawing.Point(646, 3);
+            this.tPodsumowanieZeSchowka.Multiline = true;
+            this.tPodsumowanieZeSchowka.Name = "tPodsumowanieZeSchowka";
+            this.tPodsumowanieZeSchowka.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tPodsumowanieZeSchowka.Size = new System.Drawing.Size(771, 165);
+            this.tPodsumowanieZeSchowka.TabIndex = 4;
             // 
             // OknoRaportow
             // 
@@ -1169,6 +1238,8 @@
             this.tabPageRaportTyp2.PerformLayout();
             this.tabPageImportCSV.ResumeLayout(false);
             this.tabPageImportCSV.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabPageUpdate.ResumeLayout(false);
             this.tabPageUpdate.PerformLayout();
             this.tabAdmin.ResumeLayout(false);
@@ -1179,8 +1250,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.tabImportFaktur.ResumeLayout(false);
+            this.tabImportFaktur.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1285,6 +1356,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rbKonto;
         private System.Windows.Forms.RadioButton rbSkrot;
+        private System.Windows.Forms.TabPage tabImportFaktur;
+        private System.Windows.Forms.Button bImportFakturEPP;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lSymbolFakturyZakupu;
+        private System.Windows.Forms.Button bZapiszFakZakdoSchowka;
+        private System.Windows.Forms.TextBox tPodsumowanieZeSchowka;
     }
 }
 
