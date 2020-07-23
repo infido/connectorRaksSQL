@@ -743,18 +743,19 @@
             // 
             // bZapiszFakZakdoSchowka
             // 
-            this.bZapiszFakZakdoSchowka.Location = new System.Drawing.Point(20, 81);
+            this.bZapiszFakZakdoSchowka.Location = new System.Drawing.Point(20, 73);
             this.bZapiszFakZakdoSchowka.Name = "bZapiszFakZakdoSchowka";
             this.bZapiszFakZakdoSchowka.Size = new System.Drawing.Size(266, 23);
             this.bZapiszFakZakdoSchowka.TabIndex = 3;
             this.bZapiszFakZakdoSchowka.Text = "3. Zapisz fakturę zakupową do schowka RaksSQL";
+            this.bZapiszFakZakdoSchowka.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bZapiszFakZakdoSchowka.UseVisualStyleBackColor = true;
             this.bZapiszFakZakdoSchowka.Click += new System.EventHandler(this.bZapiszFakZakdoSchowka_Click);
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(294, 25);
+            this.label23.Location = new System.Drawing.Point(17, 99);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(79, 13);
             this.label23.TabIndex = 2;
@@ -763,7 +764,7 @@
             // lSymbolFakturyZakupu
             // 
             this.lSymbolFakturyZakupu.AutoSize = true;
-            this.lSymbolFakturyZakupu.Location = new System.Drawing.Point(371, 25);
+            this.lSymbolFakturyZakupu.Location = new System.Drawing.Point(94, 99);
             this.lSymbolFakturyZakupu.Name = "lSymbolFakturyZakupu";
             this.lSymbolFakturyZakupu.Size = new System.Drawing.Size(115, 13);
             this.lSymbolFakturyZakupu.TabIndex = 1;
@@ -773,11 +774,12 @@
             // 
             // bImportFakturEPP
             // 
-            this.bImportFakturEPP.Location = new System.Drawing.Point(20, 20);
+            this.bImportFakturEPP.Location = new System.Drawing.Point(20, 12);
             this.bImportFakturEPP.Name = "bImportFakturEPP";
             this.bImportFakturEPP.Size = new System.Drawing.Size(266, 23);
             this.bImportFakturEPP.TabIndex = 0;
             this.bImportFakturEPP.Text = "1. Wczytaj plik Faktur *.epp";
+            this.bImportFakturEPP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bImportFakturEPP.UseVisualStyleBackColor = true;
             this.bImportFakturEPP.Click += new System.EventHandler(this.bImportFakturEPP_Click);
             // 
@@ -1227,11 +1229,12 @@
             // bSprawdzenieIndeksow
             // 
             this.bSprawdzenieIndeksow.Enabled = false;
-            this.bSprawdzenieIndeksow.Location = new System.Drawing.Point(20, 50);
+            this.bSprawdzenieIndeksow.Location = new System.Drawing.Point(20, 42);
             this.bSprawdzenieIndeksow.Name = "bSprawdzenieIndeksow";
             this.bSprawdzenieIndeksow.Size = new System.Drawing.Size(266, 23);
             this.bSprawdzenieIndeksow.TabIndex = 5;
             this.bSprawdzenieIndeksow.Text = "2. Sprawdzenie poprawności indeksów";
+            this.bSprawdzenieIndeksow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bSprawdzenieIndeksow.UseVisualStyleBackColor = true;
             // 
             // cTrybTestuPliku
