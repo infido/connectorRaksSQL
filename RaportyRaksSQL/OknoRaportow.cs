@@ -2128,7 +2128,7 @@ namespace RaportyRaksSQL
                         }
                         else
                         {
-                            tPodsumowanieZeSchowka.Text += "Brak towaru: " + row.Cells["SKROT"].Value.ToString() + ";" + System.Environment.NewLine;
+                            tPodsumowanieZeSchowka.Text += "Brak towaru: " + row.Cells["SKROT"].Value.ToString() + "; " + row.Cells["NAZWA"].Value.ToString() + System.Environment.NewLine;
 
                         }
                     }
