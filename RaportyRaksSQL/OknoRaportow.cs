@@ -1971,29 +1971,38 @@ namespace RaportyRaksSQL
 
                         if (typ != "" && typ!=line && line!="" && line!="[ZAWARTOSC]")
                         {
-                            if ( (typ.Equals("\"FS\"") && !line.StartsWith("\"FS")) ||
-                                (typ.Equals("\"FZ\"") && !line.StartsWith("\"FZ"))
+                            if ( (  (typ.Equals("\"FS\"") && !line.StartsWith("\"FS")) ||
+                                   (typ.Equals("\"FZ\"") && !line.StartsWith("\"FZ"))  
+                                 ) || cTrybTestuPliku.Checked
                                 )
                             {
                                 DataRow workRow = dt.NewRow();
                                 workRow["SEKCJA"] = sekcja;
                                 workRow["TYP"] = typ;
                                 workRow["LINIA"] = line;
-                                workRow["LP"]= tablica[0].ToString();
-                                workRow["ILOSC"] = Convert.ToInt32(tablica[1]);
-                                workRow["SKROT"] = tablica[2].ToString().Replace("\"", "");
+                                if (cTrybTestuPliku.Checked == false)
+                                {
+                                    workRow["LP"] = tablica[0].ToString();
+                                    workRow["ILOSC"] = Convert.ToInt32(tablica[1]);
+                                    workRow["SKROT"] = tablica[2].ToString().Replace("\"", "");
 
-                                workRow["JM"]= tablica[9].ToString().Replace("\"", "");
-                                workRow["CENA_NETTO"] = Convert.ToDecimal(tablica[16].ToString().Replace(".", ","));
-                                workRow["VAT"] = Convert.ToDecimal(tablica[17].ToString().Replace(".", ","));
-                                workRow["CENA_BRUTTO"] = Math.Round( Convert.ToDecimal(tablica[16].ToString().Replace(".", ",")) + Convert.ToDecimal(tablica[17].ToString().Replace(".", ",")),2);
+                                    workRow["JM"] = tablica[9].ToString().Replace("\"", "");
+                                    workRow["CENA_NETTO"] = Convert.ToDecimal(tablica[16].ToString().Replace(".", ","));
+                                    workRow["VAT"] = Convert.ToDecimal(tablica[17].ToString().Replace(".", ","));
+                                    workRow["CENA_BRUTTO"] = Math.Round(Convert.ToDecimal(tablica[16].ToString().Replace(".", ",")) + Convert.ToDecimal(tablica[17].ToString().Replace(".", ",")), 2);
 
-                                workRow["PROC_VAT"] = Convert.ToDecimal(tablica[15].ToString().Replace(".", ","));
-                                workRow["CENA_KAT_BRUTTO"] = Convert.ToDecimal(tablica[14].ToString().Replace(".", ","));
-                                workRow["CENA_KAT_NETTO"] = Math.Round(Convert.ToDecimal(tablica[14].ToString().Replace(".", ",")) / (1 + (Convert.ToDecimal(tablica[15].ToString().Replace(".", ","))/100) ),2) ;
-
+                                    workRow["PROC_VAT"] = Convert.ToDecimal(tablica[15].ToString().Replace(".", ","));
+                                    workRow["CENA_KAT_BRUTTO"] = Convert.ToDecimal(tablica[14].ToString().Replace(".", ","));
+                                    workRow["CENA_KAT_NETTO"] = Math.Round(Convert.ToDecimal(tablica[14].ToString().Replace(".", ",")) / (1 + (Convert.ToDecimal(tablica[15].ToString().Replace(".", ",")) / 100)), 2);
+                                }
                                 dt.Rows.Add(workRow);
                             }
+                        }
+
+                        if (typ.Equals("TOWARY"))
+                        {
+                            string[] tabTowary = line.Split(',');
+                            Console.WriteLine(line);
                         }
                     }
 
