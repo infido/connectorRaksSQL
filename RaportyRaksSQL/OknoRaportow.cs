@@ -2129,5 +2129,10 @@ namespace RaportyRaksSQL
             tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Zapisano " + iloscSave + " pozycji...";
             tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Pominieto " + iloscSkip + " pozycji...";
         }
+
+        private void lSymbolFakturyZakupu_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(lSymbolFakturyZakupu.Text);
+        }
     }
 }
