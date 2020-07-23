@@ -1937,6 +1937,7 @@ namespace RaportyRaksSQL
                     dt.Columns.Add(new DataColumn("ILOSC", typeof(int)));
                     dt.Columns.Add(new DataColumn("SKROT", typeof(String)));
                     dt.Columns.Add(new DataColumn("KOD_KRESKOWY", typeof(String)));
+                    //dt.Columns.Add(new DataColumn("KOD_KRESKOWY_W_RAKS", typeof(String)));
                     dt.Columns.Add(new DataColumn("NAZWA", typeof(String)));
                     dt.Columns.Add(new DataColumn("JM", typeof(String)));
                     dt.Columns.Add(new DataColumn("PROC_VAT", typeof(Decimal)));
@@ -1997,12 +1998,34 @@ namespace RaportyRaksSQL
                                 }
                                 dt.Rows.Add(workRow);
                             }
-                        }
 
-                        if (typ.Equals("TOWARY"))
-                        {
-                            string[] tabTowary = line.Split(',');
-                            Console.WriteLine(line);
+                            if (typ.Equals("\"TOWARY\"") && !line.Equals("\"TOWARY\"") && cTrybTestuPliku.Checked == false)
+                            {
+                                string[] tabTowary = line.Split(',');
+                                //tabTowary[1] nr zapasu
+                                //tabTowary[3] kod kreskowy (KOD_KRESKOWY)
+                                //tabTowary[4] nazwa skrocona
+                                //tabTowary[5] index i nazwa (NAZWA)
+                                Console.WriteLine(line);
+                                foreach (DataGridViewRow row in dataGridView1.Rows)
+                                {
+                                    if (row.Cells["SKROT"].Value.Equals(tabTowary[1].Replace("\"","")))
+                                    {
+                                        if (tabTowary[3]!=null)
+                                            row.Cells["KOD_KRESKOWY"].Value = tabTowary[3].Replace("\"", "");
+                                        row.Cells["NAZWA"].Value = tabTowary[5].Replace("\"", "");
+                                    }
+                                }
+
+                                foreach (DataRow row in dt.Rows)
+                                {
+                                    if (row["SKROT"].Equals(tabTowary[1].Replace("\"", "")))
+                                    {
+                                        row["KOD_KRESKOWY"] = tabTowary[3].Replace("\"", "");
+                                        row["NAZWA"] = tabTowary[5].Replace("\"", "");
+                                    }
+                                }
+                            }
                         }
                     }
 
