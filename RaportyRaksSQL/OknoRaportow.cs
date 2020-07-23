@@ -1926,6 +1926,7 @@ namespace RaportyRaksSQL
             dial.Filter = "EPP files (*.epp)|*.epp";
             if (dial.ShowDialog() == DialogResult.OK || dial.ShowDialog() == DialogResult.Yes)
             {
+                tPodsumowanieZeSchowka.Text += "Krok 1 " + DateTime.Now.ToString() + " Wczytanie pliku: " + dial.FileName + System.Environment.NewLine;
                 try
                 {
                     DataTable dt = new DataTable("PLIK");
@@ -1965,12 +1966,14 @@ namespace RaportyRaksSQL
                             typ = tablica[0].ToString();
                         }
 
-                        if (line.StartsWith("\"FS"))
+                        if (line.StartsWith("\"FS") || line.StartsWith("\"FZ"))
                             lSymbolFakturyZakupu.Text = tablica[4].ToString().Replace("\"","");
 
                         if (typ != "" && typ!=line && line!="" && line!="[ZAWARTOSC]")
                         {
-                            if (typ.Equals("\"FS\"") && !line.StartsWith("\"FS"))
+                            if ( (typ.Equals("\"FS\"") && !line.StartsWith("\"FS")) ||
+                                (typ.Equals("\"FZ\"") && !line.StartsWith("\"FZ"))
+                                )
                             {
                                 DataRow workRow = dt.NewRow();
                                 workRow["SEKCJA"] = sekcja;
@@ -2015,6 +2018,7 @@ namespace RaportyRaksSQL
             int idscho = 0;
             int iloscSkip = 0;
             int iloscSave = 0;
+            tPodsumowanieZeSchowka.Text += "Krok 3 " + DateTime.Now.ToString() + " Zapis faktury zakupowej do schowka pozycji RaksSQL" + System.Environment.NewLine;
             FbCommand gen_id_schowek = new FbCommand("SELECT GEN_ID(GM_SCHOWEK_POZYCJI_GEN,1) from rdb$database", fbconn.getCurentConnection());
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -2060,9 +2064,15 @@ namespace RaportyRaksSQL
                     myStringBuilder.Append("'EPP " + lSymbolFakturyZakupu.Text + "', ");  //IDENTYFIKATOR
                     myStringBuilder.Append("1, ");  //PUBLICZNA
 
-                    string sql = "SELECT ID_TOWARU from GM_TOWARY where SKROT='" + row.Cells["SKROT"].Value.ToString() + "'";
-                    sql += " OR SKROT2='" + row.Cells["SKROT"].Value.ToString() + "'";
-                    sql += " OR KONTOFK='" + row.Cells["SKROT"].Value.ToString() + "'";
+                    string skrot = "";
+                    if (row.Cells["SKROT"].Value.ToString().Equals("SCHENKERD"))
+                        skrot = "TR";
+                    else
+                        skrot = row.Cells["SKROT"].Value.ToString();
+
+                    string sql = "SELECT ID_TOWARU from GM_TOWARY where SKROT='" + skrot + "'";
+                    sql += " OR SKROT2='" + skrot + "'";
+                    sql += " OR KONTOFK='" + skrot + "'";
                     sql += ";";
                     FbCommand gen_id_towaru = new FbCommand(sql, fbconn.getCurentConnection());
                     string idtow = "0";
@@ -2127,7 +2137,7 @@ namespace RaportyRaksSQL
                 }
             }
             tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Zapisano " + iloscSave + " pozycji...";
-            tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Pominieto " + iloscSkip + " pozycji...";
+            tPodsumowanieZeSchowka.Text += System.Environment.NewLine + "Pominieto " + iloscSkip + " pozycji..." + System.Environment.NewLine;
         }
 
         private void lSymbolFakturyZakupu_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
