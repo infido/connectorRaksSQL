@@ -134,6 +134,7 @@
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
             this.bSprawdzenieIndeksow = new System.Windows.Forms.Button();
             this.cTrybTestuPliku = new System.Windows.Forms.CheckBox();
+            this.cUkryjKolumnyTechniczne = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -716,6 +717,7 @@
             // 
             // tabImportFaktur
             // 
+            this.tabImportFaktur.Controls.Add(this.cUkryjKolumnyTechniczne);
             this.tabImportFaktur.Controls.Add(this.cTrybTestuPliku);
             this.tabImportFaktur.Controls.Add(this.bSprawdzenieIndeksow);
             this.tabImportFaktur.Controls.Add(this.tPodsumowanieZeSchowka);
@@ -752,7 +754,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(22, 121);
+            this.label23.Location = new System.Drawing.Point(294, 25);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(79, 13);
             this.label23.TabIndex = 2;
@@ -761,7 +763,7 @@
             // lSymbolFakturyZakupu
             // 
             this.lSymbolFakturyZakupu.AutoSize = true;
-            this.lSymbolFakturyZakupu.Location = new System.Drawing.Point(99, 121);
+            this.lSymbolFakturyZakupu.Location = new System.Drawing.Point(371, 25);
             this.lSymbolFakturyZakupu.Name = "lSymbolFakturyZakupu";
             this.lSymbolFakturyZakupu.Size = new System.Drawing.Size(115, 13);
             this.lSymbolFakturyZakupu.TabIndex = 1;
@@ -1241,6 +1243,19 @@
             this.cTrybTestuPliku.TabIndex = 6;
             this.cTrybTestuPliku.Text = "Czy wczytać plik w trybie podgladu całego pliku?";
             this.cTrybTestuPliku.UseVisualStyleBackColor = true;
+            this.cTrybTestuPliku.CheckedChanged += new System.EventHandler(this.cTrybTestuPliku_CheckedChanged);
+            // 
+            // cUkryjKolumnyTechniczne
+            // 
+            this.cUkryjKolumnyTechniczne.AutoSize = true;
+            this.cUkryjKolumnyTechniczne.Checked = true;
+            this.cUkryjKolumnyTechniczne.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cUkryjKolumnyTechniczne.Location = new System.Drawing.Point(25, 127);
+            this.cUkryjKolumnyTechniczne.Name = "cUkryjKolumnyTechniczne";
+            this.cUkryjKolumnyTechniczne.Size = new System.Drawing.Size(147, 17);
+            this.cUkryjKolumnyTechniczne.TabIndex = 7;
+            this.cUkryjKolumnyTechniczne.Text = "Ukryj kolumny techniczne";
+            this.cUkryjKolumnyTechniczne.UseVisualStyleBackColor = true;
             // 
             // OknoRaportow
             // 
@@ -1390,6 +1405,7 @@
         private System.Windows.Forms.TextBox tPodsumowanieZeSchowka;
         private System.Windows.Forms.Button bSprawdzenieIndeksow;
         private System.Windows.Forms.CheckBox cTrybTestuPliku;
+        private System.Windows.Forms.CheckBox cUkryjKolumnyTechniczne;
     }
 }
 

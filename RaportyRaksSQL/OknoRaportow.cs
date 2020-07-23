@@ -2009,7 +2009,7 @@ namespace RaportyRaksSQL
                                 Console.WriteLine(line);
                                 foreach (DataGridViewRow row in dataGridView1.Rows)
                                 {
-                                    if (row.Cells["SKROT"].Value.Equals(tabTowary[1].Replace("\"","")))
+                                    if (row.Cells["SKROT"].Value!=null && row.Cells["SKROT"].Value.Equals(tabTowary[1].Replace("\"","")))
                                     {
                                         if (tabTowary[3]!=null)
                                             row.Cells["KOD_KRESKOWY"].Value = tabTowary[3].Replace("\"", "");
@@ -2032,6 +2032,18 @@ namespace RaportyRaksSQL
                     fDataView = new DataView();
                     fDataView.Table = dt;
                     dataGridView1.DataSource = fDataView;
+                    if (cUkryjKolumnyTechniczne.Checked)
+                    {
+                        dataGridView1.Columns[0].Visible = false;
+                        dataGridView1.Columns[1].Visible = false;
+                        dataGridView1.Columns[2].Visible = false;
+                    }
+                    else
+                    {
+                        dataGridView1.Columns[0].Visible = true;
+                        dataGridView1.Columns[1].Visible = true;
+                        dataGridView1.Columns[2].Visible = true;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -2175,6 +2187,12 @@ namespace RaportyRaksSQL
         private void lSymbolFakturyZakupu_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Clipboard.SetText(lSymbolFakturyZakupu.Text);
+        }
+
+        private void cTrybTestuPliku_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cTrybTestuPliku.Checked)
+                cUkryjKolumnyTechniczne.Checked = false;
         }
     }
 }
