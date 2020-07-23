@@ -1934,12 +1934,12 @@ namespace RaportyRaksSQL
                     dt.Columns.Add(new DataColumn("TYP", typeof(String)));
                     dt.Columns.Add(new DataColumn("LINIA", typeof(String)));
                     dt.Columns.Add(new DataColumn("LP", typeof(int)));
-                    dt.Columns.Add(new DataColumn("ILOSC", typeof(int)));
                     dt.Columns.Add(new DataColumn("SKROT", typeof(String)));
                     dt.Columns.Add(new DataColumn("KOD_KRESKOWY", typeof(String)));
                     //dt.Columns.Add(new DataColumn("KOD_KRESKOWY_W_RAKS", typeof(String)));
                     dt.Columns.Add(new DataColumn("NAZWA", typeof(String)));
                     dt.Columns.Add(new DataColumn("JM", typeof(String)));
+                    dt.Columns.Add(new DataColumn("ILOSC", typeof(int)));
                     dt.Columns.Add(new DataColumn("PROC_VAT", typeof(Decimal)));
                     dt.Columns.Add(new DataColumn("CENA_KAT_NETTO", typeof(Decimal)));
                     dt.Columns.Add(new DataColumn("CENA_KAT_BRUTTO", typeof(Decimal)));
