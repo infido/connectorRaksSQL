@@ -141,6 +141,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.dtKasaBankOD = new System.Windows.Forms.DateTimePicker();
             this.bRaportOperacjiKasaBank = new System.Windows.Forms.Button();
+            this.bRaportSprzedazyKasaBank = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -1270,6 +1271,7 @@
             // 
             // tabKasaBank
             // 
+            this.tabKasaBank.Controls.Add(this.bRaportSprzedazyKasaBank);
             this.tabKasaBank.Controls.Add(this.bRaportOperacjiKasaBank);
             this.tabKasaBank.Controls.Add(this.label22);
             this.tabKasaBank.Controls.Add(this.dtKasaBankDO);
@@ -1322,9 +1324,19 @@
             this.bRaportOperacjiKasaBank.Name = "bRaportOperacjiKasaBank";
             this.bRaportOperacjiKasaBank.Size = new System.Drawing.Size(284, 23);
             this.bRaportOperacjiKasaBank.TabIndex = 8;
-            this.bRaportOperacjiKasaBank.Text = "Raport operacji sprzeday i dokumentów kasowych";
+            this.bRaportOperacjiKasaBank.Text = "Raport operacji sprzedaży i dokumentów kasowych";
             this.bRaportOperacjiKasaBank.UseVisualStyleBackColor = true;
             this.bRaportOperacjiKasaBank.Click += new System.EventHandler(this.bRaportOperacjiKasaBank_Click);
+            // 
+            // bRaportSprzedazyKasaBank
+            // 
+            this.bRaportSprzedazyKasaBank.Location = new System.Drawing.Point(20, 128);
+            this.bRaportSprzedazyKasaBank.Name = "bRaportSprzedazyKasaBank";
+            this.bRaportSprzedazyKasaBank.Size = new System.Drawing.Size(284, 23);
+            this.bRaportSprzedazyKasaBank.TabIndex = 9;
+            this.bRaportSprzedazyKasaBank.Text = "Raport sprzedaży i dokumentów kasowych wg dat";
+            this.bRaportSprzedazyKasaBank.UseVisualStyleBackColor = true;
+            this.bRaportSprzedazyKasaBank.Click += new System.EventHandler(this.bRaportSprzedazyKasaBank_Click);
             // 
             // OknoRaportow
             // 
@@ -1483,6 +1495,7 @@
         private System.Windows.Forms.DateTimePicker dtKasaBankDO;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.DateTimePicker dtKasaBankOD;
+        private System.Windows.Forms.Button bRaportSprzedazyKasaBank;
     }
 }
 
