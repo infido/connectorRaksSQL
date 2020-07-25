@@ -56,6 +56,7 @@ namespace RaportyRaksSQL
                     {
                         //poprawne logowanie uzytkownika
                         tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
+                        tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabKasaBank"]);
                         logToSys.SetTimestampLastLogin();
                         currUserId = logToSys.GetCurrentUserID();
                         magazyny = logToSys.GetMagazyny();
@@ -2193,6 +2194,63 @@ namespace RaportyRaksSQL
         {
             if (cTrybTestuPliku.Checked)
                 cUkryjKolumnyTechniczne.Checked = false;
+        }
+
+        private void bRaportOperacjiKasaBank_Click(object sender, EventArgs e)
+        {
+            toSearch.ReadOnly = true;
+            toSearch2.ReadOnly = true;
+            SetStatusStartuRaportu(DateTime.Now);
+            SetWartosciParametrowDlaWhere();
+            bSaveToRaksSQLClipboard.Enabled = false;
+            checkBoxIlosc1.Enabled = true;
+            checkBoxIlosc1.Checked = false;
+
+            StringBuilder myStringBuilder = new StringBuilder(" select * from ( ");
+            myStringBuilder.Append(" Select KB_CASH_DESKS.NAME as MAGAZYN, 'KASA' as TYP, KB_CASH_DOCUMENTS.NUMBER as NUMER, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_WYSTAWIENIA, ");
+            myStringBuilder.Append(" CASE when KB_CASH_DOCUMENTS.DIRECTION_CODE='I' then KB_CASH_DOCUMENTS.AMOUNT else -KB_CASH_DOCUMENTS.AMOUNT end as KWOTA,  ");
+            myStringBuilder.Append(" KB_CASH_DOCUMENTS.CURRENCY_SYMBOL as WALUTA, ");
+            myStringBuilder.Append(" KB_CASH_DOCUMENTS.DESCRIPTION as OPIS, KB_CASH_DOCUMENTS.CONTACT_FULL_NAME  as KONTRAHENT, KB_CASH_DOCUMENTS.CONTACT_TAXID as NIP ");
+            myStringBuilder.Append(" FROM KB_CASH_DOCUMENTS ");
+            myStringBuilder.Append(" join KB_CASH_DESKS on KB_CASH_DESKS.ID=KB_CASH_DOCUMENTS.CASH_DESK_ID ");
+            myStringBuilder.Append(" where KB_CASH_DOCUMENTS.CREATION_DATE BETWEEN '" + dtKasaBankOD.Value.ToShortDateString() + "' AND '" + dtKasaBankDO.Value.ToShortDateString() + "' ");
+            myStringBuilder.Append(" and KB_CASH_DOCUMENTS.DOC_TYPE='G' ");
+
+            myStringBuilder.Append(" union  ");
+
+            myStringBuilder.Append(" SELECT GM_MAGAZYNY.NUMER AS MAGAZYN , 'BANK' as TYP, GM_FS.NUMER, DATA_WYSTAWIENIA, WAL_WARTOSC_BRUTTO as KWOTA,  ");
+            myStringBuilder.Append(" CASE when ID_WALUTY=0 then 'PLN' ");
+            myStringBuilder.Append(" when ID_WALUTY=1 then 'CHF' ");
+            myStringBuilder.Append(" when ID_WALUTY=2 then 'EUR' ");
+            myStringBuilder.Append(" when ID_WALUTY=3 then 'USD' ");
+            myStringBuilder.Append(" when ID_WALUTY=201 then 'GBP' ");
+            myStringBuilder.Append(" else '0' ");
+            myStringBuilder.Append(" end WALUTA, ");
+            myStringBuilder.Append(" NAZWA_SPOSOBU_PLATNOSCI as OPIS,  ");
+            myStringBuilder.Append(" NAZWA_PELNA_PLATNIKA as KONTRAHENT, NIP_PLATNIKA as NIP ");
+            myStringBuilder.Append(" FROM GM_FS  ");
+            myStringBuilder.Append(" join GM_MAGAZYNY on GM_MAGAZYNY.ID=GM_FS.MAGNUM ");
+            myStringBuilder.Append(" where NAZWA_SPOSOBU_PLATNOSCI not like 'Gotówka' ");
+            myStringBuilder.Append(" and DATA_WYSTAWIENIA BETWEEN '" + dtKasaBankOD.Value.ToShortDateString() + "' AND '" + dtKasaBankDO.Value.ToShortDateString() + "' ) ");
+            myStringBuilder.Append(" order by DATA_WYSTAWIENIA, NUMER ");
+
+            FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
+            try
+            {
+                FbDataAdapter adapter = new FbDataAdapter(cdk);
+                DataTable dt = new DataTable("RESULT");
+                adapter.Fill(dt);
+                fDataView = new DataView();
+                fDataView.Table = dt;
+                dataGridView1.DataSource = fDataView;
+            }
+            catch (FbException ex)
+            {
+                statusLable.Text = "Błąd wykonania raportu!";
+                MessageBox.Show("Błąd wczytywania danych do okna z Raportu 1: " + ex.Message);
+            }
+
+            SetStatusKońcaRaportuNaPasku();
         }
     }
 }
