@@ -56,7 +56,10 @@ namespace RaportyRaksSQL
                     {
                         //poprawne logowanie uzytkownika
                         tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabAdmin"]);
-                        tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabKasaBank"]);
+                        if (logToSys.GetCurrentUserLogin().Equals("SABINA") || logToSys.GetCurrentUserLogin().Equals("HONORATA"))
+                            Text += " KSIĘGOWOŚĆ"; //workaround dla roli księgowość
+                        else
+                            tabControlParametry.TabPages.Remove((TabPage)tabControlParametry.TabPages["tabKasaBank"]);
                         logToSys.SetTimestampLastLogin();
                         currUserId = logToSys.GetCurrentUserID();
                         magazyny = logToSys.GetMagazyny();
@@ -1244,7 +1247,7 @@ namespace RaportyRaksSQL
                     bSetPass.Text = "Nadaj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                     bResetPassUser.Text = "Resetuj hasło użytkownika " + dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["NAZWA"].Value.ToString();
                 }
-                catch (Exception a)
+                catch (Exception)
                 {
                     bUsrLock.Text = "Nie ustawiono...";
                     bSetPass.Text = "Nie ustawiono...";
@@ -1770,7 +1773,7 @@ namespace RaportyRaksSQL
 
         private void bSaveGenCen_Click(object sender, EventArgs e)
         {
-            int idNag;
+            //int idNag;
 
             #region pobranie nowego id nagłówka z bazy
             //FbCommand gen_id_nag = new FbCommand("SELECT GEN_ID(GM_GENCEN_GEN,1) from rdb$database", fbconn.getCurentConnection());

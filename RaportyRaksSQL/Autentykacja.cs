@@ -393,5 +393,10 @@ namespace RaportyRaksSQL
                 MessageBox.Show("Błąd sprawdzenia istnienia tabeli MM_USERS bazy RaksSQL: " + ex.Message);
             }
         }
+
+        public string GetCurrentUserLogin()
+        {
+            return kod;
+        }
     }
 }
