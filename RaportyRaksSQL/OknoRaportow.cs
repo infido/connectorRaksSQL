@@ -2210,18 +2210,22 @@ namespace RaportyRaksSQL
             checkBoxIlosc1.Checked = false;
 
             StringBuilder myStringBuilder = new StringBuilder(" select * from ( ");
-            myStringBuilder.Append(" Select KB_CASH_DESKS.NAME as MAGAZYN, 'KASA' as TYP, KB_CASH_DOCUMENTS.NUMBER as NUMER, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_WYSTAWIENIA, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_PLATNOSCI, ");
+            myStringBuilder.Append(" Select KB_CASH_DESKS.NAME as MAGAZYN, 'KASA' as TYP, ");
+            myStringBuilder.Append(" CASE when GM_FS.KOD is null then GM_FZ.KOD else GM_FS.KOD end as KOD, ");
+            myStringBuilder.Append(" KB_CASH_DOCUMENTS.NUMBER as NUMER, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_WYSTAWIENIA, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_PLATNOSCI, ");
             myStringBuilder.Append(" CASE when KB_CASH_DOCUMENTS.DIRECTION_CODE='I' then KB_CASH_DOCUMENTS.AMOUNT else -KB_CASH_DOCUMENTS.AMOUNT end as KWOTA,  ");
             myStringBuilder.Append(" KB_CASH_DOCUMENTS.CURRENCY_SYMBOL as WALUTA, ");
             myStringBuilder.Append(" KB_CASH_DOCUMENTS.DESCRIPTION as OPIS, KB_CASH_DOCUMENTS.CONTACT_FULL_NAME  as KONTRAHENT, KB_CASH_DOCUMENTS.CONTACT_TAXID as NIP ");
             myStringBuilder.Append(" FROM KB_CASH_DOCUMENTS ");
             myStringBuilder.Append(" join KB_CASH_DESKS on KB_CASH_DESKS.ID=KB_CASH_DOCUMENTS.CASH_DESK_ID ");
+            myStringBuilder.Append(" left join GM_FS on KB_CASH_DOCUMENTS.NUMBER=GM_FS.NUMER ");
+            myStringBuilder.Append(" left join GM_FZ on KB_CASH_DOCUMENTS.NUMBER=GM_FZ.NUMER ");
             myStringBuilder.Append(" where KB_CASH_DOCUMENTS.CREATION_DATE BETWEEN '" + dtKasaBankOD.Value.ToShortDateString() + "' AND '" + dtKasaBankDO.Value.ToShortDateString() + "' ");
             myStringBuilder.Append(" and KB_CASH_DOCUMENTS.DOC_TYPE='G' ");
 
             myStringBuilder.Append(" union  ");
 
-            myStringBuilder.Append(" SELECT GM_MAGAZYNY.NUMER AS MAGAZYN , 'BANK' as TYP, GM_FS.NUMER, DATA_WYSTAWIENIA, DATA_PLATNOSCI, WAL_WARTOSC_BRUTTO as KWOTA,  ");
+            myStringBuilder.Append(" SELECT GM_MAGAZYNY.NUMER AS MAGAZYN , 'BANK' as TYP, GM_FS.KOD, GM_FS.NUMER, DATA_WYSTAWIENIA, DATA_PLATNOSCI, WAL_WARTOSC_BRUTTO as KWOTA,  ");
             myStringBuilder.Append(" CASE when ID_WALUTY=0 then 'PLN' ");
             myStringBuilder.Append(" when ID_WALUTY=1 then 'CHF' ");
             myStringBuilder.Append(" when ID_WALUTY=2 then 'EUR' ");
