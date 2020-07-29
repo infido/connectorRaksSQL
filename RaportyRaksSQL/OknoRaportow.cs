@@ -2210,7 +2210,7 @@ namespace RaportyRaksSQL
             checkBoxIlosc1.Checked = false;
 
             StringBuilder myStringBuilder = new StringBuilder(" select * from ( ");
-            myStringBuilder.Append(" Select KB_CASH_DESKS.NAME as MAGAZYN, 'KASA' as TYP, KB_CASH_DOCUMENTS.NUMBER as NUMER, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_WYSTAWIENIA, ");
+            myStringBuilder.Append(" Select KB_CASH_DESKS.NAME as MAGAZYN, 'KASA' as TYP, KB_CASH_DOCUMENTS.NUMBER as NUMER, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_WYSTAWIENIA, KB_CASH_DOCUMENTS.CREATION_DATE as DATA_PLATNOSCI, ");
             myStringBuilder.Append(" CASE when KB_CASH_DOCUMENTS.DIRECTION_CODE='I' then KB_CASH_DOCUMENTS.AMOUNT else -KB_CASH_DOCUMENTS.AMOUNT end as KWOTA,  ");
             myStringBuilder.Append(" KB_CASH_DOCUMENTS.CURRENCY_SYMBOL as WALUTA, ");
             myStringBuilder.Append(" KB_CASH_DOCUMENTS.DESCRIPTION as OPIS, KB_CASH_DOCUMENTS.CONTACT_FULL_NAME  as KONTRAHENT, KB_CASH_DOCUMENTS.CONTACT_TAXID as NIP ");
@@ -2221,7 +2221,7 @@ namespace RaportyRaksSQL
 
             myStringBuilder.Append(" union  ");
 
-            myStringBuilder.Append(" SELECT GM_MAGAZYNY.NUMER AS MAGAZYN , 'BANK' as TYP, GM_FS.NUMER, DATA_WYSTAWIENIA, WAL_WARTOSC_BRUTTO as KWOTA,  ");
+            myStringBuilder.Append(" SELECT GM_MAGAZYNY.NUMER AS MAGAZYN , 'BANK' as TYP, GM_FS.NUMER, DATA_WYSTAWIENIA, DATA_PLATNOSCI, WAL_WARTOSC_BRUTTO as KWOTA,  ");
             myStringBuilder.Append(" CASE when ID_WALUTY=0 then 'PLN' ");
             myStringBuilder.Append(" when ID_WALUTY=1 then 'CHF' ");
             myStringBuilder.Append(" when ID_WALUTY=2 then 'EUR' ");
@@ -2235,7 +2235,7 @@ namespace RaportyRaksSQL
             myStringBuilder.Append(" join GM_MAGAZYNY on GM_MAGAZYNY.ID=GM_FS.MAGNUM ");
             myStringBuilder.Append(" where NAZWA_SPOSOBU_PLATNOSCI not like 'Gotówka' ");
             myStringBuilder.Append(" and DATA_WYSTAWIENIA BETWEEN '" + dtKasaBankOD.Value.ToShortDateString() + "' AND '" + dtKasaBankDO.Value.ToShortDateString() + "' ) ");
-            myStringBuilder.Append(" order by DATA_WYSTAWIENIA, NUMER ");
+            myStringBuilder.Append(" order by DATA_WYSTAWIENIA, DATA_PLATNOSCI, NUMER ");
 
             FbCommand cdk = new FbCommand(myStringBuilder.ToString(), fbconn.getCurentConnection());
             try
