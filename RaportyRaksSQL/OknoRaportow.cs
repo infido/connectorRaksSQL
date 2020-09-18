@@ -1992,9 +1992,10 @@ namespace RaportyRaksSQL
                                     workRow["SKROT"] = tablica[2].ToString().Replace("\"", "");
 
                                     workRow["JM"] = tablica[9].ToString().Replace("\"", "");
-                                    workRow["CENA_NETTO"] = Convert.ToDecimal(tablica[16].ToString().Replace(".", ","));
-                                    workRow["VAT"] = Convert.ToDecimal(tablica[17].ToString().Replace(".", ","));
-                                    workRow["CENA_BRUTTO"] = Math.Round(Convert.ToDecimal(tablica[16].ToString().Replace(".", ",")) + Convert.ToDecimal(tablica[17].ToString().Replace(".", ",")), 2);
+                                    workRow["CENA_NETTO"] = Convert.ToDecimal(tablica[12].ToString().Replace(".", ","));
+                                    workRow["VAT"] = Math.Round(Convert.ToDecimal(tablica[12].ToString().Replace(".", ",")) * (Convert.ToDecimal(tablica[15].ToString().Replace(".", ","))/100),2);
+                                    //workRow["CENA_BRUTTO"] = Math.Round(Convert.ToDecimal(tablica[16].ToString().Replace(".", ",")) + Convert.ToDecimal(tablica[17].ToString().Replace(".", ",")), 2);
+                                    workRow["CENA_BRUTTO"] = Convert.ToDecimal(workRow["CENA_NETTO"]) + Convert.ToDecimal(workRow["VAT"]);
 
                                     workRow["PROC_VAT"] = Convert.ToDecimal(tablica[15].ToString().Replace(".", ","));
                                     workRow["CENA_KAT_BRUTTO"] = Convert.ToDecimal(tablica[14].ToString().Replace(".", ","));
