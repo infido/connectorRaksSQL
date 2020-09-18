@@ -1943,7 +1943,7 @@ namespace RaportyRaksSQL
                     //dt.Columns.Add(new DataColumn("KOD_KRESKOWY_W_RAKS", typeof(String)));
                     dt.Columns.Add(new DataColumn("NAZWA", typeof(String)));
                     dt.Columns.Add(new DataColumn("JM", typeof(String)));
-                    dt.Columns.Add(new DataColumn("ILOSC", typeof(int)));
+                    dt.Columns.Add(new DataColumn("ILOSC", typeof(Decimal)));
                     dt.Columns.Add(new DataColumn("PROC_VAT", typeof(Decimal)));
                     dt.Columns.Add(new DataColumn("CENA_KAT_NETTO", typeof(Decimal)));
                     dt.Columns.Add(new DataColumn("CENA_KAT_BRUTTO", typeof(Decimal)));
@@ -1988,7 +1988,7 @@ namespace RaportyRaksSQL
                                 if (cTrybTestuPliku.Checked == false)
                                 {
                                     workRow["LP"] = tablica[0].ToString();
-                                    workRow["ILOSC"] = Convert.ToInt32(tablica[1]);
+                                    workRow["ILOSC"] = Convert.ToDecimal(tablica[10].ToString().Replace(".", ","));
                                     workRow["SKROT"] = tablica[2].ToString().Replace("\"", "");
 
                                     workRow["JM"] = tablica[9].ToString().Replace("\"", "");
