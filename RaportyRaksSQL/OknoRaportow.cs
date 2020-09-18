@@ -2133,7 +2133,7 @@ namespace RaportyRaksSQL
                         }
                         else
                         {
-                            tPodsumowanieZeSchowka.Text += "Brak towaru: " + row.Cells["SKROT"].Value.ToString() + "; " + row.Cells["NAZWA"].Value.ToString() + System.Environment.NewLine;
+                            tPodsumowanieZeSchowka.Text += "Brak towaru: " + row.Cells["SKROT"].Value.ToString() + " ; " + row.Cells["NAZWA"].Value.ToString() + " ;\t " + row.Cells["KOD_KRESKOWY"].Value.ToString() + "; " + row.Cells["JM"].Value.ToString() + System.Environment.NewLine;
 
                         }
                     }
