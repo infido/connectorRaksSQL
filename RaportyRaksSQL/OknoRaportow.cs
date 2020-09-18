@@ -2113,7 +2113,7 @@ namespace RaportyRaksSQL
                     myStringBuilder.Append("1, ");  //PUBLICZNA
 
                     string skrot = "";
-                    if (row.Cells["SKROT"].Value.ToString().Equals("SCHENKERD"))
+                    if (row.Cells["SKROT"].Value.ToString().Equals("SCHENKERD") || row.Cells["SKROT"].Value.ToString().Equals("SCHENKERM") || row.Cells["SKROT"].Value.ToString().Equals("zx0001"))
                         skrot = "TR";
                     else
                         skrot = row.Cells["SKROT"].Value.ToString();
