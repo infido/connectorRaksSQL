@@ -93,6 +93,13 @@
             this.label23 = new System.Windows.Forms.Label();
             this.lSymbolFakturyZakupu = new System.Windows.Forms.LinkLabel();
             this.bImportFakturEPP = new System.Windows.Forms.Button();
+            this.tabKasaBank = new System.Windows.Forms.TabPage();
+            this.bRaportSprzedazyKasaBank = new System.Windows.Forms.Button();
+            this.bRaportOperacjiKasaBank = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.dtKasaBankDO = new System.Windows.Forms.DateTimePicker();
+            this.label24 = new System.Windows.Forms.Label();
+            this.dtKasaBankOD = new System.Windows.Forms.DateTimePicker();
             this.tabAdmin = new System.Windows.Forms.TabPage();
             this.bResetPassUser = new System.Windows.Forms.Button();
             this.bSetPass = new System.Windows.Forms.Button();
@@ -135,13 +142,7 @@
             this.CzyDodacNaglowek = new System.Windows.Forms.CheckBox();
             this.bSave = new System.Windows.Forms.Button();
             this.openFileDialogCSV = new System.Windows.Forms.OpenFileDialog();
-            this.tabKasaBank = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
-            this.dtKasaBankDO = new System.Windows.Forms.DateTimePicker();
-            this.label24 = new System.Windows.Forms.Label();
-            this.dtKasaBankOD = new System.Windows.Forms.DateTimePicker();
-            this.bRaportOperacjiKasaBank = new System.Windows.Forms.Button();
-            this.bRaportSprzedazyKasaBank = new System.Windows.Forms.Button();
+            this.cbWyczyscOknoLoga = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.panelParametry.SuspendLayout();
             this.tabControlParametry.SuspendLayout();
@@ -151,13 +152,13 @@
             this.groupBox2.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
             this.tabImportFaktur.SuspendLayout();
+            this.tabKasaBank.SuspendLayout();
             this.tabAdmin.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelPodgladDanych.SuspendLayout();
             this.panelGridLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelGdidStopka.SuspendLayout();
-            this.tabKasaBank.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -726,6 +727,7 @@
             // 
             // tabImportFaktur
             // 
+            this.tabImportFaktur.Controls.Add(this.cbWyczyscOknoLoga);
             this.tabImportFaktur.Controls.Add(this.cUkryjKolumnyTechniczne);
             this.tabImportFaktur.Controls.Add(this.cTrybTestuPliku);
             this.tabImportFaktur.Controls.Add(this.bSprawdzenieIndeksow);
@@ -825,6 +827,75 @@
             this.bImportFakturEPP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bImportFakturEPP.UseVisualStyleBackColor = true;
             this.bImportFakturEPP.Click += new System.EventHandler(this.bImportFakturEPP_Click);
+            // 
+            // tabKasaBank
+            // 
+            this.tabKasaBank.Controls.Add(this.bRaportSprzedazyKasaBank);
+            this.tabKasaBank.Controls.Add(this.bRaportOperacjiKasaBank);
+            this.tabKasaBank.Controls.Add(this.label22);
+            this.tabKasaBank.Controls.Add(this.dtKasaBankDO);
+            this.tabKasaBank.Controls.Add(this.label24);
+            this.tabKasaBank.Controls.Add(this.dtKasaBankOD);
+            this.tabKasaBank.Location = new System.Drawing.Point(4, 22);
+            this.tabKasaBank.Name = "tabKasaBank";
+            this.tabKasaBank.Size = new System.Drawing.Size(1425, 176);
+            this.tabKasaBank.TabIndex = 6;
+            this.tabKasaBank.Text = "Sprzedaż kasa i bank";
+            this.tabKasaBank.UseVisualStyleBackColor = true;
+            // 
+            // bRaportSprzedazyKasaBank
+            // 
+            this.bRaportSprzedazyKasaBank.Location = new System.Drawing.Point(20, 128);
+            this.bRaportSprzedazyKasaBank.Name = "bRaportSprzedazyKasaBank";
+            this.bRaportSprzedazyKasaBank.Size = new System.Drawing.Size(284, 23);
+            this.bRaportSprzedazyKasaBank.TabIndex = 9;
+            this.bRaportSprzedazyKasaBank.Text = "Raport sprzedaży i dokumentów kasowych wg dat";
+            this.bRaportSprzedazyKasaBank.UseVisualStyleBackColor = true;
+            this.bRaportSprzedazyKasaBank.Click += new System.EventHandler(this.bRaportSprzedazyKasaBank_Click);
+            // 
+            // bRaportOperacjiKasaBank
+            // 
+            this.bRaportOperacjiKasaBank.Location = new System.Drawing.Point(20, 99);
+            this.bRaportOperacjiKasaBank.Name = "bRaportOperacjiKasaBank";
+            this.bRaportOperacjiKasaBank.Size = new System.Drawing.Size(284, 23);
+            this.bRaportOperacjiKasaBank.TabIndex = 8;
+            this.bRaportOperacjiKasaBank.Text = "Raport operacji sprzedaży i dokumentów kasowych";
+            this.bRaportOperacjiKasaBank.UseVisualStyleBackColor = true;
+            this.bRaportOperacjiKasaBank.Click += new System.EventHandler(this.bRaportOperacjiKasaBank_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(17, 56);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(45, 13);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Data od";
+            // 
+            // dtKasaBankDO
+            // 
+            this.dtKasaBankDO.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtKasaBankDO.Location = new System.Drawing.Point(20, 72);
+            this.dtKasaBankDO.Name = "dtKasaBankDO";
+            this.dtKasaBankDO.Size = new System.Drawing.Size(99, 20);
+            this.dtKasaBankDO.TabIndex = 6;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(17, 17);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(45, 13);
+            this.label24.TabIndex = 5;
+            this.label24.Text = "Data od";
+            // 
+            // dtKasaBankOD
+            // 
+            this.dtKasaBankOD.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtKasaBankOD.Location = new System.Drawing.Point(20, 33);
+            this.dtKasaBankOD.Name = "dtKasaBankOD";
+            this.dtKasaBankOD.Size = new System.Drawing.Size(99, 20);
+            this.dtKasaBankOD.TabIndex = 4;
             // 
             // tabAdmin
             // 
@@ -1269,74 +1340,17 @@
             this.openFileDialogCSV.Filter = "pliki csv|*.csv|tekstowe|*.txt|Wszystkie pliki|*.*";
             this.openFileDialogCSV.Title = "Wskazanie pliku z cennikiem do zaimportowania";
             // 
-            // tabKasaBank
+            // cbWyczyscOknoLoga
             // 
-            this.tabKasaBank.Controls.Add(this.bRaportSprzedazyKasaBank);
-            this.tabKasaBank.Controls.Add(this.bRaportOperacjiKasaBank);
-            this.tabKasaBank.Controls.Add(this.label22);
-            this.tabKasaBank.Controls.Add(this.dtKasaBankDO);
-            this.tabKasaBank.Controls.Add(this.label24);
-            this.tabKasaBank.Controls.Add(this.dtKasaBankOD);
-            this.tabKasaBank.Location = new System.Drawing.Point(4, 22);
-            this.tabKasaBank.Name = "tabKasaBank";
-            this.tabKasaBank.Size = new System.Drawing.Size(1425, 176);
-            this.tabKasaBank.TabIndex = 6;
-            this.tabKasaBank.Text = "Sprzedaż kasa i bank";
-            this.tabKasaBank.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(17, 56);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(45, 13);
-            this.label22.TabIndex = 7;
-            this.label22.Text = "Data od";
-            // 
-            // dtKasaBankDO
-            // 
-            this.dtKasaBankDO.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtKasaBankDO.Location = new System.Drawing.Point(20, 72);
-            this.dtKasaBankDO.Name = "dtKasaBankDO";
-            this.dtKasaBankDO.Size = new System.Drawing.Size(99, 20);
-            this.dtKasaBankDO.TabIndex = 6;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(17, 17);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(45, 13);
-            this.label24.TabIndex = 5;
-            this.label24.Text = "Data od";
-            // 
-            // dtKasaBankOD
-            // 
-            this.dtKasaBankOD.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtKasaBankOD.Location = new System.Drawing.Point(20, 33);
-            this.dtKasaBankOD.Name = "dtKasaBankOD";
-            this.dtKasaBankOD.Size = new System.Drawing.Size(99, 20);
-            this.dtKasaBankOD.TabIndex = 4;
-            // 
-            // bRaportOperacjiKasaBank
-            // 
-            this.bRaportOperacjiKasaBank.Location = new System.Drawing.Point(20, 99);
-            this.bRaportOperacjiKasaBank.Name = "bRaportOperacjiKasaBank";
-            this.bRaportOperacjiKasaBank.Size = new System.Drawing.Size(284, 23);
-            this.bRaportOperacjiKasaBank.TabIndex = 8;
-            this.bRaportOperacjiKasaBank.Text = "Raport operacji sprzedaży i dokumentów kasowych";
-            this.bRaportOperacjiKasaBank.UseVisualStyleBackColor = true;
-            this.bRaportOperacjiKasaBank.Click += new System.EventHandler(this.bRaportOperacjiKasaBank_Click);
-            // 
-            // bRaportSprzedazyKasaBank
-            // 
-            this.bRaportSprzedazyKasaBank.Location = new System.Drawing.Point(20, 128);
-            this.bRaportSprzedazyKasaBank.Name = "bRaportSprzedazyKasaBank";
-            this.bRaportSprzedazyKasaBank.Size = new System.Drawing.Size(284, 23);
-            this.bRaportSprzedazyKasaBank.TabIndex = 9;
-            this.bRaportSprzedazyKasaBank.Text = "Raport sprzedaży i dokumentów kasowych wg dat";
-            this.bRaportSprzedazyKasaBank.UseVisualStyleBackColor = true;
-            this.bRaportSprzedazyKasaBank.Click += new System.EventHandler(this.bRaportSprzedazyKasaBank_Click);
+            this.cbWyczyscOknoLoga.AutoSize = true;
+            this.cbWyczyscOknoLoga.Checked = true;
+            this.cbWyczyscOknoLoga.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbWyczyscOknoLoga.Location = new System.Drawing.Point(293, 17);
+            this.cbWyczyscOknoLoga.Name = "cbWyczyscOknoLoga";
+            this.cbWyczyscOknoLoga.Size = new System.Drawing.Size(292, 17);
+            this.cbWyczyscOknoLoga.TabIndex = 8;
+            this.cbWyczyscOknoLoga.Text = "Czy przy imporcie pliku wyczyścić okno z komunikatami?";
+            this.cbWyczyscOknoLoga.UseVisualStyleBackColor = true;
             // 
             // OknoRaportow
             // 
@@ -1366,6 +1380,8 @@
             this.tabPageUpdate.PerformLayout();
             this.tabImportFaktur.ResumeLayout(false);
             this.tabImportFaktur.PerformLayout();
+            this.tabKasaBank.ResumeLayout(false);
+            this.tabKasaBank.PerformLayout();
             this.tabAdmin.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1374,8 +1390,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelGdidStopka.ResumeLayout(false);
             this.panelGdidStopka.PerformLayout();
-            this.tabKasaBank.ResumeLayout(false);
-            this.tabKasaBank.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1496,6 +1510,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.DateTimePicker dtKasaBankOD;
         private System.Windows.Forms.Button bRaportSprzedazyKasaBank;
+        private System.Windows.Forms.CheckBox cbWyczyscOknoLoga;
     }
 }
 

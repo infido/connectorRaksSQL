@@ -1928,6 +1928,9 @@ namespace RaportyRaksSQL
         {
             OpenFileDialog dial = new OpenFileDialog();
             dial.Filter = "EPP files (*.epp)|*.epp";
+            if (cbWyczyscOknoLoga.Checked)
+                tPodsumowanieZeSchowka.Text = "";
+
             if (dial.ShowDialog() == DialogResult.OK || dial.ShowDialog() == DialogResult.Yes)
             {
                 tPodsumowanieZeSchowka.Text += "Krok 1 " + DateTime.Now.ToString() + " Wczytanie pliku: " + dial.FileName + System.Environment.NewLine;
@@ -2114,7 +2117,7 @@ namespace RaportyRaksSQL
                     myStringBuilder.Append("1, ");  //PUBLICZNA
 
                     string skrot = "";
-                    if (row.Cells["SKROT"].Value.ToString().Equals("SCHENKERD") || row.Cells["SKROT"].Value.ToString().Equals("SCHENKERM") || row.Cells["SKROT"].Value.ToString().Equals("zx0001"))
+                    if (row.Cells["SKROT"].Value.ToString().Equals("SCHENKERD") || row.Cells["SKROT"].Value.ToString().Equals("SCHENKERM") || row.Cells["SKROT"].Value.ToString().Equals("ZX0001"))
                         skrot = "TR";
                     else
                         skrot = row.Cells["SKROT"].Value.ToString();
